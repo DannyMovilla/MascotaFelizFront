@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+body {
+  background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #604c7e;
+  font-family: "Poppins";
+}
+p {
+  color: #828ca4 !important;
+}
+.container {
+  max-width: 960px;
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+.w-100 {
+  width: 100%;
+}
+/*header*/
+header {
+  background: url("/assets//img/bg.png");
+  background-size: cover;
+}
+nav a.btn.btn-outline-light {
+  font-family: "Poppins";
+  margin-left: 4px;
+  margin-right: 4px;
+}
+/*Formulario*/
+.clss-form input::placeholder {
+  color: #bacde5;
+  font-size: 11px;
+}
+.clss-form label {
+  color: #828ca4;
+  font-family: "Poppins";
+  font-size: 13px;
+}
+.clss-form .form-control {
+  border-color: #c9dcf4;
+}
+.clss-form button {
+  background: #8945f0;
+  border: none;
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 600;
+}
+/* Table  */
+table thead th {
+  font-size: 13px;
+  font-weight: 400;
+  font-family: "Poppins";
+  color: #828ca4;
+}
+table tbody th,
+table tbody td {
+  font-size: 13px;
+  font-weight: 400;
+  color: #828ca4 !important;
+}
+
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+}

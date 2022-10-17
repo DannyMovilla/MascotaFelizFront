@@ -1,0 +1,80 @@
+<header id="inicio">
+  <div class="container py-3">
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4">
+      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+        <img src="assets/img/logo.png">
+      </a>
+      <mascota-feliz-menu-inicio></mascota-feliz-menu-inicio>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-body">
+            <h3 class="fw-bolder mb-0">Contactanos</h3>
+            <p class="fs-6 lead">Contactanos para mayor información</p>
+            <form class="needs-validation clss-form" novalidate>
+              <div class="row g-3">
+                <div class="col-12 mt-1">
+                  <label for="nombre" class="form-label mb-0">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Ingresar nombre de mascota" required>
+                  <div class="invalid-feedback">
+                    Se requiere un nombre válido.
+                  </div>
+                </div>
+
+                <div class="col-12 mt-1">
+                  <label for="correo" class="form-label mb-0">Correo Electronico</label>
+                  <input type="email" class="form-control" id="correo" placeholder="Ingresar correo" required>
+                  <div class="invalid-feedback">
+                    Se requiere que ingrese el correo
+                  </div>
+                </div>
+
+                <div class="col-12 mt-1">
+                  <label for="telefono" class="form-label mb-0">Telefono</label>
+                  <input type="text" class="form-control" id="telefono" placeholder="Ingresar el telefono" required>
+                </div>
+
+                <div class="col-12 mt-1">
+                  <label for="mensaje" class="form-label mb-0">Mensaje</label>
+                  <textarea class="form-control" id="mensaje" rows="3"></textarea>
+                </div>
+              </div>
+              <button class="w-100 btn btn-primary btn-lg mt-4" type="submit">Enviar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <img src="assets/img/animal.png" class="w-100">
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container py-3 mt-3">
+  <div class="p-3 pb-md-4 mx-auto border-bottom">
+    <h2 class="fw-bolder mb-0  text-center text-uppercase">
+      <strong>Bienvenidos a nuestra familia</strong>
+      <br>
+      Mascota Feliz
+    </h2>
+    <br>
+    <h3 class="fs-6 lead text-justify">
+      Esta idea surge gracias a la confianza y demanda de nuestros clientes, de un espacio dedicado a las mascotas en
+      donde tuvieran la atención necesaria para su bienestar y tener la atención medica - preventiva que se merecen.
+    </h3>
+    <h3 class="fs-6 lead text-justify">
+      Ser afiliado Mascota Feliz significa poder proteger a tu mejor amigo las 24 horas los 365 días al año. Nuestra red
+      de profesionales veterinarios nos permiten brindar un servicio cumpliendo con los estandares más altos de calidad,
+      así mismo, nuestro sistema de salud permite a los usuarios acceder a servicios gratuitos e ilimitados de manera
+      permanente
+    </h3>
+  </div>
+</div>
+
+<div class="container py-3">
+  <div class="p-3 pb-md-4 mx-auto border-bottom">
+    <mascota-feliz-planes></mascota-feliz-planes>
+  </div>
+</div>
