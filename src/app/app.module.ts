@@ -7,6 +7,7 @@ import { InicioComponent } from './publico/inicio/inicio.component';
 import { MenuInicioComponent } from './publico/navegacion/menu-inicio/menu-inicio.component';
 import { PlanesComponent } from './publico/planes/planes.component';
 import { EmpresaComponent } from './publico/empresa/empresa.component';
+import { MenuDasboardComponent } from './publico/navegacion/menu-dasboard/menu-dasboard.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { EmpresaComponent } from './publico/empresa/empresa.component';
     InicioComponent,
     MenuInicioComponent,
     PlanesComponent,
-    EmpresaComponent
+    EmpresaComponent,
+    MenuDasboardComponent
   ],
   imports: [
     BrowserModule,
