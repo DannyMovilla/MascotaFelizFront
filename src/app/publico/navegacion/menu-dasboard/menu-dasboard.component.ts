@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 
 @Component({
   selector: 'mascota-feliz-menu-dasboard',
@@ -7,9 +8,13 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 })
 export class MenuDasboardComponent implements OnInit  {
 
-  constructor() { }
+  constructor(private authServices: SeguridadService) { }
 
   ngOnInit(): void {
+  }
+
+  cerrarSession(){
+    this.authServices.eliminarSession();
   }
 
 }
