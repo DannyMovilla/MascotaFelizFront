@@ -1,2 +1,21 @@
+<!--<router-outlet></router-outlet>-->
 
-<router-outlet></router-outlet>
+<mat-toolbar>
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+
+  Mascota Feliz
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav class="mat-elevation-z8" #sidenav="matSidenav">
+    <mascota-feliz-menu-dasboard></mascota-feliz-menu-dasboard>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <!--<router-outlet></router-outlet>-->
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

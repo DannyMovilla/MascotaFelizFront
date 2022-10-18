@@ -8,6 +8,12 @@ import { MenuInicioComponent } from './publico/navegacion/menu-inicio/menu-inici
 import { PlanesComponent } from './publico/planes/planes.component';
 import { EmpresaComponent } from './publico/empresa/empresa.component';
 import { MenuDasboardComponent } from './publico/navegacion/menu-dasboard/menu-dasboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -16,11 +22,17 @@ import { MenuDasboardComponent } from './publico/navegacion/menu-dasboard/menu-d
     MenuInicioComponent,
     PlanesComponent,
     EmpresaComponent,
-    MenuDasboardComponent
+    MenuDasboardComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
   ],
   exports: [
 
