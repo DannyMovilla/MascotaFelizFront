@@ -70,6 +70,15 @@ table tbody td {
   color: #828ca4 !important;
 }
 
+table {
+  caption-side: bottom;
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  color: #828ca4 !important;
+}
+
+
 .text-justify {
   text-align: justify;
   text-justify: inter-word;

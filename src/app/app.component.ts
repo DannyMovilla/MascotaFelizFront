@@ -35,7 +35,6 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.subs = this.authServices
       .obtenerDatosUserSession()
       .subscribe((datos: any) => {
-        console.log(datos);
         if (datos != '' && datos != null) {
           this.seInicionSesion = true;
         } else {
@@ -54,7 +53,6 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.sidenav.open();
       }
     });
-
     this.changeDetector.detectChanges();
   }
 }

@@ -1,28 +1,19 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'mascota-feliz-registrar',
   templateUrl: './registrar.component.html',
-  styleUrls: ['./registrar.component.css']
+  styleUrls: ['./registrar.component.css'],
 })
 export class RegistrarComponent implements OnInit, OnDestroy {
-  constructor(
-    private router: Router,
-    @Inject(DOCUMENT) private document: Document
-  ) {}
+  constructor(private router: Router, public bsModalRef: BsModalRef) {}
 
-  ngOnInit(): void {
-    this.document.body.style.background = '#f5f5f5';
-    this.document.body.className = 'text-center';
-  }
+  ngOnInit(): void {}
 
-  ngOnDestroy() {
-    this.document.body.style.background = '';
-    this.document.body.className = '';
-  }
+  ngOnDestroy() {}
 
   onIngresar(form: NgForm) {
     if (form.invalid) {
@@ -31,5 +22,4 @@ export class RegistrarComponent implements OnInit, OnDestroy {
 
     this.router.navigateByUrl('/inicio');
   }
-
 }

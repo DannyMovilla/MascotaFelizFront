@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./modulos/seguridad/seguridad.module').then( m => m.SeguridadModule )
   },
   {
+    path: 'mascotas',
+    loadChildren: () => import('./modulos/mascotas/mascotas.module').then(m => m.MascotasModule)
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/inicio'
