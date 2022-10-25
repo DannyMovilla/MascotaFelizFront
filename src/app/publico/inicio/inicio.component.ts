@@ -18,11 +18,14 @@ export class InicioComponent implements OnInit {
     private fb: FormBuilder,
     private authServices: SeguridadService,
     private router: Router
-  ) {}
+  ) {
+    if (this.authServices.obtenerSession()) {
+      this.router.navigate(['/configuracion/dashboard']);
+    }
+  }
 
   ngOnInit(): void {
     this.initForm();
-   // this.cerrarSession();
   }
 
   initForm() {
@@ -95,8 +98,4 @@ export class InicioComponent implements OnInit {
     );
   }
 
-  cerrarSession() {
-    this.authServices.eliminarSession();
-    this.router.navigateByUrl('/inicio');
-  }
 }

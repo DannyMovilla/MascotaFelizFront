@@ -19,6 +19,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,7 @@ import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
     MenuInicioComponent,
     PlanesComponent,
     EmpresaComponent,
-    MenuDasboardComponent,
+    MenuDasboardComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,8 @@ import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
+    LayoutModule,
+    MatListModule,
   ],
   exports: [],
   providers: [

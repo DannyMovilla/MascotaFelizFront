@@ -34,9 +34,11 @@ export class AppComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.subs = this.authServices.obtenerDatosUserSession().subscribe((datos:ModeloIdentificar) => {
-      this.seInicionSesion = datos.estaIdentificado;
-    })
+    this.subs = this.authServices
+      .obtenerDatosUserSession()
+      .subscribe((datos: ModeloIdentificar) => {
+        this.seInicionSesion = datos.estaIdentificado;
+      });
   }
 
   ngAfterViewInit() {
@@ -52,8 +54,4 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.changeDetector.detectChanges();
   }
 
-  /*@HostListener('window:beforeunload', ['$event'])
-  beforeunloadHandler() {
-    localStorage.clear();
-  }*/
 }

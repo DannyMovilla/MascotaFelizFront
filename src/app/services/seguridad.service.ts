@@ -72,6 +72,14 @@ export class SeguridadService {
     );
   }
 
+  resetPassword(usuario: string): Observable<any> {
+    return this.http.post<ModeloIdentificar>(
+      `${environment.urlMascostaFelizApi}/reset-password/${usuario}`,
+      {},
+      {}
+    );
+  }
+
   ObtenerToken() {
     let datosString = localStorage.getItem('datosSesion');
     if (datosString) {

@@ -2,9 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SeguridadService } from 'src/app/services/seguridad.service';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as CryptoJS from 'crypto-js';
 import Swal from 'sweetalert2';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
   selector: 'mascota-feliz-login',
@@ -14,11 +15,15 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit, OnDestroy {
   fgValidador: FormGroup = this.fb.group({});
 
+  modalRef2?: BsModalRef;
+
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private authService: SeguridadService,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         );
 
         this.authService.almacenarSession(datos);
-        this.router.navigateByUrl('/mascotas/listar');
+        this.router.navigateByUrl('/configuracion/dashboard');
 
         this.bsModalRef?.hide();
       },
@@ -79,5 +84,24 @@ export class LoginComponent implements OnInit, OnDestroy {
       (this.fgValidador.get('contrasena')?.dirty ||
         this.fgValidador.get('contrasena')?.touched)
     );
+  }
+
+  onCargarResetPassword() {
+    let initialState = {};
+    let modalConfig = {
+      animated: true,
+    };
+    /* this is how we open a Modal Component from another component */
+    this.modalRef2 = this.modalService.show(
+      ResetPasswordComponent,
+      Object.assign({}, modalConfig, { class: 'modal-md', initialState })
+    );
+    this.modalRef2.content.closeBtnName = 'Cancelar';
+
+    if (!this.bsModalRef) {
+      return;
+    }
+
+    this.bsModalRef.hide();
   }
 }
