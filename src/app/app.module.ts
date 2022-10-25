@@ -21,6 +21,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
 import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material/list';
+import { TestimoniosComponent } from './publico/testimonios/testimonios.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MatListModule } from '@angular/material/list';
     MenuInicioComponent,
     PlanesComponent,
     EmpresaComponent,
-    MenuDasboardComponent
+    MenuDasboardComponent,
+    TestimoniosComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { MatListModule } from '@angular/material/list';
     ModalModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
     LayoutModule,
-    MatListModule,
+    MatListModule
   ],
   exports: [],
   providers: [

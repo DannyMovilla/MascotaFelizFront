@@ -69,7 +69,7 @@ export class RegistrarComponent implements OnInit, OnDestroy {
       next: (data) => {
         if (data) {
           Swal.fire(
-            'Registro exitoso!',
+            'Bienvenido a Mascota Feliz!',
             'Usted recibirá un correo con mayor información.',
             'success'
           );
@@ -82,4 +82,53 @@ export class RegistrarComponent implements OnInit, OnDestroy {
 
     this.router.navigateByUrl('/inicio');
   }
+
+  get correoNoValido() {
+    return (
+      this.fgValidador.get('correo')?.invalid &&
+      (this.fgValidador.get('correo')?.dirty ||
+        this.fgValidador.get('correo')?.touched)
+    );
+  }
+
+  get contrasenaNoValido() {
+    return (
+      this.fgValidador.get('contrasena')?.invalid &&
+      (this.fgValidador.get('contrasena')?.dirty ||
+        this.fgValidador.get('contrasena')?.touched)
+    );
+  }
+
+  get documentoNoValido() {
+    return (
+      this.fgValidador.get('documento')?.invalid &&
+      (this.fgValidador.get('documento')?.dirty ||
+        this.fgValidador.get('documento')?.touched)
+    );
+  }
+
+  get tipoDocumentoNoValido() {
+    return (
+      this.fgValidador.get('tipoDocumento')?.invalid &&
+      (this.fgValidador.get('tipoDocumento')?.dirty ||
+        this.fgValidador.get('tipoDocumento')?.touched)
+    );
+  }
+
+  get nombresNoValido() {
+    return (
+      this.fgValidador.get('nombres')?.invalid &&
+      (this.fgValidador.get('nombres')?.dirty ||
+        this.fgValidador.get('nombres')?.touched)
+    );
+  }
+
+  get apellidosNoValido() {
+    return (
+      this.fgValidador.get('apellidos')?.invalid &&
+      (this.fgValidador.get('apellidos')?.dirty ||
+        this.fgValidador.get('apellidos')?.touched)
+    );
+  }
+
 }

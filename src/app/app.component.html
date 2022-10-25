@@ -1,5 +1,4 @@
-<ng-container
-  *ngIf="!seInicionSesion; then notauthenticated; else authenticate">
+<ng-container *ngIf="!seInicionSesion; then notauthenticated; else authenticate">
 </ng-container>
 
 <ng-template #notauthenticated>
@@ -30,5 +29,4 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </ng-template>
-<ng-http-loader></ng-http-loader>
-
+<ng-http-loader [backgroundColor]="'#8945f0'" [backdropBackgroundColor]="'#cfcccc'" spinner="sk-wandering-cubes"></ng-http-loader>

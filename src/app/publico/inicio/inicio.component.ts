@@ -53,10 +53,10 @@ export class InicioComponent implements OnInit {
           if (data) {
             Swal.fire(
               'Mascota Feliz!',
-              'Información ha sido almacenada correctamente',
+              'Gracias por dejarnos tú contacto, un asesor pronto se comunicará con usted.',
               'success'
             );
-            console.log('Almacenado correctamente');
+            this.initForm();
           } else {
             console.log('Error almacenando');
             Swal.fire(

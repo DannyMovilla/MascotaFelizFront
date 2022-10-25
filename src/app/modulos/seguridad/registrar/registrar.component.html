@@ -15,48 +15,66 @@
         <div class="col-md-6">
           <div class="form-floating">
             <input type="text" class="form-control" id="numDocumento" placeholder="name@example.com"
-              formControlName="documento">
+              formControlName="documento" [class.is-invalid]="documentoNoValido">
             <label for="numDocumento">Documento</label>
+            <small *ngIf="documentoNoValido" class="text-danger">
+              Ingrese el documento
+            </small>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-floating">
             <input type="text" class="form-control" id="tipoDocum" placeholder="name@example.com"
-              formControlName="tipoDocumento">
+              formControlName="tipoDocumento" [class.is-invalid]="tipoDocumentoNoValido">
             <label for="tipoDocum">Tipo Documento</label>
+            <small *ngIf="tipoDocumentoNoValido" class="text-danger">
+              Seleccione el tipo documento
+            </small>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-floating">
             <input type="text" class="form-control" id="nombres" placeholder="name@example.com"
-              formControlName="nombres">
+              formControlName="nombres" [class.is-invalid]="nombresNoValido">
             <label for="nombres">Nombres</label>
+            <small *ngIf="nombresNoValido" class="text-danger">
+              Ingrese el nombre
+            </small>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-floating">
             <input type="text" class="form-control" id="apellidos" placeholder="name@example.com"
-              formControlName="apellidos">
+              formControlName="apellidos" [class.is-invalid]="apellidosNoValido">
             <label for="apellidos">Apellidos</label>
+            <small *ngIf="apellidosNoValido" class="text-danger">
+              Ingrese el apellido
+            </small>
           </div>
         </div>
 
         <div class="col-md-12">
           <div class="form-floating">
-            <input type="email" class="form-control" id="correo" placeholder="name@example.com"
-              formControlName="correo">
+            <input type="email" class="form-control" id="correo" placeholder="name@example.com" formControlName="correo"
+              [class.is-invalid]="correoNoValido">
             <label for="correo">Correo</label>
+            <small *ngIf="correoNoValido" class="text-danger">
+              Ingrese el correo
+            </small>
           </div>
         </div>
 
         <div class="col-md-12">
           <div class="form-floating">
             <input type="password" class="form-control" id="contrasena" placeholder="Contraseña"
-              formControlName="contrasena">
+              formControlName="contrasena" [class.is-invalid]="contrasenaNoValido">
             <label for="contrasena">Contraseña</label>
+            <small *ngIf="contrasenaNoValido" class="text-danger">
+             Ingrese la contraseña
+            </small>
           </div>
         </div>
 

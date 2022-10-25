@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       (datos: any) => {
         Swal.fire(
           'Mascota Feliz!',
-          'Bienvenido ' + datos.datos.nombre,
+          'Bienvenido ' + datos.datos.nombre + ', un gusto volverte a ver.',
           'success'
         );
 
