@@ -28,7 +28,7 @@ export class MenuInicioComponent implements OnInit {
     /* this is how we open a Modal Component from another component */
     this.bsModalRef = this.modalService.show(
       LoginComponent,
-      Object.assign({}, modalConfig, { class: 'modal-lg', initialState })
+      Object.assign({}, modalConfig, { class: 'modal-md', initialState })
     );
     this.bsModalRef.content.closeBtnName = 'Cancelar';
   }
@@ -43,7 +43,7 @@ export class MenuInicioComponent implements OnInit {
     /* this is how we open a Modal Component from another component */
     this.bsModalRef = this.modalService.show(
       RegistrarComponent,
-      Object.assign({}, modalConfig, { class: 'modal-lg', initialState })
+      Object.assign({}, modalConfig, { class: 'modal-md', initialState })
     );
     this.bsModalRef.content.closeBtnName = 'Cancelar';
   }

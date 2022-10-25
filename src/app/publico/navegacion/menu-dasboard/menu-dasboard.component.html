@@ -1,7 +1,7 @@
 <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
 
-<h4 class="name">Daniel Movilla</h4>
-<p class="designation">Software Engineer</p>
+<h4 class="name" style="color: white;">{{dataUser.datos.nombre}}</h4>
+<p class="designation">{{dataUser.rolUsuario.nombre}}</p>
 
 <mat-divider></mat-divider>
 
@@ -13,12 +13,29 @@
   <mat-icon>pets</mat-icon>
   <span>Mascotas</span>
 </button>
+<button routerLink="/administracion/roles" routerLinkActive="mat-accent" mat-button class="menu-button">
+  <mat-icon>engineering</mat-icon>
+  <span>Roles</span>
+</button>
+<button routerLink="/administracion/usuarios" routerLinkActive="mat-accent" mat-button class="menu-button">
+  <mat-icon>groups</mat-icon>
+  <span>Usuarios</span>
+</button>
 <button mat-button class="menu-button">
   <mat-icon>summarize</mat-icon>
   <span>Planes</span>
 </button>
+<button routerLink="/configuracion/prospectos" routerLinkActive="mat-accent" mat-button class="menu-button">
+  <mat-icon>contact_mail</mat-icon>
+  <span>Prospectos</span>
+</button>
 
 <mat-divider></mat-divider>
+
+<button routerLink="/configuracion/perfil" routerLinkActive="mat-accent" mat-button class="menu-button">
+  <mat-icon>account_circle</mat-icon>
+  <span>Perfil</span>
+</button>
 
 <button mat-button class="menu-button" (click)="cerrarSession()">
   <mat-icon>logout</mat-icon>

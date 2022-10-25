@@ -7,34 +7,62 @@
 <div class="modal-body">
 
   <main class="form-signin w-100 m-auto text-center">
-    <form (ngSubmit)="onIngresar(fLong)" autocomplete="off" #fLong="ngForm">
-      <img class="mb-4" src="assets/img/logoMorado2.png" alt="">
+    <form [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" autocomplete="off" class="clss-form">
+      <img class="mb-2" src="assets/img/logoMorado2.png" alt="">
       <h1 class="h3 mb-3 fw-normal">Registrar</h1>
-      <div class="row g-2">
-        <div class="col-md">
+      <div class="row">
+
+        <div class="col-md-6">
           <div class="form-floating">
-            <input type="email" class="form-control" id="nombres" placeholder="name@example.com">
+            <input type="text" class="form-control" id="numDocumento" placeholder="name@example.com"
+              formControlName="documento">
+            <label for="numDocumento">Documento</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="tipoDocum" placeholder="name@example.com"
+              formControlName="tipoDocumento">
+            <label for="tipoDocum">Tipo Documento</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="nombres" placeholder="name@example.com"
+              formControlName="nombres">
             <label for="nombres">Nombres</label>
           </div>
         </div>
 
-        <div class="col-md">
+        <div class="col-md-6">
           <div class="form-floating">
-            <input type="email" class="form-control" id="apellidos" placeholder="name@example.com">
+            <input type="text" class="form-control" id="apellidos" placeholder="name@example.com"
+              formControlName="apellidos">
             <label for="apellidos">Apellidos</label>
           </div>
         </div>
 
-        <div class="form-floating">
-          <input type="email" class="form-control" id="correo" placeholder="name@example.com">
-          <label for="correo">Correo</label>
+        <div class="col-md-12">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="correo" placeholder="name@example.com"
+              formControlName="correo">
+            <label for="correo">Correo</label>
+          </div>
         </div>
-        <div class="form-floating">
-          <input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
-          <label for="contrasena">Contraseña</label>
+
+        <div class="col-md-12">
+          <div class="form-floating">
+            <input type="password" class="form-control" id="contrasena" placeholder="Contraseña"
+              formControlName="contrasena">
+            <label for="contrasena">Contraseña</label>
+          </div>
         </div>
+
       </div>
-      <button class="w-100 btn btn-primary btn-lg mt-4" type="submit">Registrar</button>
+      <button class="w-100 btn btn-primary btn-lg mt-4 mb-3" [disabled]="!fgValidador.valid"
+        type="submit">Registrar</button>
     </form>
   </main>
 

@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Prospecto</h2>
+<mat-dialog-content class="mat-typography">
+  <form autocomplete="off" class="needs-validation clss-form mt-3">
+    <div class="row g-3">
+      <div class="col-12 mt-1">
+        <label for="nombre" class="form-label mb-0">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="Ingresar nombre">
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="correo" class="form-label mb-0">Correo Electronico</label>
+        <input type="email" class="form-control" formControlName="correo" id="correo" placeholder="Ingresar correo">
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="mensaje" class="form-label mb-0">Mensaje</label>
+        <input type="text" class="form-control" formControlName="mensaje" id="mensaje" placeholder="Ingresar mensaje">
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Guardar</button>
+  <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>

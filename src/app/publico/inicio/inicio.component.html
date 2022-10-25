@@ -6,41 +6,43 @@
       </a>
       <mascota-feliz-menu-inicio></mascota-feliz-menu-inicio>
     </div>
-    <div class="row">
+    <div class="row animate__animated animate__bounce">
       <div class="col-md-5">
-        <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card mb-4 mt-2 rounded-3 shadow-sm">
           <div class="card-body">
-            <h3 class="fw-bolder mb-0">Contactanos</h3>
-            <p class="fs-6 lead">Contactanos para mayor información</p>
-            <form class="needs-validation clss-form" novalidate>
+            <h3 class="fw-bolder mb-0">Contáctanos</h3>
+            <p class="fs-6 lead">Contáctanos para más información</p>
+            <form autocomplete="off" class="needs-validation clss-form" [formGroup]="formValidator">
               <div class="row g-3">
                 <div class="col-12 mt-1">
                   <label for="nombre" class="form-label mb-0">Nombre</label>
-                  <input type="text" class="form-control" id="nombre" placeholder="Ingresar nombre de mascota" required>
-                  <div class="invalid-feedback">
-                    Se requiere un nombre válido.
-                  </div>
+                  <input type="text" class="form-control" formControlName="nombre" id="nombre"
+                    placeholder="Ingresar nombre" [class.is-invalid]="nombreNoValido">
+                  <small *ngIf="nombreNoValido" class="text-danger">
+                    Se requiere que ingrese un mensaje
+                  </small>
                 </div>
 
                 <div class="col-12 mt-1">
                   <label for="correo" class="form-label mb-0">Correo Electronico</label>
-                  <input type="email" class="form-control" id="correo" placeholder="Ingresar correo" required>
-                  <div class="invalid-feedback">
-                    Se requiere que ingrese el correo
-                  </div>
-                </div>
-
-                <div class="col-12 mt-1">
-                  <label for="telefono" class="form-label mb-0">Telefono</label>
-                  <input type="text" class="form-control" id="telefono" placeholder="Ingresar el telefono" required>
+                  <input type="email" class="form-control" formControlName="correo" id="correo"
+                    placeholder="Ingresar correo" [class.is-invalid]="correoNoValido">
+                  <small *ngIf="correoNoValido" class="text-danger">
+                    Se requiere que ingrese el correo válido.
+                  </small>
                 </div>
 
                 <div class="col-12 mt-1">
                   <label for="mensaje" class="form-label mb-0">Mensaje</label>
-                  <textarea class="form-control" id="mensaje" rows="3"></textarea>
+                  <textarea class="form-control" formControlName="mensaje" id="mensaje" rows="3"
+                    [class.is-invalid]="mensajeNoValido"></textarea>
+                  <small *ngIf="mensajeNoValido" class="text-danger">
+                    Se requiere que ingrese un mensaje
+                  </small>
                 </div>
               </div>
-              <button class="w-100 btn btn-primary btn-lg mt-4" type="submit">Enviar</button>
+              <button class="w-100 btn btn-primary btn-lg mt-4" type="submit" [disabled]="!formValidator.valid"
+                (click)="guardarProspecto()">Enviar</button>
             </form>
           </div>
         </div>

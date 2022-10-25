@@ -21,6 +21,14 @@ const routes: Routes = [
     loadChildren: () => import('./modulos/mascotas/mascotas.module').then(m => m.MascotasModule)
   },
   {
+    path: 'configuracion',
+    loadChildren: () => import('./modulos/configuracion/configuracion.module').then(m => m.ConfiguracionModule)
+  },
+  {
+    path: 'administracion',
+    loadChildren: () => import('./modulos/administracion/administracion.module').then(m => m.AdministracionModule)
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/inicio'

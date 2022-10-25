@@ -4,11 +4,13 @@ import {
   ChangeDetectorRef,
   AfterViewInit,
   OnInit,
+  HostListener,
 } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SeguridadService } from './services/seguridad.service';
 import { Subscription } from 'rxjs';
+import { ModeloIdentificar } from './modelos/modelo-identificar';
 
 @Component({
   selector: 'mascota-feliz-root',
@@ -32,15 +34,9 @@ export class AppComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.subs = this.authServices
-      .obtenerDatosUserSession()
-      .subscribe((datos: any) => {
-        if (datos != '' && datos != null) {
-          this.seInicionSesion = true;
-        } else {
-          this.seInicionSesion = false;
-        }
-      });
+    this.subs = this.authServices.obtenerDatosUserSession().subscribe((datos:ModeloIdentificar) => {
+      this.seInicionSesion = datos.estaIdentificado;
+    })
   }
 
   ngAfterViewInit() {
@@ -55,4 +51,9 @@ export class AppComponent implements AfterViewInit, OnInit {
     });
     this.changeDetector.detectChanges();
   }
+
+  /*@HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler() {
+    localStorage.clear();
+  }*/
 }

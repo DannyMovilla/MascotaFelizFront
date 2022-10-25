@@ -8,9 +8,13 @@ import { SeguridadService } from 'src/app/services/seguridad.service';
   styleUrls: ['./menu-dasboard.component.css'],
 })
 export class MenuDasboardComponent implements OnInit {
+  dataUser: any;
+
   constructor(private authServices: SeguridadService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dataUser = this.authServices.obtenerSession();
+  }
 
   cerrarSession() {
     this.authServices.eliminarSession();
