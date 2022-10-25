@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Roles</h2>
+<form autocomplete="off" class="needs-validation clss-form" [formGroup]="fgValidador" (ngSubmit)="onRegistrar()">
+  <mat-dialog-content class="mat-typography ">
+    <div class="row g-3  mt-3 mb-3">
+
+      <div class="col-12 mt-1">
+        <label for="codigo" class="form-label mb-0">Codigo</label>
+        <input type="text" class="form-control" formControlName="codigo" id="codigo" placeholder="Ingresar codigo">
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="nombre" class="form-label mb-0">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="Ingresar nombre">
+      </div>
+
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button type="submit" color="primary" [mat-dialog-close]="true" cdkFocusInitial>Guardar</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+  </mat-dialog-actions>
+
+</form>

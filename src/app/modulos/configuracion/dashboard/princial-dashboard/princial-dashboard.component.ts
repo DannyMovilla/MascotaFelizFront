@@ -13,18 +13,18 @@ export class PrincialDashboardComponent {
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
+          { title: 'Usuarios', cols: 1, rows: 1 },
+          { title: 'Clientes', cols: 1, rows: 1 },
+          { title: 'Afiliaciones', cols: 1, rows: 1 },
+          { title: 'Mascotas', cols: 1, rows: 1 }
         ];
       }
 
       return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
+        { title: 'Usuarios', cols: 2, rows: 1 },
+        { title: 'Clientes', cols: 1, rows: 1 },
+        { title: 'Afiliaciones', cols: 1, rows: 2 },
+        { title: 'Mascotas', cols: 1, rows: 1 }
       ];
     })
   );

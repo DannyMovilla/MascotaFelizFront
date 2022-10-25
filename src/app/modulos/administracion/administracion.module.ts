@@ -13,9 +13,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListarUsuariosComponent } from './usuarios/listar-usuarios/listar-usuarios.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { InfoRolesComponent } from './roles/info-roles/info-roles.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
-  declarations: [ListarRolesComponent, ListarUsuariosComponent],
+  declarations: [
+    ListarRolesComponent,
+    ListarUsuariosComponent,
+    InfoRolesComponent,
+  ],
   imports: [
     CommonModule,
     AdministracionRoutingModule,
@@ -29,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
+    MatCheckboxModule,
   ],
 })
 export class AdministracionModule {}
