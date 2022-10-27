@@ -1,20 +1,18 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { combineLatest } from 'rxjs';
 import { Rol } from 'src/app/modelos/rol.model';
 import { Usuario } from 'src/app/modelos/usuario.model';
 import { RolService } from 'src/app/services/rol.service';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'mascota-feliz-info-usuarios',
-  templateUrl: './info-usuarios.component.html',
-  styleUrls: ['./info-usuarios.component.css'],
+  selector: 'mascota-feliz-info-perfil',
+  templateUrl: './info-perfil.component.html',
+  styleUrls: ['./info-perfil.component.css'],
 })
-export class InfoUsuariosComponent implements OnInit {
+export class InfoPerfilComponent implements OnInit {
   modeloRoles: Rol[] = [];
 
   fgValidador: FormGroup = this.fb.group({
@@ -27,18 +25,19 @@ export class InfoUsuariosComponent implements OnInit {
     rolId: ['', [Validators.required]],
   });
 
-  constructor(
-    private fb: FormBuilder,
-    public bsModalRef: BsModalRef,
-    private rolServices: RolService,
-    private usuarioServices: UsuarioService,
-    public dialogRef: MatDialogRef<InfoUsuariosComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string
-  ) {}
-
   InitSelect: any;
 
+  id: string = '';
+
+  constructor(
+    private fb: FormBuilder,
+    private rolServices: RolService,
+    private usuarioServices: UsuarioService,
+    private authServices: SeguridadService
+  ) {}
+
   ngOnInit(): void {
+    this.id = this.authServices.obtenerSession().datos.id;
     this.obtenerObjecto();
   }
 
@@ -52,10 +51,10 @@ export class InfoUsuariosComponent implements OnInit {
       },
     });
 
-    if (this.data != null) {
-      this.usuarioServices.getUsuarioById(this.data).subscribe({
+    if (this.id != null) {
+      this.usuarioServices.getUsuarioById(this.id).subscribe({
         next: (dataUsario) => {
-          this.fgValidador.controls['id'].setValue(this.data);
+          this.fgValidador.controls['id'].setValue(this.id);
           this.fgValidador.controls['nombres'].setValue(dataUsario.nombres);
           this.fgValidador.controls['apellidos'].setValue(dataUsario.apellidos);
           this.fgValidador.controls['correo'].setValue(dataUsario.correo);
@@ -73,51 +72,24 @@ export class InfoUsuariosComponent implements OnInit {
   onRegistrar() {
     let usuarioData = new Usuario(this.fgValidador.value);
 
-    if (this.data == null) {
-      delete usuarioData.id;
+    this.usuarioServices.updateUsuario(usuarioData).subscribe(
+      (datos: any) => {
+        Swal.fire(
+          'Mascota Feliz!',
+          'El usuario fue guardado correctamente',
+          'success'
+        );
+      },
+      (error: any) => {
+        console.log(error);
 
-      this.usuarioServices.newUsuario(usuarioData).subscribe(
-        (datos: any) => {
-          Swal.fire(
-            'Mascota Feliz!',
-            'El usuario fue guardado correctamente',
-            'success'
-          );
-
-          this.bsModalRef?.hide();
-        },
-        (error: any) => {
-          console.log(error);
-
-          Swal.fire(
-            'Mascota Feliz!',
-            'Error al guardar la información',
-            'warning'
-          );
-        }
-      );
-    } else {
-      this.usuarioServices.updateUsuario(usuarioData).subscribe(
-        (datos: any) => {
-          Swal.fire(
-            'Mascota Feliz!',
-            'El usuario fue guardado correctamente',
-            'success'
-          );
-
-          this.bsModalRef?.hide();
-        },
-        (error: any) => {
-          console.log(error);
-
-          Swal.fire(
-            'Mascota Feliz!',
-            'Error al guardar la información',
-            'warning'
-          );
-        }
-      );
-    }
+        Swal.fire(
+          'Mascota Feliz!',
+          'Error al guardar la información',
+          'warning'
+        );
+      }
+    );
   }
 
   get correoNoValido() {

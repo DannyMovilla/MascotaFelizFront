@@ -18,9 +18,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
+import { InfoPerfilComponent } from './perfil/info-perfil/info-perfil.component';
 
 @NgModule({
-  declarations: [ListarProspectosComponent, InfoProspectosComponent, PrincipalComponent],
+  declarations: [ListarProspectosComponent, InfoProspectosComponent, PrincipalComponent, InfoPerfilComponent],
   imports: [
     CommonModule,
     ConfiguracionRoutingModule,

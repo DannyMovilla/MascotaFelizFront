@@ -14,7 +14,7 @@ import { InfoUsuariosComponent } from '../info-usuarios/info-usuarios.component'
   styleUrls: ['./listar-usuarios.component.css'],
 })
 export class ListarUsuariosComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'nombres', 'identificacion', 'correo'];
+  displayedColumns: string[] = ['select', 'nombres', 'identificacion', 'correo', 'opcions'];
   dataSource!: MatTableDataSource<Usuario>;
   selection = new SelectionModel<Usuario>(true, []);
 
@@ -60,7 +60,7 @@ export class ListarUsuariosComponent implements OnInit {
     const dialogRef = this.dialog.open(InfoUsuariosComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      this.onCargarInformacion();
     });
   }
 

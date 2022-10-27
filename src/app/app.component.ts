@@ -4,7 +4,6 @@ import {
   ChangeDetectorRef,
   AfterViewInit,
   OnInit,
-  HostListener,
 } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -53,5 +52,4 @@ export class AppComponent implements AfterViewInit, OnInit {
     });
     this.changeDetector.detectChanges();
   }
-
 }
