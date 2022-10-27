@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Usuario</h2>
+<form [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" autocomplete="off" class="needs-validation clss-form">
+  <mat-dialog-content class="mat-typography ">
+    <!-- <img class="mb-2" src="assets/img/logoMorado2.png" alt="">-->
+    <div class="row g-3 mt-3 mb-3">
+
+      <div class="col-md-12 mt-1">
+        <label for="numDocumento" class="form-label mb-0">Documento</label>
+        <input type="text" class="form-control" id="numDocumento" placeholder="Docuemento" formControlName="documento"
+          [class.is-invalid]="documentoNoValido">
+        <small *ngIf="documentoNoValido" class="text-danger">
+          Ingrese el documento
+        </small>
+      </div>
+
+      <div class="col-md-6">
+        <label for="nombres" class="form-label mb-0">Nombres</label>
+        <input type="text" class="form-control" id="nombres" placeholder="Nombres" formControlName="nombres"
+          [class.is-invalid]="nombresNoValido">
+        <small *ngIf="nombresNoValido" class="text-danger">
+          Ingrese el nombre
+        </small>
+      </div>
+
+      <div class="col-md-6">
+        <label for="apellidos" class="form-label mb-0">Apellidos</label>
+        <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" formControlName="apellidos"
+          [class.is-invalid]="apellidosNoValido">
+        <small *ngIf="apellidosNoValido" class="text-danger">
+          Ingrese el apellido
+        </small>
+      </div>
+
+      <div class="col-md-12">
+        <label for="correo" class="form-label mb-0">Correo</label>
+        <input type="email" class="form-control" id="correo" placeholder="name@example.com" formControlName="correo"
+          [class.is-invalid]="correoNoValido">
+        <small *ngIf="correoNoValido" class="text-danger">
+          Ingrese el correo
+        </small>
+      </div>
+
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button type="submit" color="primary" [mat-dialog-close]="true" cdkFocusInitial>Guardar</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+  </mat-dialog-actions>
+</form>

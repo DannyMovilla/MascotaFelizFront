@@ -4,6 +4,7 @@ import { ValidadorSesionGuard } from 'src/app/seguridad/validador-sesion.guard';
 import { ListarPlanesComponent } from './planes/listar-planes/listar-planes.component';
 import { ListarRolesComponent } from './roles/listar-roles/listar-roles.component';
 import { ListarSucursalComponent } from './sucursal/listar-sucursal/listar-sucursal.component';
+import { InfoUsuariosComponent } from './usuarios/info-usuarios/info-usuarios.component';
 import { ListarUsuariosComponent } from './usuarios/listar-usuarios/listar-usuarios.component';
 
 const routes: Routes = [
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: 'usuarios',
     component: ListarUsuariosComponent,
+    canActivate: [ValidadorSesionGuard],
+  },
+  {
+    path: 'infoUsuario',
+    component: InfoUsuariosComponent,
     canActivate: [ValidadorSesionGuard],
   },
   {

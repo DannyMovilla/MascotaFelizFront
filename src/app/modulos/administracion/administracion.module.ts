@@ -19,6 +19,7 @@ import { ListarPlanesComponent } from './planes/listar-planes/listar-planes.comp
 import { InfoPlanComponent } from './planes/info-plan/info-plan.component';
 import { InfoSucursalComponent } from './sucursal/info-sucursal/info-sucursal.component';
 import { ListarSucursalComponent } from './sucursal/listar-sucursal/listar-sucursal.component';
+import { InfoUsuariosComponent } from './usuarios/info-usuarios/info-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ListarSucursalComponent } from './sucursal/listar-sucursal/listar-sucur
     InfoPlanComponent,
     InfoSucursalComponent,
     ListarSucursalComponent,
+    InfoUsuariosComponent,
   ],
   imports: [
     CommonModule,
