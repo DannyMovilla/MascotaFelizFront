@@ -102,3 +102,5 @@ body {
 .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
   background: #8945f0 !important;
 }
+
+

@@ -12,24 +12,13 @@
       <h1 class="h3 mb-3 fw-normal">Registrar</h1>
       <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="form-floating">
             <input type="text" class="form-control" id="numDocumento" placeholder="name@example.com"
               formControlName="documento" [class.is-invalid]="documentoNoValido">
             <label for="numDocumento">Documento</label>
             <small *ngIf="documentoNoValido" class="text-danger">
               Ingrese el documento
-            </small>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="tipoDocum" placeholder="name@example.com"
-              formControlName="tipoDocumento" [class.is-invalid]="tipoDocumentoNoValido">
-            <label for="tipoDocum">Tipo Documento</label>
-            <small *ngIf="tipoDocumentoNoValido" class="text-danger">
-              Seleccione el tipo documento
             </small>
           </div>
         </div>
@@ -63,17 +52,6 @@
             <label for="correo">Correo</label>
             <small *ngIf="correoNoValido" class="text-danger">
               Ingrese el correo
-            </small>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="form-floating">
-            <input type="password" class="form-control" id="contrasena" placeholder="Contraseña"
-              formControlName="contrasena" [class.is-invalid]="contrasenaNoValido">
-            <label for="contrasena">Contraseña</label>
-            <small *ngIf="contrasenaNoValido" class="text-danger">
-             Ingrese la contraseña
             </small>
           </div>
         </div>

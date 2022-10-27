@@ -48,9 +48,7 @@ export class RegistrarComponent implements OnInit, OnDestroy {
   initForm() {
     this.fgValidador = this.fb.group({
       correo: ['', [Validators.required, Validators.email]],
-      contrasena: ['', [Validators.required]],
       documento: ['', [Validators.required]],
-      tipoDocumento: ['', [Validators.required]],
       nombres: ['', [Validators.required]],
       apellidos: ['', [Validators.required]],
     });
@@ -91,27 +89,11 @@ export class RegistrarComponent implements OnInit, OnDestroy {
     );
   }
 
-  get contrasenaNoValido() {
-    return (
-      this.fgValidador.get('contrasena')?.invalid &&
-      (this.fgValidador.get('contrasena')?.dirty ||
-        this.fgValidador.get('contrasena')?.touched)
-    );
-  }
-
   get documentoNoValido() {
     return (
       this.fgValidador.get('documento')?.invalid &&
       (this.fgValidador.get('documento')?.dirty ||
         this.fgValidador.get('documento')?.touched)
-    );
-  }
-
-  get tipoDocumentoNoValido() {
-    return (
-      this.fgValidador.get('tipoDocumento')?.invalid &&
-      (this.fgValidador.get('tipoDocumento')?.dirty ||
-        this.fgValidador.get('tipoDocumento')?.touched)
     );
   }
 

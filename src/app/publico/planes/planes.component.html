@@ -1,55 +1,32 @@
-<main>
-  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-    <div class="col">
-      <div class="card mb-4 rounded-3 shadow-sm">
-        <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">Free</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mo</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>10 users included</li>
-            <li>2 GB of storage</li>
-            <li>Email support</li>
-            <li>Help center access</li>
-          </ul>
-          <button type="button" class="w-100 btn btn-lg btn-outline-primary" routerLink="/security/registrar">Sign up for free</button>
-        </div>
+<div class="container py-3  animate__animated animate__fadeInRight" *ngIf="modeloData.length > 0">
+  <div class="p-3 pb-md-4 mx-auto border-bottom">
+
+    <h2 class="fw-bolder mb-0  text-center text-uppercase">
+      Planes
+    </h2>
+    <br>
+
+    <main>
+      <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <ng-container *ngFor="let data of modeloData;let i=index">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">{{data.nombre}}</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">${{data.precio}}</h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>{{data.descripcion}}</li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary"
+                  (click)="onCargarRegistrar()">Registrarme</button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
       </div>
-    </div>
-    <div class="col">
-      <div class="card mb-4 rounded-3 shadow-sm">
-        <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">Pro</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">$15<small class="text-muted fw-light">/mo</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>20 users included</li>
-            <li>10 GB of storage</li>
-            <li>Priority email support</li>
-            <li>Help center access</li>
-          </ul>
-          <button type="button" class="w-100 btn btn-lg btn-primary" routerLink="/security/registrar">Get started</button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card mb-4 rounded-3 shadow-sm border-primary">
-        <div class="card-header py-3 text-bg-primary border-primary">
-          <h4 class="my-0 fw-normal text-white">Enterprise</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">$29<small class="text-muted fw-light">/mo</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>30 users included</li>
-            <li>15 GB of storage</li>
-            <li>Phone and email support</li>
-            <li>Help center access</li>
-          </ul>
-          <button type="button" class="w-100 btn btn-lg btn-primary" routerLink="/security/registrar">Contact us</button>
-        </div>
-      </div>
-    </div>
+    </main>
+
   </div>
-</main>
+</div>

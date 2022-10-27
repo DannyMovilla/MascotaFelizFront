@@ -4,26 +4,35 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Rol } from 'src/app/modelos/rol.model';
-import { RolService } from 'src/app/services/rol.service';
+import { Sucursal } from 'src/app/modelos/sucursal.model';
+import { SucursalService } from 'src/app/services/sucursal.service';
 import Swal from 'sweetalert2';
-import { InfoRolesComponent } from '../info-roles/info-roles.component';
+import { InfoSucursalComponent } from '../info-sucursal/info-sucursal.component';
 
 @Component({
-  selector: 'mascota-feliz-listar-roles',
-  templateUrl: './listar-roles.component.html',
-  styleUrls: ['./listar-roles.component.css'],
+  selector: 'mascota-feliz-listar-sucursal',
+  templateUrl: './listar-sucursal.component.html',
+  styleUrls: ['./listar-sucursal.component.css'],
 })
-export class ListarRolesComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'codigo', 'nombre', 'opcions'];
-  dataSource!: MatTableDataSource<Rol>;
-  selection = new SelectionModel<Rol>(true, []);
+export class ListarSucursalComponent implements OnInit {
+  displayedColumns: string[] = [
+    'select',
+    'departamento',
+    'ciudad',
+    'direccion',
+    'opcions',
+  ];
+  dataSource!: MatTableDataSource<Sucursal>;
+  selection = new SelectionModel<Sucursal>(true, []);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private rolServices: RolService, public dialog: MatDialog) {
+  constructor(
+    private sucursalServices: SucursalService,
+    public dialog: MatDialog
+  ) {
     this.dataSource = new MatTableDataSource();
   }
 
@@ -32,7 +41,7 @@ export class ListarRolesComponent implements OnInit {
   }
 
   onCargarInformacion() {
-    this.rolServices.getRols().subscribe({
+    this.sucursalServices.getSucursal().subscribe({
       next: (data) => {
         this.dataSource = new MatTableDataSource(data);
 
@@ -55,7 +64,7 @@ export class ListarRolesComponent implements OnInit {
   }
 
   openRegistrar() {
-    const dialogRef = this.dialog.open(InfoRolesComponent);
+    const dialogRef = this.dialog.open(InfoSucursalComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       this.onCargarInformacion();
@@ -63,7 +72,7 @@ export class ListarRolesComponent implements OnInit {
   }
 
   openUpdate(idData: String) {
-    const dialogRef = this.dialog.open(InfoRolesComponent, {
+    const dialogRef = this.dialog.open(InfoSucursalComponent, {
       data: idData,
     });
 
@@ -87,7 +96,7 @@ export class ListarRolesComponent implements OnInit {
     this.selection.select(...this.dataSource.data);
   }
 
-  checkboxLabel(row?: Rol): string {
+  checkboxLabel(row?: Sucursal): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
@@ -109,8 +118,8 @@ export class ListarRolesComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           for (let index = 0; index < this.selection.selected.length; index++) {
-            const rolData = this.selection.selected[index];
-            this.rolServices.deleteRol(rolData.id!).subscribe(
+            const sucursalData = this.selection.selected[index];
+            this.sucursalServices.deleteSucursal(sucursalData.id!).subscribe(
               (datos: any) => {
                 Swal.fire(
                   'Mascota Feliz!',

@@ -2,27 +2,28 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Rol } from 'src/app/modelos/rol.model';
-import { RolService } from 'src/app/services/rol.service';
+import { Plan } from 'src/app/modelos/plan.model';
+import { PlanService } from 'src/app/services/plan.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'mascota-feliz-info-roles',
-  templateUrl: './info-roles.component.html',
-  styleUrls: ['./info-roles.component.css'],
+  selector: 'mascota-feliz-info-plan',
+  templateUrl: './info-plan.component.html',
+  styleUrls: ['./info-plan.component.css'],
 })
-export class InfoRolesComponent implements OnInit {
+export class InfoPlanComponent implements OnInit {
   fgValidador: FormGroup = this.fb.group({
     id: ['', [Validators.required]],
     nombre: ['', [Validators.required]],
-    codigo: ['', [Validators.required]],
+    descripcion: ['', [Validators.required]],
+    precio: ['', [Validators.required]],
   });
 
   constructor(
     private fb: FormBuilder,
     public bsModalRef: BsModalRef,
-    private rolServices: RolService,
-    public dialogRef: MatDialogRef<InfoRolesComponent>,
+    private planServices: PlanService,
+    public dialogRef: MatDialogRef<InfoPlanComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string
   ) {}
 
@@ -33,11 +34,12 @@ export class InfoRolesComponent implements OnInit {
   }
 
   obtenerObjecto() {
-    this.rolServices.getRolById(this.data).subscribe({
+    this.planServices.getPlanById(this.data).subscribe({
       next: (data) => {
         this.fgValidador.controls['id'].setValue(this.data);
         this.fgValidador.controls['nombre'].setValue(data.nombre);
-        this.fgValidador.controls['codigo'].setValue(data.codigo);
+        this.fgValidador.controls['descripcion'].setValue(data.descripcion);
+        this.fgValidador.controls['precio'].setValue(data.precio);
       },
       error: (err) => {
         console.log('Problemas en la comunicación con el servidor');
@@ -45,33 +47,16 @@ export class InfoRolesComponent implements OnInit {
     });
   }
 
-  get nombreNoValido() {
-    return (
-      this.fgValidador.get('nombre')?.invalid &&
-      (this.fgValidador.get('nombre')?.dirty ||
-        this.fgValidador.get('nombre')?.touched)
-    );
-  }
-
-  get codigoNoValido() {
-    return (
-      this.fgValidador.get('codigo')?.invalid &&
-      (this.fgValidador.get('codigo')?.dirty ||
-        this.fgValidador.get('codigo')?.touched)
-    );
-  }
-
   onRegistrar() {
-    let rolData = new Rol(this.fgValidador.value);
+    let planData = new Plan(this.fgValidador.value);
 
     if (this.data == null) {
-      delete rolData.id;
-
-      this.rolServices.newRol(rolData).subscribe(
+      delete planData.id;
+      this.planServices.newPlan(planData).subscribe(
         (datos: any) => {
           Swal.fire(
             'Mascota Feliz!',
-            'El rol fue guardado correctamente',
+            'El plan fue guardado correctamente',
             'success'
           );
 
@@ -88,11 +73,11 @@ export class InfoRolesComponent implements OnInit {
         }
       );
     } else {
-      this.rolServices.updateRol(rolData).subscribe(
+      this.planServices.updatePlan(planData).subscribe(
         (datos: any) => {
           Swal.fire(
             'Mascota Feliz!',
-            'El rol fue guardado correctamente',
+            'El plan fue guardado correctamente',
             'success'
           );
 
@@ -109,5 +94,29 @@ export class InfoRolesComponent implements OnInit {
         }
       );
     }
+  }
+
+  get nombreNoValido() {
+    return (
+      this.fgValidador.get('nombre')?.invalid &&
+      (this.fgValidador.get('nombre')?.dirty ||
+        this.fgValidador.get('nombre')?.touched)
+    );
+  }
+
+  get descripcionNoValido() {
+    return (
+      this.fgValidador.get('descripcion')?.invalid &&
+      (this.fgValidador.get('descripcion')?.dirty ||
+        this.fgValidador.get('descripcion')?.touched)
+    );
+  }
+
+  get precioNoValido() {
+    return (
+      this.fgValidador.get('precio')?.invalid &&
+      (this.fgValidador.get('precio')?.dirty ||
+        this.fgValidador.get('precio')?.touched)
+    );
   }
 }

@@ -15,12 +15,20 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { InfoRolesComponent } from './roles/info-roles/info-roles.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ListarPlanesComponent } from './planes/listar-planes/listar-planes.component';
+import { InfoPlanComponent } from './planes/info-plan/info-plan.component';
+import { InfoSucursalComponent } from './sucursal/info-sucursal/info-sucursal.component';
+import { ListarSucursalComponent } from './sucursal/listar-sucursal/listar-sucursal.component';
 
 @NgModule({
   declarations: [
     ListarRolesComponent,
     ListarUsuariosComponent,
     InfoRolesComponent,
+    ListarPlanesComponent,
+    InfoPlanComponent,
+    InfoSucursalComponent,
+    ListarSucursalComponent,
   ],
   imports: [
     CommonModule,

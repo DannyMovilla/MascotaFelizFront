@@ -1,16 +1,7 @@
-<h2 mat-dialog-title>Roles</h2>
+<h2 mat-dialog-title>Planes</h2>
 <form autocomplete="off" class="needs-validation clss-form" [formGroup]="fgValidador" (ngSubmit)="onRegistrar()">
   <mat-dialog-content class="mat-typography ">
     <div class="row g-3  mt-3 mb-3">
-
-      <div class="col-12 mt-1">
-        <label for="codigo" class="form-label mb-0">Codigo</label>
-        <input type="text" class="form-control" formControlName="codigo" id="codigo" placeholder="Ingresar codigo"
-          [class.is-invalid]="codigoNoValido">
-        <small *ngIf="codigoNoValido" class="text-danger">
-          Se requiere que ingrese el código.
-        </small>
-      </div>
 
       <div class="col-12 mt-1">
         <label for="nombre" class="form-label mb-0">Nombre</label>
@@ -18,6 +9,24 @@
           [class.is-invalid]="nombreNoValido">
         <small *ngIf="nombreNoValido" class="text-danger">
           Se requiere que ingrese el nombre.
+        </small>
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="descripcion" class="form-label mb-0">Descripción</label>
+        <textarea class="form-control" formControlName="descripcion" id="descripcion" rows="3"
+          [class.is-invalid]="descripcionNoValido"></textarea>
+        <small *ngIf="descripcionNoValido" class="text-danger">
+          Se requiere que ingrese la descripcion.
+        </small>
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="precio" class="form-label mb-0">Precio</label>
+        <input type="number" class="form-control" formControlName="precio" id="precio" placeholder="Ingresar precio"
+          [class.is-invalid]="precioNoValido">
+        <small *ngIf="precioNoValido" class="text-danger">
+          Se requiere que ingrese el Precio.
         </small>
       </div>
 

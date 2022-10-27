@@ -14,14 +14,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { PrincipalComponent } from './dashboard/principal/principal.component';
-import { PrincialDashboardComponent } from './dashboard/princial-dashboard/princial-dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
-  declarations: [ListarProspectosComponent, InfoProspectosComponent, PrincipalComponent, PrincialDashboardComponent],
+  declarations: [ListarProspectosComponent, InfoProspectosComponent, PrincipalComponent],
   imports: [
     CommonModule,
     ConfiguracionRoutingModule,

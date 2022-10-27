@@ -22,6 +22,7 @@ import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material/list';
 import { TestimoniosComponent } from './publico/testimonios/testimonios.component';
+import { SucursalesComponent } from './publico/sucursales/sucursales.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TestimoniosComponent } from './publico/testimonios/testimonios.componen
     PlanesComponent,
     EmpresaComponent,
     MenuDasboardComponent,
-    TestimoniosComponent
+    TestimoniosComponent,
+    SucursalesComponent
   ],
   imports: [
     BrowserModule,

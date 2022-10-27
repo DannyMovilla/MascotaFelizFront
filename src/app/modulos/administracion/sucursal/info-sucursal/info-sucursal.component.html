@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Sucursales</h2>
+<form autocomplete="off" class="needs-validation clss-form" [formGroup]="fgValidador" (ngSubmit)="onRegistrar()">
+  <mat-dialog-content class="mat-typography ">
+    <div class="row g-3  mt-3 mb-3">
+
+      <div class="col-12 mt-1">
+        <label for="departamento" class="form-label mb-0">Departamento</label>
+        <input type="text" class="form-control" formControlName="departamento" id="departamento"
+          placeholder="Ingresar departamento" [class.is-invalid]="departamentoNoValido">
+        <small *ngIf="departamentoNoValido" class="text-danger">
+          Se requiere que ingrese el departamento.
+        </small>
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="ciudad" class="form-label mb-0">Ciudad</label>
+        <input type="text" class="form-control" formControlName="ciudad" id="ciudad" placeholder="Ingresar ciudad"
+          [class.is-invalid]="ciudadNoValido">
+        <small *ngIf="ciudadNoValido" class="text-danger">
+          Se requiere que ingrese la ciudad.
+        </small>
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="direccion" class="form-label mb-0">Direccion</label>
+        <input type="text" class="form-control" formControlName="direccion" id="direccion"
+          placeholder="Ingresar direccion" [class.is-invalid]="direccionNoValido">
+        <small *ngIf="direccionNoValido" class="text-danger">
+          Se requiere que ingrese la direccion.
+        </small>
+      </div>
+
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button type="submit" color="primary" [mat-dialog-close]="true" cdkFocusInitial>Guardar</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+  </mat-dialog-actions>
+
+</form>
