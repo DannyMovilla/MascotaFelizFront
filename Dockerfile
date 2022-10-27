@@ -9,7 +9,7 @@ RUN npm run build
 
 # production stage
 FROM nginxinc/nginx-unprivileged:stable-alpine as production-stage
-COPY --from=build-stage /app/dist/angular-app /usr/share/nginx/html
+COPY --from=build-stage /app/dist/mascota-feliz /usr/share/nginx/html
 EXPOSE 8080
 USER 101
 CMD ["nginx", "-g", "daemon off;"]
