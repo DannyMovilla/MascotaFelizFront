@@ -19,9 +19,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
 import { InfoPerfilComponent } from './perfil/info-perfil/info-perfil.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
-  declarations: [ListarProspectosComponent, InfoProspectosComponent, PrincipalComponent, InfoPerfilComponent],
+  declarations: [ListarProspectosComponent, InfoProspectosComponent, PrincipalComponent, InfoPerfilComponent,],
   imports: [
     CommonModule,
     ConfiguracionRoutingModule,
@@ -38,7 +39,8 @@ import { InfoPerfilComponent } from './perfil/info-perfil/info-perfil.component'
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    LayoutModule
+    LayoutModule,
+    NgxChartsModule
   ],
 })
 export class ConfiguracionModule {}

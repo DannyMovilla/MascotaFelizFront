@@ -16,6 +16,12 @@ export class MascotaService {
     );
   }
 
+  getMascotaCount(): Observable<any> {
+    return this.http.get<any>(
+      `${environment.urlMascostaFelizApi}mascotas/count`
+    );
+  }
+
   getMascotaById(id: string): Observable<Mascota> {
     return this.http.get<Mascota>(
       `${environment.urlMascostaFelizApi}mascotas/${id}`

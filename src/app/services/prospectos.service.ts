@@ -16,6 +16,12 @@ export class ProspectosService {
     );
   }
 
+  getProspectosCount(): Observable<any> {
+    return this.http.get<any>(
+      `${environment.urlMascostaFelizApi}prospectos/count`
+    );
+  }
+
   getProspectosById(id: string): Observable<Prospectos> {
     return this.http.get<Prospectos>(`${environment.urlMascostaFelizApi}prospectos/${id}`);
   }

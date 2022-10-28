@@ -16,6 +16,12 @@ export class SucursalService {
     );
   }
 
+  getSucursalCount(): Observable<any> {
+    return this.http.get<any>(
+      `${environment.urlMascostaFelizApi}sucursals/count`
+    );
+  }
+
   getSucursalById(id: string): Observable<Sucursal> {
     return this.http.get<Sucursal>(
       `${environment.urlMascostaFelizApi}sucursals/${id}`

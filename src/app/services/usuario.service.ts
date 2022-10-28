@@ -16,6 +16,12 @@ export class UsuarioService {
     );
   }
 
+  getUsuarioCount(): Observable<any> {
+    return this.http.get<any>(
+      `${environment.urlMascostaFelizApi}usuarios/count`
+    );
+  }
+
   getUsuarioById(id: string): Observable<Usuario> {
     return this.http.get<Usuario>(
       `${environment.urlMascostaFelizApi}usuarios/${id}`
