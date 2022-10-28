@@ -14,7 +14,7 @@ import { InfoUsuariosComponent } from '../info-usuarios/info-usuarios.component'
   styleUrls: ['./listar-usuarios.component.css'],
 })
 export class ListarUsuariosComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'nombres', 'identificacion', 'correo', 'opcions'];
+  displayedColumns: string[] = ['select', 'nombres', 'identificacion', 'correo', 'rol', 'opcions'];
   dataSource!: MatTableDataSource<Usuario>;
   selection = new SelectionModel<Usuario>(true, []);
 

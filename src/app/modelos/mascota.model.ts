@@ -1,3 +1,6 @@
+import { Plan } from "./plan.model";
+import { Usuario } from "./usuario.model";
+
 export class Mascota {
   id?: string;
   nombre?: string;
@@ -9,6 +12,8 @@ export class Mascota {
   fechaAfiliacion?: string;
   usuarioId?: string;
   planId?: string;
+  plan?: Plan;
+  usuario?: Usuario;
 
   public constructor(init?: Partial<Mascota>) {
     Object.assign(this, init);

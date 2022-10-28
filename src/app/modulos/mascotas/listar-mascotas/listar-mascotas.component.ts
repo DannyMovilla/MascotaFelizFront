@@ -15,7 +15,7 @@ import { InfoMascotaComponent } from '../info-mascota/info-mascota.component';
   styleUrls: ['./listar-mascotas.component.css'],
 })
 export class ListarMascotasComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'nombre', 'especie', 'estado', 'opcions'];
+  displayedColumns: string[] = ['select', 'nombre', 'especie', 'estado', 'propietario',  'plan',  'opcions'];
   dataSource!: MatTableDataSource<Mascota>;
   selection = new SelectionModel<Mascota>(true, []);
 

@@ -12,7 +12,7 @@ export class MascotaService {
 
   getMascota(): Observable<Mascota[]> {
     return this.http.get<Mascota[]>(
-      `${environment.urlMascostaFelizApi}mascotas`
+      `${environment.urlMascostaFelizApi}mascotas?filter={"include":[{"relation": "usuario"},{"relation": "plan"}]}`
     );
   }
 

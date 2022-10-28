@@ -12,7 +12,7 @@ export class UsuarioService {
 
   getUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(
-      `${environment.urlMascostaFelizApi}usuarios`
+      `${environment.urlMascostaFelizApi}usuarios?filter={"include":[{"relation": "rol"}]}`
     );
   }
 
