@@ -1,76 +1,51 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-}
-
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Mascota } from 'src/app/modelos/mascota.model';
+import { MascotaService } from 'src/app/services/mascota.service';
+import Swal from 'sweetalert2';
+import { InfoMascotaComponent } from '../info-mascota/info-mascota.component';
 
 @Component({
   selector: 'mascota-feliz-listar-mascotas',
   templateUrl: './listar-mascotas.component.html',
-  styleUrls: ['./listar-mascotas.component.css']
+  styleUrls: ['./listar-mascotas.component.css'],
 })
-export class ListarMascotasComponent implements OnInit, AfterViewInit {
-
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
-  dataSource: MatTableDataSource<UserData>;
+export class ListarMascotasComponent implements OnInit {
+  displayedColumns: string[] = ['select', 'nombre', 'especie', 'estado', 'opcions'];
+  dataSource!: MatTableDataSource<Mascota>;
+  selection = new SelectionModel<Mascota>(true, []);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  constructor(
+    private mascotaServices: MascotaService,
+    public dialog: MatDialog
+  ) {
+    this.dataSource = new MatTableDataSource();
   }
 
   ngOnInit(): void {
+    this.onCargarInformacion();
+  }
+
+  onCargarInformacion() {
+    this.mascotaServices.getMascota().subscribe({
+      next: (data) => {
+        this.dataSource = new MatTableDataSource(data);
+
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error: (err) => {
+        console.log('Problemas en la comunicación con el servidor');
+      },
+    });
   }
 
   applyFilter(event: Event) {
@@ -82,19 +57,91 @@ export class ListarMascotasComponent implements OnInit, AfterViewInit {
     }
   }
 
-}
+  openRegistrar() {
+    const dialogRef = this.dialog.open(InfoMascotaComponent);
 
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
+    dialogRef.afterClosed().subscribe((result) => {
+      this.onCargarInformacion();
+    });
+  }
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
+  openUpdate(idData: String) {
+    const dialogRef = this.dialog.open(InfoMascotaComponent, {
+      data: idData,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.onCargarInformacion();
+    });
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  checkboxLabel(row?: Mascota): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${
+      this.selection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row}`;
+  }
+
+  onEliminar() {
+    if (this.selection.selected.length > 0) {
+      Swal.fire({
+        title: 'Atención',
+        text: 'Está seguro que desea eliminar la información seleccionada?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminar!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          for (let index = 0; index < this.selection.selected.length; index++) {
+            const rolData = this.selection.selected[index];
+            this.mascotaServices.deleteMascota(rolData.id!).subscribe(
+              (datos: any) => {
+                Swal.fire(
+                  'Mascota Feliz!',
+                  'La información ha sido eliminada correctamente.',
+                  'success'
+                );
+
+                this.onCargarInformacion();
+              },
+              (error: any) => {
+                console.log(error);
+
+                Swal.fire(
+                  'Mascota Feliz!',
+                  'Error al eliminar la información',
+                  'warning'
+                );
+              }
+            );
+          }
+        }
+      });
+    } else {
+      Swal.fire(
+        'Mascota Feliz',
+        'Para eliminar debe seleccionar uno o varios registros.',
+        'warning'
+      );
+    }
+  }
 }
