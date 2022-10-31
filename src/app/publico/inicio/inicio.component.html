@@ -7,52 +7,54 @@
       <mascota-feliz-menu-inicio></mascota-feliz-menu-inicio>
     </div>
     <div class="row">
-      <div class="col-md-5">
-        <div class="card mb-4 rounded-3 shadow-sm">
+      <div class="col-md-5 animate__animated animate__fadeInLeft">
+        <div class="card mb-4 mt-2 rounded-3 shadow-sm">
           <div class="card-body">
-            <h3 class="fw-bolder mb-0">Contactanos</h3>
-            <p class="fs-6 lead">Contactanos para mayor información</p>
-            <form class="needs-validation clss-form" novalidate>
+            <h3 class="fw-bolder mb-0">Contáctanos</h3>
+            <p class="fs-6 lead">Contáctanos para más información</p>
+            <form autocomplete="off" class="needs-validation clss-form" [formGroup]="formValidator">
               <div class="row g-3">
                 <div class="col-12 mt-1">
                   <label for="nombre" class="form-label mb-0">Nombre</label>
-                  <input type="text" class="form-control" id="nombre" placeholder="Ingresar nombre de mascota" required>
-                  <div class="invalid-feedback">
-                    Se requiere un nombre válido.
-                  </div>
+                  <input type="text" class="form-control" formControlName="nombre" id="nombre"
+                    placeholder="Ingresar nombre" [class.is-invalid]="nombreNoValido">
+                  <small *ngIf="nombreNoValido" class="text-danger">
+                    Se requiere que ingrese un mensaje
+                  </small>
                 </div>
 
                 <div class="col-12 mt-1">
-                  <label for="correo" class="form-label mb-0">Correo Electronico</label>
-                  <input type="email" class="form-control" id="correo" placeholder="Ingresar correo" required>
-                  <div class="invalid-feedback">
-                    Se requiere que ingrese el correo
-                  </div>
-                </div>
-
-                <div class="col-12 mt-1">
-                  <label for="telefono" class="form-label mb-0">Telefono</label>
-                  <input type="text" class="form-control" id="telefono" placeholder="Ingresar el telefono" required>
+                  <label for="correoProspecto" class="form-label mb-0">Correo Electronico</label>
+                  <input type="email" class="form-control" formControlName="correo" id="correoProspecto"
+                    placeholder="Ingresar correo" [class.is-invalid]="correoNoValido">
+                  <small *ngIf="correoNoValido" class="text-danger">
+                    Se requiere que ingrese el correo válido.
+                  </small>
                 </div>
 
                 <div class="col-12 mt-1">
                   <label for="mensaje" class="form-label mb-0">Mensaje</label>
-                  <textarea class="form-control" id="mensaje" rows="3"></textarea>
+                  <textarea class="form-control" formControlName="mensaje" id="mensaje" rows="3"
+                    [class.is-invalid]="mensajeNoValido"></textarea>
+                  <small *ngIf="mensajeNoValido" class="text-danger">
+                    Se requiere que ingrese un mensaje
+                  </small>
                 </div>
               </div>
-              <button class="w-100 btn btn-primary btn-lg mt-4" type="submit">Enviar</button>
+              <button class="w-100 btn btn-primary btn-lg mt-4" type="submit" [disabled]="!formValidator.valid"
+                (click)="guardarProspecto()">Enviar</button>
             </form>
           </div>
         </div>
       </div>
-      <div class="col-md-7">
+      <div class="col-md-7 animate__animated animate__fadeInRight">
         <img src="assets/img/animal.png" class="w-100">
       </div>
     </div>
   </div>
 </header>
 
-<div class="container py-3 mt-3">
+<div class="container py-3 mt-3 animate__animated animate__fadeInDown">
   <div class="p-3 pb-md-4 mx-auto border-bottom">
     <h2 class="fw-bolder mb-0  text-center text-uppercase">
       <strong>Bienvenidos a nuestra familia</strong>
@@ -73,8 +75,8 @@
   </div>
 </div>
 
-<div class="container py-3">
-  <div class="p-3 pb-md-4 mx-auto border-bottom">
-    <mascota-feliz-planes></mascota-feliz-planes>
-  </div>
-</div>
+<mascota-feliz-testimonios></mascota-feliz-testimonios>
+
+<mascota-feliz-planes></mascota-feliz-planes>
+
+<mascota-feliz-sucursales></mascota-feliz-sucursales>

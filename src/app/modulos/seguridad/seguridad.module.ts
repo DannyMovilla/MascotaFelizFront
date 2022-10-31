@@ -3,19 +3,25 @@ import { CommonModule } from '@angular/common';
 
 import { SeguridadRoutingModule } from './seguridad-routing.module';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrarComponent } from './registrar/registrar.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistrarComponent
+    RegistrarComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    SeguridadRoutingModule
+    ReactiveFormsModule,
+    SeguridadRoutingModule,
+    ModalModule.forRoot(),
   ]
 })
 export class SeguridadModule { }

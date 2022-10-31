@@ -1,34 +1,65 @@
-<main class="form-signin w-100 m-auto" style="padding-top: 100px;">
-  <form (ngSubmit)="onIngresar(fLong)" autocomplete="off" #fLong="ngForm">
-    <img class="mb-4" src="assets/img/logo.png" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">Registrar</h1>
-    <p class="fs-6 lead  text-justify">¿Ya tienes un perfil personal? <a routerLink="/security/login"><strong>Inicio Sesión</strong></a></p>
+<div class="modal-header">
+  <h4 class="modal-title pull-left"></h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
 
-    <div class="row g-2">
-      <div class="col-md">
-        <div class="form-floating">
-          <input type="email" class="form-control" id="nombres" placeholder="name@example.com">
-          <label for="nombres">Nombres</label>
+  <main class="form-signin w-100 m-auto text-center">
+    <form [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" autocomplete="off" class="clss-form">
+      <img class="mb-2" src="assets/img/logoMorado2.png" alt="">
+      <h1 class="h3 mb-3 fw-normal">Registrar</h1>
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="numDocumento" placeholder="name@example.com"
+              formControlName="documento" [class.is-invalid]="documentoNoValido">
+            <label for="numDocumento">Documento</label>
+            <small *ngIf="documentoNoValido" class="text-danger">
+              Ingrese el documento
+            </small>
+          </div>
         </div>
-      </div>
 
-      <div class="col-md">
-        <div class="form-floating">
-          <input type="email" class="form-control" id="apellidos" placeholder="name@example.com">
-          <label for="apellidos">Apellidos</label>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="nombres" placeholder="name@example.com"
+              formControlName="nombres" [class.is-invalid]="nombresNoValido">
+            <label for="nombres">Nombres</label>
+            <small *ngIf="nombresNoValido" class="text-danger">
+              Ingrese el nombre
+            </small>
+          </div>
         </div>
-      </div>
 
-      <div class="form-floating">
-        <input type="email" class="form-control" id="correo" placeholder="name@example.com">
-        <label for="correo">Correo</label>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="apellidos" placeholder="name@example.com"
+              formControlName="apellidos" [class.is-invalid]="apellidosNoValido">
+            <label for="apellidos">Apellidos</label>
+            <small *ngIf="apellidosNoValido" class="text-danger">
+              Ingrese el apellido
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="correo" placeholder="name@example.com" formControlName="correo"
+              [class.is-invalid]="correoNoValido">
+            <label for="correo">Correo</label>
+            <small *ngIf="correoNoValido" class="text-danger">
+              Ingrese el correo
+            </small>
+          </div>
+        </div>
+
       </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
-        <label for="contrasena">Contraseña</label>
-      </div>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Registrar</button>
-    <p class="mt-5 mb-3 text-muted">Mascota Feliz &copy; 2017–2022</p>
-  </form>
-</main>
+      <button class="w-100 btn btn-primary btn-lg mt-4 mb-3" [disabled]="!fgValidador.valid"
+        type="submit">Registrar</button>
+    </form>
+  </main>
+
+</div>

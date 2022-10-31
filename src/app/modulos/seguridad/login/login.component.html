@@ -1,25 +1,47 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left"></h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
 
-<main class="form-signin w-100 m-auto" style="padding-top: 100px;">
-  <form (ngSubmit)="onIngresar(fLong)" autocomplete="off" #fLong="ngForm">
-    <img class="mb-4" src="assets/img/logo.png" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
-    <p class="fs-6 lead text-justify">¿Eres nuevo en este sitio? <a routerLink="/security/registrar"><strong>Regístrate</strong></a></p>
+  <main class="form-signin w-100 m-auto text-center">
+    <form autocomplete="off" [formGroup]="fgValidador" (ngSubmit)="onIngresar()" class="clss-form">
+      <img class="mb-4" src="assets/img/logoMorado2.png" alt="">
+      <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
+      <div class="form-floating">
+        <input type="email" class="form-control" id="usuario" placeholder="name@example.com" formControlName="usuario"
+          [class.is-invalid]="usuarioNoValido">
+        <label for="usuario">Usuario</label>
+        <small *ngIf="usuarioNoValido" class="text-danger">
+          Se requiere que ingrese el usuario
+        </small>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="contrasena" placeholder="Contraseña"
+          formControlName="contrasena" [class.is-invalid]="contrasenaNoValido">
+        <label for="contrasena">Contraseña</label>
+        <small *ngIf="contrasenaNoValido" class="text-danger">
+          Se requiere que ingrese la contraseña
+        </small>
+      </div>
 
-    <div class="form-floating">
-      <input type="email" class="form-control" id="usuario" placeholder="name@example.com">
-      <label for="usuario">Usuario</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
-      <label for="contrasena">Contraseña</label>
-    </div>
+      <!--<div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Recuerdame
+        </label>
+      </div>-->
 
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Recuerdame
-      </label>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
-    <p class="mt-5 mb-3 text-muted">Mascota Feliz &copy; 2017–2022</p>
-  </form>
-</main>
+      <a  (click)="onCargarResetPassword()">
+        ¿Olvidaste la contraseña?
+      </a>
+
+
+
+      <button class="w-100 btn btn-primary btn-lg mt-4 mb-3" [disabled]="!fgValidador.valid"
+        type="submit">Ingresar</button>
+    </form>
+  </main>
+
+</div>

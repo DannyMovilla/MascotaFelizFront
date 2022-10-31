@@ -1,7 +1,11 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SeguridadService } from 'src/app/services/seguridad.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import * as CryptoJS from 'crypto-js';
+import Swal from 'sweetalert2';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
   selector: 'mascota-feliz-login',
@@ -9,26 +13,95 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  fgValidador: FormGroup = this.fb.group({});
+
+  modalRef2?: BsModalRef;
+
+
   constructor(
     private router: Router,
-    @Inject(DOCUMENT) private document: Document
+    private fb: FormBuilder,
+    private authService: SeguridadService,
+    public bsModalRef: BsModalRef,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
-    this.document.body.style.background = '#f5f5f5';
-    this.document.body.className = 'text-center';
+    this.initForm();
   }
 
-  ngOnDestroy() {
-    this.document.body.style.background = '';
-    this.document.body.className = '';
+  initForm() {
+    this.fgValidador = this.fb.group({
+      usuario: ['', [Validators.required, Validators.email]],
+      contrasena: ['', [Validators.required]],
+    });
   }
 
-  onIngresar(form: NgForm) {
-    if (form.invalid) {
+  ngOnDestroy() {}
+
+  onIngresar() {
+    let usuario = this.fgValidador.controls['usuario'].value;
+    let contrasena = this.fgValidador.controls['contrasena'].value;
+
+    let claveCifrada = CryptoJS.MD5(contrasena).toString();
+
+    this.authService.loginUsuario(usuario, claveCifrada).subscribe(
+      (datos: any) => {
+        Swal.fire(
+          'Mascota Feliz!',
+          'Bienvenido ' + datos.datos.nombre + ', un gusto volverte a ver.',
+          'success'
+        );
+
+        this.authService.almacenarSession(datos);
+        this.router.navigateByUrl('/configuracion/dashboard');
+
+        this.bsModalRef?.hide();
+      },
+      (error: any) => {
+        console.log(error);
+
+        Swal.fire(
+          'Mascota Feliz!',
+          'Usuario o contraseña no válidos',
+          'warning'
+        );
+      }
+    );
+  }
+
+  get usuarioNoValido() {
+    return (
+      this.fgValidador.get('usuario')?.invalid &&
+      (this.fgValidador.get('usuario')?.dirty ||
+        this.fgValidador.get('usuario')?.touched)
+    );
+  }
+
+  get contrasenaNoValido() {
+    return (
+      this.fgValidador.get('contrasena')?.invalid &&
+      (this.fgValidador.get('contrasena')?.dirty ||
+        this.fgValidador.get('contrasena')?.touched)
+    );
+  }
+
+  onCargarResetPassword() {
+    let initialState = {};
+    let modalConfig = {
+      animated: true,
+    };
+    /* this is how we open a Modal Component from another component */
+    this.modalRef2 = this.modalService.show(
+      ResetPasswordComponent,
+      Object.assign({}, modalConfig, { class: 'modal-md', initialState })
+    );
+    this.modalRef2.content.closeBtnName = 'Cancelar';
+
+    if (!this.bsModalRef) {
       return;
     }
 
-    this.router.navigateByUrl('/inicio');
+    this.bsModalRef.hide();
   }
 }

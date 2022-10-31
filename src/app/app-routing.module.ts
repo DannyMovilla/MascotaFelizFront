@@ -6,30 +6,40 @@ import { InicioComponent } from './publico/inicio/inicio.component';
 const routes: Routes = [
   {
     path: 'inicio',
-    component: InicioComponent
+    component: InicioComponent,
   },
   {
     path: 'empresa',
-    component: EmpresaComponent
+    component: EmpresaComponent,
   },
   {
     path: 'security',
-    loadChildren: () => import('./modulos/seguridad/seguridad.module').then( m => m.SeguridadModule )
+    loadChildren: () =>
+      import('./modulos/seguridad/seguridad.module').then(
+        (m) => m.SeguridadModule
+      ),
+  },
+  {
+    path: 'configuracion',
+    loadChildren: () =>
+      import('./modulos/configuracion/configuracion.module').then(
+        (m) => m.ConfiguracionModule
+      ),
   },
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/inicio'
+    redirectTo: '/inicio',
   },
 
   {
     path: '**',
-    redirectTo: '/inicio'
-  }
+    redirectTo: '/inicio',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

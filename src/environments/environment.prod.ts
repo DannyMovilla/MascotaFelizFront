@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  urlMascostaFelizApi: 'https://mascotafeliz-prod-mascotafeliz-hcadhp.mo5.mogenius.io/',
 };

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  //urlMascostaFelizApi: 'https://mascotafeliz-prod-mascotafeliz-hcadhp.mo5.mogenius.io/',
+  urlMascostaFelizApi: 'http://localhost:3000/',
 };
 
 /*
