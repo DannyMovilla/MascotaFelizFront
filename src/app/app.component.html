@@ -1,2 +1,17 @@
+<ng-container *ngIf="!seInicionSesion; then notauthenticated; else authenticate">
+</ng-container>
+
+<ng-template #notauthenticated>
+  <mascota-feliz-menu-inicio></mascota-feliz-menu-inicio>
+</ng-template>
+
+<ng-template #authenticate>
+  <mascota-feliz-menu-dasboard></mascota-feliz-menu-dasboard>
+</ng-template>
+
+
 
 <router-outlet></router-outlet>
+
+<ng-http-loader [backgroundColor]="'#8945f0'" [backdropBackgroundColor]="'#cfcccc'" spinner="sk-wandering-cubes">
+</ng-http-loader>

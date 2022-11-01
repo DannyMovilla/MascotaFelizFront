@@ -8,6 +8,7 @@ import { SeguridadService } from 'src/app/services/seguridad.service';
   styleUrls: ['./empresa.component.css'],
 })
 export class EmpresaComponent implements OnInit {
+
   constructor(private authServices: SeguridadService, private router: Router) {
     if (this.authServices.obtenerSession()) {
       this.router.navigate(['/configuracion/dashboard']);
@@ -15,4 +16,5 @@ export class EmpresaComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
 }

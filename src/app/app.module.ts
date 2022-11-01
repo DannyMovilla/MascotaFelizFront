@@ -11,9 +11,12 @@ import { MenuDasboardComponent } from './publico/navegacion/menu-dasboard/menu-d
 import { SucursalesComponent } from './publico/sucursales/sucursales.component';
 import { TestimoniosComponent } from './publico/testimonios/testimonios.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
 
 
 @NgModule({
@@ -35,11 +38,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     HttpClientModule,
     ModalModule.forRoot(),
+    NgHttpLoaderModule.forRoot(),
+    NgxPermissionsModule.forRoot()
   ],
   exports: [
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
