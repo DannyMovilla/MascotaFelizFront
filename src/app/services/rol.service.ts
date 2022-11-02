@@ -26,9 +26,9 @@ export class RolService {
     );
   }
 
-  updateRol(model: Rol): Observable<Rol> {
+  updateRol(idRol: string, model: Rol): Observable<Rol> {
     return this.http.put<Rol>(
-      `${environment.urlMascostaFelizApi}rols/${model.id}`,
+      `${environment.urlMascostaFelizApi}rols/${idRol}`,
       model,
       {}
     );

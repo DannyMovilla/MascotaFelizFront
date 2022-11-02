@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxRolesService } from 'ngx-permissions';
 import { SeguridadService } from 'src/app/services/seguridad.service';
 
 @Component({
@@ -14,7 +13,6 @@ export class MenuDasboardComponent implements OnInit {
   constructor(
     private authServices: SeguridadService,
     private router: Router,
-    private rolesService: NgxRolesService
   ) {}
 
   ngOnInit(): void {
@@ -22,7 +20,6 @@ export class MenuDasboardComponent implements OnInit {
   }
 
   cerrarSession() {
-    this.rolesService.flushRoles();
     this.authServices.eliminarSession();
     this.router.navigateByUrl('/inicio');
   }

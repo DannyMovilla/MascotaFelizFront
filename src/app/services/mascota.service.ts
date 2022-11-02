@@ -36,9 +36,9 @@ export class MascotaService {
     );
   }
 
-  updateMascota(model: Mascota): Observable<Mascota> {
+  updateMascota(idMascota: string, model: Mascota): Observable<Mascota> {
     return this.http.put<Mascota>(
-      `${environment.urlMascostaFelizApi}mascotas/${model.id}`,
+      `${environment.urlMascostaFelizApi}mascotas/${idMascota}`,
       model,
       {}
     );

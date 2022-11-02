@@ -31,10 +31,11 @@ export class ProductoServicioService {
   }
 
   updateProductoServicio(
+    idProducto: string,
     model: ProductoServicio
   ): Observable<ProductoServicio> {
     return this.http.put<ProductoServicio>(
-      `${environment.urlMascostaFelizApi}producto-servicios/${model.id}`,
+      `${environment.urlMascostaFelizApi}producto-servicios/${idProducto}`,
       model,
       {}
     );

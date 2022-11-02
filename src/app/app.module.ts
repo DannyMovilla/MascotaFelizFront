@@ -15,7 +15,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgHttpLoaderModule } from 'ng-http-loader';
-import { NgxPermissionsModule } from 'ngx-permissions';
 import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
 
 
@@ -39,7 +38,6 @@ import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
     HttpClientModule,
     ModalModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
-    NgxPermissionsModule.forRoot()
   ],
   exports: [
 

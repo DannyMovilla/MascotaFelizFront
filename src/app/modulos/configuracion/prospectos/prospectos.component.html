@@ -9,29 +9,15 @@
         <thead>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Especie</th>
-            <th scope="col">Color</th>
-            <th scope="col">Raza</th>
-            <th scope="col">Propietario</th>
-            <th scope="col">Veterinario</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Mensaje</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Poseidon</td>
-            <td>Perro</td>
-            <td>Amarillo</td>
-            <td>Pitbull</td>
-            <td>Pablo Sanchez</td>
-            <td>Jorge Uribe Petro</td>
-          </tr>
-          <tr>
-            <td>Poseidon</td>
-            <td>Perro</td>
-            <td>Amarillo</td>
-            <td>Pitbull</td>
-            <td>Pablo Sanchez</td>
-            <td>Jorge Uribe Petro</td>
+          <tr *ngFor="let data of modeloData">
+            <td>{{data.nombres}}</td>
+            <td>{{data.correo}}</td>
+            <td>{{data.mensaje}}</td>
           </tr>
         </tbody>
       </table>

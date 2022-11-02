@@ -6,7 +6,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as CryptoJS from 'crypto-js';
 import Swal from 'sweetalert2';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
-import { NgxRolesService } from 'ngx-permissions';
 
 @Component({
   selector: 'mascota-feliz-login',
@@ -25,7 +24,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     private authService: SeguridadService,
     public bsModalRef: BsModalRef,
     private modalService: BsModalService,
-    private rolesService: NgxRolesService
   ) {}
 
   ngOnInit(): void {
@@ -54,8 +52,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           'Bienvenido ' + datos.datos.nombre + ', un gusto volverte a ver.',
           'success'
         );
-
-        this.rolesService.addRole(datos.rolUsuario.codigo, []);
 
         this.authService.almacenarSession(datos);
         this.router.navigateByUrl('/configuracion/dashboard');

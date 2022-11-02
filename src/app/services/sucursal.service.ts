@@ -36,9 +36,9 @@ export class SucursalService {
     );
   }
 
-  updateSucursal(model: Sucursal): Observable<Sucursal> {
+  updateSucursal(idSucursal: string, model: Sucursal): Observable<Sucursal> {
     return this.http.put<Sucursal>(
-      `${environment.urlMascostaFelizApi}sucursals/${model.id}`,
+      `${environment.urlMascostaFelizApi}sucursals/${idSucursal}`,
       model,
       {}
     );

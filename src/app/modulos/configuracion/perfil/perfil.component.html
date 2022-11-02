@@ -1,0 +1,66 @@
+<div id="consultar" class="container py-3 mt-3">
+  <div class="p-3 pb-md-4 mx-auto border-bottom">
+    <h3 class="fw-bolder mb-0  text-center">Perfil</h3>
+    <p class="fs-6 lead  text-center">En esta sección podrás visualizar y gestionar tú Información</p>
+  </div>
+  <main>
+    <form [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" autocomplete="off" class="needs-validation clss-form">
+
+      <!-- <img class="mb-2" src="assets/img/logoMorado2.png" alt="">-->
+      <div class="row g-3 mt-3 mb-3">
+
+        <div class="col-md-12 mt-1">
+          <label for="numDocumento" class="form-label mb-0">Documento</label>
+          <input type="text" class="form-control" id="numDocumento" placeholder="Docuemento" formControlName="documento"
+            [class.is-invalid]="documentoNoValido">
+          <small *ngIf="documentoNoValido" class="text-danger">
+            Ingrese el documento
+          </small>
+        </div>
+
+        <div class="col-md-6">
+          <label for="nombres" class="form-label mb-0">Nombres</label>
+          <input type="text" class="form-control" id="nombres" placeholder="Nombres" formControlName="nombres"
+            [class.is-invalid]="nombresNoValido">
+          <small *ngIf="nombresNoValido" class="text-danger">
+            Ingrese el nombre
+          </small>
+        </div>
+
+        <div class="col-md-6">
+          <label for="apellidos" class="form-label mb-0">Apellidos</label>
+          <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" formControlName="apellidos"
+            [class.is-invalid]="apellidosNoValido">
+          <small *ngIf="apellidosNoValido" class="text-danger">
+            Ingrese el apellido
+          </small>
+        </div>
+
+        <div class="col-md-12">
+          <label for="correo" class="form-label mb-0">Correo</label>
+          <input type="email" class="form-control" id="correo" placeholder="name@example.com" formControlName="correo"
+            [class.is-invalid]="correoNoValido">
+          <small *ngIf="correoNoValido" class="text-danger">
+            Ingrese el correo
+          </small>
+        </div>
+
+        <div class="col-md-12">
+          <label for="rol" class="form-label mb-0">Rol</label>
+          <select id="selectorRol" formControlName="rolId" class="form-select">
+            <option *ngFor="let data of modeloRoles" value="{{data.id}}">{{data.nombre}}</option>
+          </select>
+          <small *ngIf="correoNoValido" class="text-danger">
+            Seleccione el Rol
+          </small>
+        </div>
+
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg mt-4" [disabled]="!fgValidador.valid">Guardar</button>
+
+    </form>
+
+  </main>
+
+</div>

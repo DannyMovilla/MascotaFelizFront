@@ -36,9 +36,17 @@ export class UsuarioService {
     );
   }
 
-  updateUsuario(model: Usuario): Observable<Usuario> {
+  updateUsuario(idUsuario: string, model: Usuario): Observable<Usuario> {
     return this.http.put<Usuario>(
-      `${environment.urlMascostaFelizApi}usuarios/${model.id}`,
+      `${environment.urlMascostaFelizApi}usuarios/${idUsuario}`,
+      model,
+      {}
+    );
+  }
+
+  updateUsuarioPatch(idUsuario: string, model: Usuario): Observable<Usuario> {
+    return this.http.patch<Usuario>(
+      `${environment.urlMascostaFelizApi}usuarios/${idUsuario}`,
       model,
       {}
     );

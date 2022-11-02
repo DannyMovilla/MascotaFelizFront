@@ -1,0 +1,72 @@
+<div id="consultar" class="container py-3 mt-3">
+  <div class="p-3 pb-md-4 mx-auto border-bottom">
+    <h3 class="fw-bolder mb-0  text-center">Consultar Afiliaciones</h3>
+    <p class="fs-6 lead  text-center">En esta sección podrás consultar de las afiliaciones</p>
+
+    <form class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
+      <div class="col">
+        <label for="mascota" class="form-label mb-0">Mascota</label>
+        <input type="text" class="form-control" id="mascota" placeholder="Nombre de la Mascota">
+      </div>
+
+      <div class="col">
+        <label for="propietario" class="form-label mb-0">Propietario</label>
+        <input type="text" class="form-control" id="propietario" placeholder="Nombre del propietario">
+      </div>
+
+      <div class="col">
+        <label for="plan" class="form-label mb-0">Plan</label>
+        <input type="text" class="form-control" id="plan" placeholder="Ingrese Plan">
+      </div>
+      <div class="col">
+        <label for="estado" class="form-label mb-0">Estado</label>
+        <input type="text" class="form-control" id="estado" placeholder="Ingrese Estado">
+      </div>
+      <div class="col">
+        <button class="btn btn-primary py-2" type="submit" data-toggle="tooltip" data-placement="top" title="Consultar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="btn btn-primary py-2 mx-2" style="float: right;" (click)="onCargar()" data-toggle="tooltip"
+          data-placement="top" title="Nuevo">
+          <i class="fa-sharp fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+  <main>
+    <div class="table-responsive mt-3">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Mascota</th>
+            <th scope="col">Especie</th>
+            <th scope="col">Propietario</th>
+            <th scope="col">Plan</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of modeloData">
+            <td>{{data.nombre}}</td>
+            <td>{{data.especie}}</td>
+            <td>{{data.usuario!.nombres}} {{data.usuario!.apellidos}}</td>
+            <td>{{data.plan!.nombre}}</td>
+            <td>{{data.estado}}</td>
+            <td>
+              <a class="btn btn-primary mx-2" data-toggle="tooltip" data-placement="top" title="Editar"
+                (click)="onGestionar(data.id)">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </a>
+              <a class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"
+                (click)="onEliminar(data.id!)">
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+</div>

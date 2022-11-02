@@ -27,6 +27,20 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'administracion',
+    loadChildren: () =>
+      import('./modulos/administracion/administracion.module').then(
+        (m) => m.AdministracionModule
+      ),
+  },
+  {
+    path: 'afiliaciones',
+    loadChildren: () =>
+      import('./modulos/afiliaciones/afiliaciones.module').then(
+        (m) => m.AfiliacionesModule
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/inicio',

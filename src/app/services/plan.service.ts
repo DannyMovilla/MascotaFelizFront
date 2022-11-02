@@ -26,9 +26,9 @@ export class PlanService {
     );
   }
 
-  updatePlan(model: Plan): Observable<Plan> {
+  updatePlan(idPlan: string, model: Plan): Observable<Plan> {
     return this.http.put<Plan>(
-      `${environment.urlMascostaFelizApi}plans/${model.id}`,
+      `${environment.urlMascostaFelizApi}plans/${idPlan}`,
       model,
       {}
     );
