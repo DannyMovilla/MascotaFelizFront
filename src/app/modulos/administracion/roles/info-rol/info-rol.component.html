@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Rol</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<form autocomplete="off" [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" class="clss-form">
+  <div class="modal-body">
+    <div class="row g-3  mt-3 mb-3">
+
+      <div class="col-12 mt-1">
+        <label for="codigo" class="form-label mb-0">Codigo</label>
+        <input type="text" class="form-control" formControlName="codigo" id="codigo" placeholder="Ingresar codigo"
+          [class.is-invalid]="codigoNoValido">
+        <small *ngIf="codigoNoValido" class="text-danger">
+          Se requiere que ingrese el código.
+        </small>
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="nombre" class="form-label mb-0">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="Ingresar nombre"
+          [class.is-invalid]="nombreNoValido">
+        <small *ngIf="nombreNoValido" class="text-danger">
+          Se requiere que ingrese el nombre.
+        </small>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary btn-lg mb-3" type="submit">Guardar</button>
+    <button class="btn btn-danger btn-lg mb-3 mx-2" (click)="bsModalRef.hide()">Cancelar</button>
+  </div>
+
+</form>

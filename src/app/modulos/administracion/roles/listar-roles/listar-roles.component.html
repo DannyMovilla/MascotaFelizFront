@@ -1,0 +1,57 @@
+<div id="consultar" class="container py-3 mt-3">
+  <div class="p-3 pb-md-4 mx-auto border-bottom">
+    <h3 class="fw-bolder mb-0  text-center">Consultar Rol</h3>
+    <p class="fs-6 lead  text-center">En esta sección podrás consultar de los roles</p>
+
+    <form class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
+      <div class="col">
+        <label for="nombre" class="form-label mb-0">Nombre</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre del rol">
+      </div>
+
+      <div class="col">
+        <label for="codigo" class="form-label mb-0">Codigo</label>
+        <input type="text" class="form-control" id="codigo" placeholder="Nombre del codigo">
+      </div>
+      <div class="col">
+        <button class="btn btn-primary py-2" type="submit" data-toggle="tooltip" data-placement="top" title="Consultar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="btn btn-primary py-2 mx-2" style="float: right;" (click)="onCargar()" data-toggle="tooltip"
+          data-placement="top" title="Nuevo">
+          <i class="fa-sharp fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+  <main>
+    <div class="table-responsive mt-3">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Codigo</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of modeloData">
+            <td>{{data.nombre}}</td>
+            <td>{{data.codigo}}</td>
+            <td>
+              <a class="btn btn-primary mx-2" data-toggle="tooltip" data-placement="top" title="Editar"
+                (click)="onGestionar(data.id)">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </a>
+              <a class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"
+                (click)="onEliminar(data.id!)">
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+</div>
