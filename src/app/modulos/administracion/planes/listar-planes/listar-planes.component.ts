@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Rol } from 'src/app/modelos/rol.model';
-import { RolService } from 'src/app/services/rol.service';
+import { Plan } from 'src/app/modelos/plan.model';
+import { PlanService } from 'src/app/services/plan.service';
 import Swal from 'sweetalert2';
-import { InfoRolComponent } from '../info-rol/info-rol.component';
+import { InfoPlanComponent } from '../info-plan/info-plan.component';
 
 @Component({
-  selector: 'mascota-feliz-listar-roles',
-  templateUrl: './listar-roles.component.html',
-  styleUrls: ['./listar-roles.component.css'],
+  selector: 'mascota-feliz-listar-planes',
+  templateUrl: './listar-planes.component.html',
+  styleUrls: ['./listar-planes.component.css'],
 })
-export class ListarRolesComponent implements OnInit {
-  modeloData: Rol[] = [];
+export class ListarPlanesComponent implements OnInit {
+  modeloData: Plan[] = [];
   bsModalRef?: BsModalRef;
   constructor(
-    private rolServices: RolService,
+    private planServices: PlanService,
     private modalService: BsModalService
   ) {}
 
@@ -23,24 +23,24 @@ export class ListarRolesComponent implements OnInit {
   }
 
   buscar() {
-    this.rolServices.getRols().subscribe({
-      next: (data: Rol[]) => {
+    this.planServices.getPlan().subscribe({
+      next: (data: Plan[]) => {
         this.modeloData = data;
       },
     });
   }
 
-  onGestionar(idRol: any) {
+  onGestionar(idPlan: any) {
     var dataObject = {};
     let initialState = {
-      idRol: idRol,
+      idPlan: idPlan,
     };
     let modalConfig = {
       animated: true,
     };
     /* this is how we open a Modal Component from another component */
     this.bsModalRef = this.modalService.show(
-      InfoRolComponent,
+      InfoPlanComponent,
       Object.assign(dataObject, modalConfig, {
         class: 'modal-md',
         initialState,
@@ -60,7 +60,7 @@ export class ListarRolesComponent implements OnInit {
     };
     /* this is how we open a Modal Component from another component */
     this.bsModalRef = this.modalService.show(
-      InfoRolComponent,
+      InfoPlanComponent,
       Object.assign({}, modalConfig, { class: 'modal-md', initialState })
     );
     this.bsModalRef.content.closeBtnName = 'Cancelar';
@@ -70,7 +70,7 @@ export class ListarRolesComponent implements OnInit {
     };
   }
 
-  onEliminar(idRol: string) {
+  onEliminar(idPlan: string) {
     Swal.fire({
       title: 'Atención',
       text: 'Está seguro que desea eliminar la información seleccionada?',
@@ -81,7 +81,7 @@ export class ListarRolesComponent implements OnInit {
       confirmButtonText: 'Si, Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.rolServices.deleteRol(idRol).subscribe(
+        this.planServices.deletePlan(idPlan).subscribe(
           (datos: any) => {
             Swal.fire(
               'Mascota Feliz!',
