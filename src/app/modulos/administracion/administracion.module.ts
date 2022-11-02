@@ -9,9 +9,11 @@ import { ListarRolesComponent } from './roles/listar-roles/listar-roles.componen
 import { InfoRolComponent } from './roles/info-rol/info-rol.component';
 import { ListarPlanesComponent } from './planes/listar-planes/listar-planes.component';
 import { InfoPlanComponent } from './planes/info-plan/info-plan.component';
+import { ListarSucursalesComponent } from './sucursales/listar-sucursales/listar-sucursales.component';
+import { InfoSucursalesComponent } from './sucursales/info-sucursales/info-sucursales.component';
 
 @NgModule({
-  declarations: [UsuariosComponent, InfoUsuarioComponent, ListarRolesComponent, InfoRolComponent, ListarPlanesComponent, InfoPlanComponent],
+  declarations: [UsuariosComponent, InfoUsuarioComponent, ListarRolesComponent, InfoRolComponent, ListarPlanesComponent, InfoPlanComponent, ListarSucursalesComponent, InfoSucursalesComponent],
   imports: [
     CommonModule,
     AdministracionRoutingModule,

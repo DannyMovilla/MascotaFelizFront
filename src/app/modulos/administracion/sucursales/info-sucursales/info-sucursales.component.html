@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Sucursal</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<form autocomplete="off" [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" class="clss-form">
+  <div class="modal-body">
+    <div class="row g-3  mt-3 mb-3">
+
+      <div class="col-12 mt-1">
+        <label for="departamento" class="form-label mb-0">Departamento</label>
+        <input type="text" class="form-control" formControlName="departamento" id="departamento"
+          placeholder="Ingresar departamento" [class.is-invalid]="departamentoNoValido">
+        <small *ngIf="departamentoNoValido" class="text-danger">
+          Se requiere que ingrese el departamento.
+        </small>
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="ciudad" class="form-label mb-0">Ciudad</label>
+        <input type="text" class="form-control" formControlName="ciudad" id="ciudad" placeholder="Ingresar ciudad"
+          [class.is-invalid]="ciudadNoValido">
+        <small *ngIf="ciudadNoValido" class="text-danger">
+          Se requiere que ingrese la ciudad.
+        </small>
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="direccion" class="form-label mb-0">Direccion</label>
+        <input type="text" class="form-control" formControlName="direccion" id="direccion"
+          placeholder="Ingresar direccion" [class.is-invalid]="direccionNoValido">
+        <small *ngIf="direccionNoValido" class="text-danger">
+          Se requiere que ingrese la direccion.
+        </small>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary btn-lg mb-3" type="submit">Guardar</button>
+    <button class="btn btn-danger btn-lg mb-3 mx-2" (click)="bsModalRef.hide()">Cancelar</button>
+  </div>
+
+</form>
