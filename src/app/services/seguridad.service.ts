@@ -89,4 +89,10 @@ export class SeguridadService {
       return '';
     }
   }
+
+  obtenerRolSesion() {
+    return null != this.obtenerSession()
+      ? this.obtenerSession().rolUsuario.codigo
+      : null;
+  }
 }

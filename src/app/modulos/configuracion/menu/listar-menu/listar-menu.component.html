@@ -1,0 +1,45 @@
+<div id="consultar" class="container py-3 mt-3">
+  <div class="p-3 pb-md-4 mx-auto border-bottom">
+    <h3 class="fw-bolder mb-0  text-center">Consultar Menu</h3>
+    <p class="fs-6 lead  text-center">En esta sección podrás consultar de los menu</p>
+
+    <div class="col mb-3 pb-3">
+      <button class="btn btn-primary py-2 mx-2 mb-3" style="float: right;" (click)="onCargar()" data-toggle="tooltip"
+        data-placement="top" title="Nuevo">
+        <i class="fa-sharp fa-solid fa-plus"></i>
+      </button>
+    </div>
+  </div>
+  <main>
+    <div class="table-responsive mt-3">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Url</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of modeloData">
+            <td>{{data.nombre}}</td>
+            <td>{{data.url}}</td>
+            <td>{{data.rol}}</td>
+            <td>
+              <a class="btn btn-primary mx-2" data-toggle="tooltip" data-placement="top" title="Editar"
+                (click)="onGestionar(data.id)">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </a>
+              <a class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"
+                (click)="onEliminar(data.id!)">
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+</div>

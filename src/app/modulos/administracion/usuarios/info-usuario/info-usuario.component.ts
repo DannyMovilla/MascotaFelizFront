@@ -47,7 +47,7 @@ export class InfoUsuarioComponent implements OnInit {
       },
     });
 
-    if (this.idUsuario != null) {
+    if (typeof this.idUsuario != 'undefined') {
       this.usuarioServices.getUsuarioById(this.idUsuario).subscribe({
         next: (dataUsario) => {
           this.fgValidador.controls['id'].setValue(this.idUsuario);
@@ -69,7 +69,7 @@ export class InfoUsuarioComponent implements OnInit {
     let usuarioData = new Usuario(this.fgValidador.value);
     delete usuarioData.id;
 
-    if (this.idUsuario == null) {
+    if (typeof this.idUsuario == 'undefined') {
       this.usuarioServices.newUsuario(usuarioData).subscribe(
         (datos: any) => {
           Swal.fire(

@@ -11,7 +11,7 @@
 
       <div class="col-md-12 mt-1">
         <label for="numDocumento" class="form-label mb-0">Documento</label>
-        <input type="text" class="form-control" id="numDocumento" placeholder="Docuemento" formControlName="documento"
+        <input type="text" class="form-control" id="numDocumento" placeholder="Documento" formControlName="documento"
           [class.is-invalid]="documentoNoValido">
         <small *ngIf="documentoNoValido" class="text-danger">
           Ingrese el documento
@@ -61,7 +61,7 @@
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary btn-lg mb-3" type="submit">Guardar</button>
-    <button class="btn btn-danger btn-lg mb-3 mx-2" (click)="bsModalRef.hide()">Cancelar</button>
+    <button class="btn btn-danger btn-lg mb-3 mx-2" type="button" (click)="bsModalRef.hide()">Cancelar</button>
   </div>
 
 </form>

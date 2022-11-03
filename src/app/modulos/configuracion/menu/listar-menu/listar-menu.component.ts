@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Rol } from 'src/app/modelos/rol.model';
-import { RolService } from 'src/app/services/rol.service';
+import { MenuRol } from 'src/app/modelos/menu-rol.model';
+import { MenuRolService } from 'src/app/services/menu-rol.service';
 import Swal from 'sweetalert2';
-import { InfoRolComponent } from '../info-rol/info-rol.component';
+import { InfoMenuComponent } from '../info-menu/info-menu.component';
 
 @Component({
-  selector: 'mascota-feliz-listar-roles',
-  templateUrl: './listar-roles.component.html',
-  styleUrls: ['./listar-roles.component.css'],
+  selector: 'mascota-feliz-listar-menu',
+  templateUrl: './listar-menu.component.html',
+  styleUrls: ['./listar-menu.component.css'],
 })
-export class ListarRolesComponent implements OnInit {
-  modeloData: Rol[] = [];
+export class ListarMenuComponent implements OnInit {
+  modeloData: MenuRol[] = [];
   bsModalRef?: BsModalRef;
+
   constructor(
-    private rolServices: RolService,
+    private menuRolServices: MenuRolService,
     private modalService: BsModalService
   ) {}
 
@@ -23,24 +24,24 @@ export class ListarRolesComponent implements OnInit {
   }
 
   buscar() {
-    this.rolServices.getRols().subscribe({
-      next: (data: Rol[]) => {
+    this.menuRolServices.getMenuRol().subscribe({
+      next: (data: MenuRol[]) => {
         this.modeloData = data;
       },
     });
   }
 
-  onGestionar(idRol: any) {
+  onGestionar(idMenuRol: any) {
     var dataObject = {};
     let initialState = {
-      idRol: idRol,
+      idMenuRol: idMenuRol,
     };
     let modalConfig = {
       animated: true,
     };
     /* this is how we open a Modal Component from another component */
     this.bsModalRef = this.modalService.show(
-      InfoRolComponent,
+      InfoMenuComponent,
       Object.assign(dataObject, modalConfig, {
         class: 'modal-sm',
         initialState,
@@ -60,7 +61,7 @@ export class ListarRolesComponent implements OnInit {
     };
     /* this is how we open a Modal Component from another component */
     this.bsModalRef = this.modalService.show(
-      InfoRolComponent,
+      InfoMenuComponent,
       Object.assign({}, modalConfig, { class: 'modal-sm', initialState })
     );
     this.bsModalRef.content.closeBtnName = 'Cancelar';
@@ -70,7 +71,7 @@ export class ListarRolesComponent implements OnInit {
     };
   }
 
-  onEliminar(idRol: string) {
+  onEliminar(idMenuRol: string) {
     Swal.fire({
       title: 'Atención',
       text: 'Está seguro que desea eliminar la información seleccionada?',
@@ -81,7 +82,7 @@ export class ListarRolesComponent implements OnInit {
       confirmButtonText: 'Si, Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.rolServices.deleteRol(idRol).subscribe(
+        this.menuRolServices.deleteMenuRol(idMenuRol).subscribe(
           (datos: any) => {
             Swal.fire(
               'Mascota Feliz!',
