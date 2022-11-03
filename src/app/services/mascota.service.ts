@@ -16,6 +16,20 @@ export class MascotaService {
     );
   }
 
+  getMascotaCliente(idCliente: string): Observable<Mascota[]> {
+    let data = {
+      where: {
+        usuarioId: idCliente,
+      },
+      include: [{ relation: 'usuario' }, { relation: 'plan' }],
+    };
+
+    let filtro = JSON.stringify(data);
+    return this.http.get<Mascota[]>(
+      `${environment.urlMascostaFelizApi}mascotas?filter=${filtro}`
+    );
+  }
+
   getMascotaCount(): Observable<any> {
     return this.http.get<any>(
       `${environment.urlMascostaFelizApi}mascotas/count`

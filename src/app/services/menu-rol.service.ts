@@ -17,9 +17,15 @@ export class MenuRolService {
   }
 
   getMenuRolFilter(rol: string): Observable<MenuRol[]> {
-    console.log(rol)
+    let data = {
+      where: {
+        rol: rol,
+      },
+    };
+
+    let filtro = JSON.stringify(data);
     return this.http.get<MenuRol[]>(
-      `${environment.urlMascostaFelizApi}menu-rols?filter=%7B%0A%20%20%22where%22%3A%20%7B%0A%22rol%22%3A%20%22${rol}%22%0A%7D%0A%7D`
+      `${environment.urlMascostaFelizApi}menu-rols?filter=${filtro}`
     );
   }
 

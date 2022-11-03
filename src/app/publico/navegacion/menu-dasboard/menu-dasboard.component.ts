@@ -28,12 +28,9 @@ export class MenuDasboardComponent implements OnInit {
   }
 
   buscar() {
-    console.log(this.rolUsuario);
     this.menuRolServices.getMenuRolFilter(this.rolUsuario).subscribe({
       next: (data: MenuRol[]) => {
-        console.log(data);
         this.modeloData = data;
-        console.log(this.modeloData)
       },
     });
   }

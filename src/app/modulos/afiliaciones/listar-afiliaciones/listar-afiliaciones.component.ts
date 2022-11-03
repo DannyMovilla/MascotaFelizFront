@@ -5,6 +5,7 @@ import { Plan } from 'src/app/modelos/plan.model';
 import { Usuario } from 'src/app/modelos/usuario.model';
 import { MascotaService } from 'src/app/services/mascota.service';
 import { PlanService } from 'src/app/services/plan.service';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 import { InfoAfiliacionComponent } from '../info-afiliacion/info-afiliacion.component';
@@ -19,24 +20,37 @@ export class ListarAfiliacionesComponent implements OnInit {
   modeloUsuarios: Usuario[] = [];
   modeloPlans: Plan[] = [];
   bsModalRef?: BsModalRef;
+  dataSesion: any;
 
   constructor(
     private mascotaServices: MascotaService,
     private planServices: PlanService,
     private usuarioServices: UsuarioService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private authServices: SeguridadService
   ) {}
 
   ngOnInit(): void {
+    this.dataSesion = this.authServices.obtenerSession();
     this.buscar();
   }
 
   buscar() {
-    this.mascotaServices.getMascota().subscribe({
-      next: (data: Mascota[]) => {
-        this.modeloData = data;
-      },
-    });
+    if (this.dataSesion.rolUsuario.codigo != 'CLIENTE') {
+      this.mascotaServices.getMascota().subscribe({
+        next: (data: Mascota[]) => {
+          this.modeloData = data;
+        },
+      });
+    } else {
+      this.mascotaServices
+        .getMascotaCliente(this.dataSesion.datos.id)
+        .subscribe({
+          next: (data: Mascota[]) => {
+            this.modeloData = data;
+          },
+        });
+    }
 
     this.planServices.getPlan().subscribe({
       next: (data: Plan[]) => {
