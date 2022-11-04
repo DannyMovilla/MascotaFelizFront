@@ -5,7 +5,7 @@ import { Mascota } from 'src/app/modelos/mascota.model';
 import { Plan } from 'src/app/modelos/plan.model';
 import { MascotaService } from 'src/app/services/mascota.service';
 import { PlanService } from 'src/app/services/plan.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,8 +15,14 @@ import Swal from 'sweetalert2';
 })
 export class InfoAfiliacionComponent implements OnInit {
   modeloPlan: Plan[] = [];
+  modeloEstado: string[] = ['PENDIENTE', 'ACEPTADO', 'RECHAZADO'];
+
   idMascota?: string | undefined;
   idUsuaro?: string | undefined;
+  rolSesion: string = '';
+  dataSesion: any;
+  modeloMascota: Mascota = new Mascota();
+
   onClose: any;
 
   fgValidador: FormGroup = this.fb.group({
@@ -25,7 +31,7 @@ export class InfoAfiliacionComponent implements OnInit {
     color: ['', [Validators.required]],
     raza: ['', [Validators.required]],
     especie: ['', [Validators.required]],
-    estado: ['', [Validators.required]],
+    estado: ['PENDIENTE', [Validators.required]],
     detalle: ['', [Validators.required]],
     fechaAfiliacion: ['', [Validators.required]],
     usuarioId: ['', [Validators.required]],
@@ -36,10 +42,15 @@ export class InfoAfiliacionComponent implements OnInit {
     private fb: FormBuilder,
     public bsModalRef: BsModalRef,
     private planServices: PlanService,
-    private mascotaServices: MascotaService
+    private mascotaServices: MascotaService,
+    private authServices: SeguridadService
   ) {}
 
   ngOnInit(): void {
+    this.dataSesion = this.authServices.obtenerSession();
+    this.rolSesion = this.dataSesion.rolUsuario.codigo;
+    this.fgValidador.get('estado')!.disable();
+    this.fgValidador.get('detalle')!.disable();
     this.obtenerObjecto();
   }
 
@@ -53,6 +64,7 @@ export class InfoAfiliacionComponent implements OnInit {
     if (this.idMascota != null) {
       this.mascotaServices.getMascotaById(this.idMascota).subscribe({
         next: (dataUsario) => {
+          this.modeloMascota = dataUsario;
           this.fgValidador.controls['id'].setValue(this.idMascota);
           this.fgValidador.controls['nombre'].setValue(dataUsario.nombre);
           this.fgValidador.controls['color'].setValue(dataUsario.color);
@@ -78,6 +90,12 @@ export class InfoAfiliacionComponent implements OnInit {
     delete mascotaData.id;
 
     if (this.idMascota == null) {
+      mascotaData.estado = "PENDIENTE";
+
+      if(this.rolSesion == "CLIENTE"){
+        mascotaData.usuarioId = this.dataSesion.datos.id;
+      }
+
       this.mascotaServices.newMascota(mascotaData).subscribe(
         (datos: any) => {
           Swal.fire(
@@ -100,6 +118,7 @@ export class InfoAfiliacionComponent implements OnInit {
         }
       );
     } else {
+      mascotaData.estado = this.modeloMascota.estado;
       this.mascotaServices.updateMascota(this.idMascota, mascotaData).subscribe(
         (datos: any) => {
           Swal.fire(
@@ -165,5 +184,9 @@ export class InfoAfiliacionComponent implements OnInit {
       (this.fgValidador.get('planId')?.dirty ||
         this.fgValidador.get('planId')?.touched)
     );
+  }
+
+  get estadoValido() {
+    return this.fgValidador.get('estado')?.value;
   }
 }

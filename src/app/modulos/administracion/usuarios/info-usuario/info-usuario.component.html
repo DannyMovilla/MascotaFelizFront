@@ -47,10 +47,10 @@
 
       <div class="col-md-12">
         <label for="rol" class="form-label mb-0">Rol</label>
-        <select id="selectorRol" formControlName="rolId" class="form-select">
+        <select formControlName="rolId" class="form-select">
           <option *ngFor="let data of modeloRoles" value="{{data.id}}">{{data.nombre}}</option>
         </select>
-        <small *ngIf="correoNoValido" class="text-danger">
+        <small *ngIf="rolIdNoValido" class="text-danger">
           Seleccione el Rol
         </small>
       </div>

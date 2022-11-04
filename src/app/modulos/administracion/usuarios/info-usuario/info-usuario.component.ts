@@ -147,4 +147,12 @@ export class InfoUsuarioComponent implements OnInit {
         this.fgValidador.get('apellidos')?.touched)
     );
   }
+
+  get rolIdNoValido() {
+    return (
+      this.fgValidador.get('rolId')?.invalid &&
+      (this.fgValidador.get('rolId')?.dirty ||
+        this.fgValidador.get('rolId')?.touched)
+    );
+  }
 }

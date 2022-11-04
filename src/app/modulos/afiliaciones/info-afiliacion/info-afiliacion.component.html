@@ -1,1 +1,82 @@
-<p>info-afiliacion works!</p>
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Afiliación</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<form autocomplete="off" [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" class="clss-form">
+  <div class="modal-body">
+
+    <div class="row g-3 mb-3">
+
+      <div class="col-md-12 mt-1">
+        <label for="nombre" class="form-label mb-0">Nombre</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre" formControlName="nombre"
+          [class.is-invalid]="nombreNoValido">
+        <small *ngIf="nombreNoValido" class="text-danger">
+          Ingrese el nombre
+        </small>
+      </div>
+
+      <div class="col-md-6">
+        <label for="color" class="form-label mb-0">Color</label>
+        <input type="text" class="form-control" id="color" placeholder="Color" formControlName="color"
+          [class.is-invalid]="colorNoValido">
+        <small *ngIf="colorNoValido" class="text-danger">
+          Ingrese el color
+        </small>
+      </div>
+
+      <div class="col-md-6">
+        <label for="raza" class="form-label mb-0">Raza</label>
+        <input type="text" class="form-control" id="raza" placeholder="Raza" formControlName="raza"
+          [class.is-invalid]="razaNoValido">
+        <small *ngIf="razaNoValido" class="text-danger">
+          Ingrese el Raza
+        </small>
+      </div>
+
+      <div class="col-md-12">
+        <label for="especie" class="form-label mb-0">Especie</label>
+        <input type="text" class="form-control" id="especie" placeholder="Especie" formControlName="especie"
+          [class.is-invalid]="especieNoValido">
+        <small *ngIf="especieNoValido" class="text-danger">
+          Ingrese el especie
+        </small>
+      </div>
+
+      <div class="col-md-12">
+        <label for="plan" class="form-label mb-0">Plan</label>
+        <select formControlName="planId" class="form-select">
+          <option *ngFor="let data of modeloPlan" value="{{data.id}}" [class.is-invalid]="planIdNoValido">{{data.nombre}}</option>
+        </select>
+        <small *ngIf="planIdNoValido" class="text-danger">
+          Seleccione el Plan
+        </small>
+      </div>
+
+      <div class="col-md-12">
+        <input type="hidden" formControlName="estado"/>
+        <label for="estado" class="form-label mb-0">Estado</label>
+        <select formControlName="estado" class="form-select">
+          <option *ngFor="let data of modeloEstado" value="{{data}}">{{data}}</option>
+        </select>
+        <small *ngIf="estadoNoValido" class="text-danger">
+          Seleccione el Estado
+        </small>
+      </div>
+
+      <div class="col-12 mt-1" *ngIf="idMascota !== undefined && estadoValido != 'PENDIENTE'">
+        <label for="detalle" class="form-label mb-0">Detalle</label>
+        <textarea class="form-control" formControlName="detalle" id="detalle" rows="3"></textarea>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary btn-lg mb-3" type="submit">Guardar</button>
+    <button class="btn btn-danger btn-lg mb-3 mx-2" type="button" (click)="bsModalRef.hide()">Cancelar</button>
+  </div>
+
+</form>
