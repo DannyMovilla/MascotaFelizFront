@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
+import { Plan } from 'src/app/modelos/plan.model';
 import { MascotaService } from 'src/app/services/mascota.service';
+import { PlanService } from 'src/app/services/plan.service';
 import { ProspectosService } from 'src/app/services/prospectos.service';
 import { SucursalService } from 'src/app/services/sucursal.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -12,7 +14,20 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class DashboardComponent implements OnInit {
   dataCounter: any[] = [];
-  view: any[] = [700, 150];
+  dataBarra: any[] = [];
+  view: any[] = [850, 200];
+
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = false;
+  showXAxisLabel = true;
+  xAxisLabel = 'Planes';
+  showYAxisLabel = true;
+  yAxisLabel = 'Afiliaciones';
+  /*colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };*/
 
   colorScheme = {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
@@ -23,11 +38,15 @@ export class DashboardComponent implements OnInit {
     private prospectoServices: ProspectosService,
     private mascotasServices: MascotaService,
     private usuarioServices: UsuarioService,
-    private surcursalServices: SucursalService
-  ) {}
+    private surcursalServices: SucursalService,
+    private planServices: PlanService
+  ) {
+    this.view = [innerWidth / 2, 250];
+  }
 
   ngOnInit(): void {
     this.grafiContar();
+    this.grafiBarra();
   }
 
   grafiContar() {
@@ -64,7 +83,30 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  grafiBarra() {
+    this.planServices.getPlan().subscribe((data: Plan[]) => {
+      let dato: any[] = [];
+      for (let index = 0; index < data.length; index++) {
+        const dataPlan = data[index];
+
+        let datos = {
+          name: dataPlan.nombre,
+          value:
+            typeof dataPlan.mascotas == 'undefined'
+              ? 0
+              : dataPlan.mascotas.length,
+        };
+        dato.push(datos);
+      }
+      this.dataBarra = dato;
+    });
+  }
+
   onSelect(event: any) {
     console.log(event);
+  }
+
+  onResize(event: any) {
+    this.view = [event.target.innerWidth / 2, 250];
   }
 }

@@ -11,7 +11,7 @@ export class PlanService {
   constructor(private http: HttpClient) {}
 
   getPlan(): Observable<Plan[]> {
-    return this.http.get<Plan[]>(`${environment.urlMascostaFelizApi}plans`);
+    return this.http.get<Plan[]>(`${environment.urlMascostaFelizApi}plans?filter={"include":[{"relation": "mascotas"}]}`);
   }
 
   getPlanById(id: string): Observable<Plan> {
