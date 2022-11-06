@@ -21,7 +21,6 @@ export class PerfilComponent implements OnInit {
     apellidos: ['', [Validators.required]],
     correo: ['', [Validators.required]],
     documento: ['', [Validators.required]],
-    foto: ['', [Validators.required]],
     rolId: ['', [Validators.required]],
   });
 
@@ -54,7 +53,6 @@ export class PerfilComponent implements OnInit {
           this.fgValidador.controls['apellidos'].setValue(dataUsario.apellidos);
           this.fgValidador.controls['correo'].setValue(dataUsario.correo);
           this.fgValidador.controls['documento'].setValue(dataUsario.documento);
-          this.fgValidador.controls['foto'].setValue(dataUsario.foto);
           this.fgValidador.controls['rolId'].setValue(dataUsario.rolId);
         },
         error: (err) => {

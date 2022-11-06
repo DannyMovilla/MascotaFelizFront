@@ -90,9 +90,9 @@ export class InfoAfiliacionComponent implements OnInit {
     delete mascotaData.id;
 
     if (this.idMascota == null) {
-      mascotaData.estado = "PENDIENTE";
+      mascotaData.estado = 'PENDIENTE';
 
-      if(this.rolSesion == "CLIENTE"){
+      if (this.rolSesion == 'CLIENTE') {
         mascotaData.usuarioId = this.dataSesion.datos.id;
       }
 
@@ -100,7 +100,7 @@ export class InfoAfiliacionComponent implements OnInit {
         (datos: any) => {
           Swal.fire(
             'Mascota Feliz!',
-            'El usuario fue guardado correctamente',
+            'La afiliación fue guardada correctamente',
             'success'
           );
 
@@ -123,7 +123,7 @@ export class InfoAfiliacionComponent implements OnInit {
         (datos: any) => {
           Swal.fire(
             'Mascota Feliz!',
-            'El usuario fue actualizado correctamente',
+            'La afiliación fue actualizada correctamente',
             'success'
           );
 

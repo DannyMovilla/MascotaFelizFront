@@ -4,6 +4,7 @@ import { Plan } from 'src/app/modelos/plan.model';
 import { MascotaService } from 'src/app/services/mascota.service';
 import { PlanService } from 'src/app/services/plan.service';
 import { ProspectosService } from 'src/app/services/prospectos.service';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 import { SucursalService } from 'src/app/services/sucursal.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -39,7 +40,8 @@ export class DashboardComponent implements OnInit {
     private mascotasServices: MascotaService,
     private usuarioServices: UsuarioService,
     private surcursalServices: SucursalService,
-    private planServices: PlanService
+    private planServices: PlanService,
+    private authServices: SeguridadService
   ) {
     this.view = [innerWidth / 2, 250];
   }
@@ -64,7 +66,7 @@ export class DashboardComponent implements OnInit {
             value: prospecto['count'],
           },
           {
-            name: 'Mascotas',
+            name: 'Afiliaciones',
             value: mascota['count'],
           },
           {
@@ -72,10 +74,22 @@ export class DashboardComponent implements OnInit {
             value: usuario['count'],
           },
           {
-            name: 'Sucursal',
+            name: 'Sucursales',
             value: sucursal['count'],
           },
         ];
+
+        if(this.authServices.obtenerRolSesion() != 'ADMIN'){
+          for (let index = 0; index < this.dataCounter.length; index++) {
+            const element = this.dataCounter[index];
+
+            if(element.name == 'Usuario'){
+              this.dataCounter.splice(index,1);
+              break
+            }
+
+          }
+        }
       },
       (errorServicio) => {
         console.log(errorServicio);

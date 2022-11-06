@@ -8,6 +8,7 @@ import { PlanService } from 'src/app/services/plan.service';
 import { SeguridadService } from 'src/app/services/seguridad.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+import { EstadoAfiliacionComponent } from '../estado-afiliacion/estado-afiliacion.component';
 import { InfoAfiliacionComponent } from '../info-afiliacion/info-afiliacion.component';
 
 @Component({
@@ -77,6 +78,29 @@ export class ListarAfiliacionesComponent implements OnInit {
     /* this is how we open a Modal Component from another component */
     this.bsModalRef = this.modalService.show(
       InfoAfiliacionComponent,
+      Object.assign(dataObject, modalConfig, {
+        class: 'modal-md',
+        initialState,
+      })
+    );
+    this.bsModalRef.content.closeBtnName = 'Cancelar';
+
+    this.bsModalRef.content.onClose = () => {
+      this.buscar();
+    };
+  }
+
+  onEstados(idMascota: any) {
+    var dataObject = {};
+    let initialState = {
+      idMascota: idMascota,
+    };
+    let modalConfig = {
+      animated: true,
+    };
+    /* this is how we open a Modal Component from another component */
+    this.bsModalRef = this.modalService.show(
+      EstadoAfiliacionComponent,
       Object.assign(dataObject, modalConfig, {
         class: 'modal-md',
         initialState,

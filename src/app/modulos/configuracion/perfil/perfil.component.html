@@ -4,7 +4,7 @@
     <p class="fs-6 lead  text-center">En esta sección podrás visualizar y gestionar tú Información</p>
   </div>
   <main>
-    <form [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" autocomplete="off" class="needs-validation clss-form">
+    <form [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" autocomplete="off" class="clss-form">
 
       <!-- <img class="mb-2" src="assets/img/logoMorado2.png" alt="">-->
       <div class="row g-3 mt-3 mb-3">
@@ -42,16 +42,6 @@
             [class.is-invalid]="correoNoValido">
           <small *ngIf="correoNoValido" class="text-danger">
             Ingrese el correo
-          </small>
-        </div>
-
-        <div class="col-md-12">
-          <label for="rol" class="form-label mb-0">Rol</label>
-          <select id="selectorRol" formControlName="rolId" class="form-select">
-            <option *ngFor="let data of modeloRoles" value="{{data.id}}">{{data.nombre}}</option>
-          </select>
-          <small *ngIf="correoNoValido" class="text-danger">
-            Seleccione el Rol
           </small>
         </div>
 

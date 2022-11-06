@@ -17,13 +17,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   modalRef2?: BsModalRef;
 
-
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private authService: SeguridadService,
     public bsModalRef: BsModalRef,
-    private modalService: BsModalService,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +53,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         );
 
         this.authService.almacenarSession(datos);
-        this.router.navigateByUrl('/configuracion/dashboard');
+
+        if (datos.rolUsuario.codigo != 'CLIENTE') {
+          this.router.navigateByUrl('/configuracion/dashboard');
+        } else {
+          this.router.navigateByUrl('/afiliaciones/afiliaciones');
+        }
 
         this.bsModalRef?.hide();
       },

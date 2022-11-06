@@ -50,8 +50,8 @@
           <tr *ngFor="let data of modeloData">
             <td>{{data.nombre}}</td>
             <td>{{data.especie}}</td>
-            <td>{{data.usuario!.nombres}} {{data.usuario!.apellidos}}</td>
-            <td>{{data.plan!.nombre}}</td>
+            <td>{{data.usuario?.nombres}} {{data.usuario?.apellidos}}</td>
+            <td>{{data.plan?.nombre}}</td>
             <td>{{data.estado}}</td>
             <td>
               <a class="btn btn-primary mr-2" data-toggle="tooltip" data-placement="top" title="Editar"
@@ -62,8 +62,8 @@
                 (click)="onEliminar(data.id!)">
                 <i class="fa-solid fa-trash"></i>
               </a>
-              <a class="btn btn-success" data-toggle="tooltip" *ngIf="dataSesion.rolUsuario.codigo == 'ASESOR'" data-placement="top" title="Responder Solicitud"
-                (click)="onGestionar(data.id!)">
+              <a class="btn btn-success" data-toggle="tooltip" *ngIf="dataSesion.rolUsuario.codigo == 'ASESOR' && data.estado != 'PENDIENTE'" data-placement="top" title="Responder Solicitud"
+                (click)="onEstados(data.id!)">
                 <i class="fa-solid fa-check-to-slot"></i>
               </a>
             </td>

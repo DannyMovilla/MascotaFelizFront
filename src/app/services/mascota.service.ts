@@ -38,7 +38,7 @@ export class MascotaService {
 
   getMascotaById(id: string): Observable<Mascota> {
     return this.http.get<Mascota>(
-      `${environment.urlMascostaFelizApi}mascotas/${id}`
+      `${environment.urlMascostaFelizApi}mascotas/${id}?filter={"include":[{"relation": "usuario"},{"relation": "plan"}]}`
     );
   }
 
@@ -52,6 +52,14 @@ export class MascotaService {
 
   updateMascota(idMascota: string, model: Mascota): Observable<Mascota> {
     return this.http.put<Mascota>(
+      `${environment.urlMascostaFelizApi}mascotas/${idMascota}`,
+      model,
+      {}
+    );
+  }
+
+  updatePatchMascota(idMascota: string, model: Mascota): Observable<Mascota> {
+    return this.http.patch<Mascota>(
       `${environment.urlMascostaFelizApi}mascotas/${idMascota}`,
       model,
       {}
