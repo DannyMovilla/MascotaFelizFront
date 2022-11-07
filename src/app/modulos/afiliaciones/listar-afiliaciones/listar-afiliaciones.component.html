@@ -1,9 +1,9 @@
-<div class="container py-3 mt-3">
+<div class="container py-3 mt-3" id="htmlData">
   <div id="consultar" class="p-3 pb-md-4 mx-auto border-bottom">
     <h3 class="fw-bolder mb-0  text-center">Consultar Afiliaciones</h3>
     <p class="fs-6 lead  text-center">En esta sección podrás consultar de las afiliaciones</p>
 
-    <form [formGroup]="fgValidador" (ngSubmit)="buscar()"  class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
+    <form data-html2canvas-ignore [formGroup]="fgValidador" (ngSubmit)="buscar()"  class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
       <div class="col">
         <label for="mascota" class="form-label mb-0">Mascota</label>
         <input type="text" class="form-control" id="mascota" formControlName="nombre" placeholder="Nombre de la Mascota">
@@ -18,6 +18,10 @@
       <div class="col">
         <button class="btn btn-primary py-2" type="submit" data-toggle="tooltip" data-placement="top" title="Consultar">
           <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="btn btn-success py-2 mx-2" type="button" style="float: right;" (click)="downloadPDF()" data-toggle="tooltip"
+          data-placement="top" title="PDF">
+          <i class="fa-solid fa-file-pdf"></i>
         </button>
         <button class="btn btn-primary py-2 mx-2" type="button" style="float: right;" (click)="onCargar()" data-toggle="tooltip"
           data-placement="top" title="Nuevo">
@@ -36,7 +40,7 @@
             <th scope="col">Propietario</th>
             <th scope="col">Plan</th>
             <th scope="col">Estado</th>
-            <th scope="col">Opciones</th>
+            <th scope="col" data-html2canvas-ignore>Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -46,7 +50,7 @@
             <td>{{data.usuario?.nombres}} {{data.usuario?.apellidos}}</td>
             <td>{{data.plan?.nombre}}</td>
             <td>{{data.estado}}</td>
-            <td>
+            <td data-html2canvas-ignore>
               <a class="btn btn-primary mr-2" data-toggle="tooltip" data-placement="top" title="Editar"
                 (click)="onGestionar(data.id)">
                 <i class="fa-solid fa-pen-to-square"></i>
