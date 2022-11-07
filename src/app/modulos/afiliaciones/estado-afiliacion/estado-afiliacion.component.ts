@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Mascota } from 'src/app/modelos/mascota.model';
-import { Plan } from 'src/app/modelos/plan.model';
 import { MascotaService } from 'src/app/services/mascota.service';
 import { PlanService } from 'src/app/services/plan.service';
 import { SeguridadService } from 'src/app/services/seguridad.service';
@@ -69,6 +68,10 @@ export class EstadoAfiliacionComponent implements OnInit {
     let mascotaData = new Mascota(this.fgValidador.value);
     delete mascotaData.id;
 
+    if(mascotaData.estado == 'PENDIENTE'){
+      mascotaData.detalle = "";
+    }
+
     if (this.idMascota == null) {
       Swal.fire(
         'Mascota Feliz!',
@@ -77,13 +80,12 @@ export class EstadoAfiliacionComponent implements OnInit {
       );
     } else {
       if(mascotaData.estado == 'ACEPTADA'){
-        let today: Date = new Date();
         let pipe = new DatePipe('en-US');
         mascotaData.fechaAfiliacion = pipe.transform(Date.now(), 'dd/MM/yyyy')!;
         console.log(mascotaData.fechaAfiliacion)
       }
 
-      this.mascotaServices.updatePatchMascota(this.idMascota, mascotaData).subscribe(
+      this.mascotaServices.updateEstadoMascota(this.idMascota, mascotaData).subscribe(
         (datos: any) => {
           Swal.fire(
             'Mascota Feliz!',

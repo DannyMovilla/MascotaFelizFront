@@ -10,17 +10,43 @@ import { Mascota } from '../modelos/mascota.model';
 export class MascotaService {
   constructor(private http: HttpClient) {}
 
-  getMascota(): Observable<Mascota[]> {
+  getMascota(filtroMascota?: Mascota): Observable<Mascota[]> {
+    let where: any = {};
+
+    if (filtroMascota?.nombre != null && filtroMascota?.nombre != '') {
+      where['nombre'] = filtroMascota?.nombre;
+    }
+
+    if (filtroMascota?.estado != null && filtroMascota?.estado != '') {
+      where['estado'] = filtroMascota?.estado;
+    }
+
+    let data = {
+      where,
+      include: [{ relation: 'usuario' }, { relation: 'plan' }],
+    };
+    let filtro = JSON.stringify(data);
+
     return this.http.get<Mascota[]>(
-      `${environment.urlMascostaFelizApi}mascotas?filter={"include":[{"relation": "usuario"},{"relation": "plan"}]}`
+      `${environment.urlMascostaFelizApi}mascotas?filter=${filtro}`
     );
   }
 
-  getMascotaCliente(idCliente: string): Observable<Mascota[]> {
+  getMascotaCliente(
+    idCliente: string,
+    filtroMascota?: Mascota
+  ): Observable<Mascota[]> {
+    let where: any = {usuarioId: idCliente};
+
+    if (filtroMascota?.nombre != null && filtroMascota?.nombre != '') {
+      where['nombre'] = filtroMascota?.nombre;
+    }
+
+    if (filtroMascota?.estado != null && filtroMascota?.estado != '') {
+      where['estado'] = filtroMascota?.estado;
+    }
     let data = {
-      where: {
-        usuarioId: idCliente,
-      },
+      where,
       include: [{ relation: 'usuario' }, { relation: 'plan' }],
     };
 
@@ -61,6 +87,14 @@ export class MascotaService {
   updatePatchMascota(idMascota: string, model: Mascota): Observable<Mascota> {
     return this.http.patch<Mascota>(
       `${environment.urlMascostaFelizApi}mascotas/${idMascota}`,
+      model,
+      {}
+    );
+  }
+
+  updateEstadoMascota(idMascota: string, model: Mascota): Observable<Mascota> {
+    return this.http.patch<Mascota>(
+      `${environment.urlMascostaFelizApi}mascotas/estadoafiliacion/${idMascota}`,
       model,
       {}
     );

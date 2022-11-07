@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Mascota } from 'src/app/modelos/mascota.model';
 import { Plan } from 'src/app/modelos/plan.model';
@@ -20,10 +21,18 @@ export class ListarAfiliacionesComponent implements OnInit {
   modeloData: Mascota[] = [];
   modeloUsuarios: Usuario[] = [];
   modeloPlans: Plan[] = [];
+  modeloEstado: string[] = ['PENDIENTE', 'ACEPTADO', 'RECHAZADO'];
+
   bsModalRef?: BsModalRef;
   dataSesion: any;
 
+  fgValidador: FormGroup = this.fb.group({
+    nombre: [''],
+    estado: [''],
+  })
+
   constructor(
+    private fb: FormBuilder,
     private mascotaServices: MascotaService,
     private planServices: PlanService,
     private usuarioServices: UsuarioService,
@@ -37,15 +46,17 @@ export class ListarAfiliacionesComponent implements OnInit {
   }
 
   buscar() {
+    let filtro = new Mascota(this.fgValidador.value);
+
     if (this.dataSesion.rolUsuario.codigo != 'CLIENTE') {
-      this.mascotaServices.getMascota().subscribe({
+      this.mascotaServices.getMascota(filtro).subscribe({
         next: (data: Mascota[]) => {
           this.modeloData = data;
         },
       });
     } else {
       this.mascotaServices
-        .getMascotaCliente(this.dataSesion.datos.id)
+        .getMascotaCliente(this.dataSesion.datos.id, filtro)
         .subscribe({
           next: (data: Mascota[]) => {
             this.modeloData = data;

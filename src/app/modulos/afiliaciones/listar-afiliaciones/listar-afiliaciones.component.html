@@ -1,32 +1,25 @@
-<div id="consultar" class="container py-3 mt-3">
-  <div class="p-3 pb-md-4 mx-auto border-bottom">
+<div class="container py-3 mt-3">
+  <div id="consultar" class="p-3 pb-md-4 mx-auto border-bottom">
     <h3 class="fw-bolder mb-0  text-center">Consultar Afiliaciones</h3>
     <p class="fs-6 lead  text-center">En esta sección podrás consultar de las afiliaciones</p>
 
-    <form class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
+    <form [formGroup]="fgValidador" (ngSubmit)="buscar()"  class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
       <div class="col">
         <label for="mascota" class="form-label mb-0">Mascota</label>
-        <input type="text" class="form-control" id="mascota" placeholder="Nombre de la Mascota">
-      </div>
-
-      <div class="col">
-        <label for="propietario" class="form-label mb-0">Propietario</label>
-        <input type="text" class="form-control" id="propietario" placeholder="Nombre del propietario">
-      </div>
-
-      <div class="col">
-        <label for="plan" class="form-label mb-0">Plan</label>
-        <input type="text" class="form-control" id="plan" placeholder="Ingrese Plan">
+        <input type="text" class="form-control" id="mascota" formControlName="nombre" placeholder="Nombre de la Mascota">
       </div>
       <div class="col">
         <label for="estado" class="form-label mb-0">Estado</label>
-        <input type="text" class="form-control" id="estado" placeholder="Ingrese Estado">
+        <select formControlName="estado" class="form-select">
+          <option value="">Seleccione</option>
+          <option *ngFor="let data of modeloEstado" value="{{data}}">{{data}}</option>
+        </select>
       </div>
       <div class="col">
         <button class="btn btn-primary py-2" type="submit" data-toggle="tooltip" data-placement="top" title="Consultar">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <button class="btn btn-primary py-2 mx-2" style="float: right;" (click)="onCargar()" data-toggle="tooltip"
+        <button class="btn btn-primary py-2 mx-2" type="button" style="float: right;" (click)="onCargar()" data-toggle="tooltip"
           data-placement="top" title="Nuevo">
           <i class="fa-sharp fa-solid fa-plus"></i>
         </button>
@@ -58,12 +51,13 @@
                 (click)="onGestionar(data.id)">
                 <i class="fa-solid fa-pen-to-square"></i>
               </a>
-              <a class="btn btn-danger mx-2" data-toggle="tooltip" data-placement="top" title="Eliminar"
-                (click)="onEliminar(data.id!)">
+              <a class="btn btn-danger mx-2" data-toggle="tooltip" *ngIf="dataSesion.rolUsuario.codigo == 'CLIENTE'"
+                data-placement="top" title="Eliminar" (click)="onEliminar(data.id!)">
                 <i class="fa-solid fa-trash"></i>
               </a>
-              <a class="btn btn-success" data-toggle="tooltip" *ngIf="dataSesion.rolUsuario.codigo == 'ASESOR' && data.estado != 'PENDIENTE'" data-placement="top" title="Responder Solicitud"
-                (click)="onEstados(data.id!)">
+              <a class="btn btn-success mx-2" data-toggle="tooltip"
+                *ngIf="dataSesion.rolUsuario.codigo == 'ASESOR' && data.estado == 'PENDIENTE'" data-placement="top"
+                title="Responder Solicitud" (click)="onEstados(data.id!)">
                 <i class="fa-solid fa-check-to-slot"></i>
               </a>
             </td>
