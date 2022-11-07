@@ -1,21 +1,30 @@
 <header id="inicio">
   <div class="container py-3">
     <div class="d-flex flex-column flex-md-row align-items-center">
-      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <img src="assets/img/logo.png">
-      </a>
+
       <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
+          <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+            <img src="assets/img/logo.png">
+          </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ng-container *ngFor="let data of modeloData; last as islast">
-              <a class="btn btn-outline-light" routerLink="{{data.url}}" routerLinkActive="active">{{data.nombre}}</a>
-              <a class="btn btn-outline-light" *ngIf="islast" (click)="cerrarSession()">Salir</a>
-            </ng-container>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              <ng-container *ngFor="let data of modeloData; last as islast">
+                <li class="nav-item">
+                  <a class="btn btn-outline-light" routerLink="{{data.url}}"
+                    routerLinkActive="active">{{data.nombre}}</a>
+                </li>
+                <li class="nav-item" *ngIf="islast">
+                  <a class="btn btn-outline-light" (click)="cerrarSession()">Salir</a>
+                </li>
+              </ng-container>
+            </ul>
           </div>
         </div>
       </nav>
