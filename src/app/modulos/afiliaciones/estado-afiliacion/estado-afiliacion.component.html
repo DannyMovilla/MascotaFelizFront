@@ -9,13 +9,33 @@
 
     <div class="row g-3 mb-3">
 
+      <div class="col-md-12 ">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-12">
+              <div class="card-body">
+                <h4 class="card-title text-center">{{modeloMascota.nombre}}</h4>
+                <p class="card-text mb-0">
+                  <Strong>Raza:</Strong> {{modeloMascota.raza}}
+                </p>
+                <p class="card-text mb-0">
+                  <Strong>Color:</Strong> {{modeloMascota.color}}
+                </p>
+                <p class="card-text mb-0">
+                  <Strong>Especie:</Strong> {{modeloMascota.especie}}
+                </p>
+                <p class="card-text mb-0">
+                  <Strong>Propietario:</Strong> {{modeloMascota.usuario?.nombres}} {{modeloMascota.usuario?.apellidos}}
+                </p>
+                <p class="card-text mb-0">
+                  <Strong>Plan:</Strong> {{modeloMascota.plan?.nombre}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <label class="form-label mb-0">{{modeloMascota.nombre}}</label>
-      <label class="form-label mb-0">{{modeloMascota.raza}}</label>
-      <label class="form-label mb-0">{{modeloMascota.color}}</label>
-      <label class="form-label mb-0">{{modeloMascota.especie}}</label>
-      <label class="form-label mb-0">{{modeloMascota.usuario?.nombres}}</label>
-      <label class="form-label mb-0">{{modeloMascota.plan?.nombre}}</label>
+      </div>
 
       <div class="col-md-12">
         <input type="hidden" formControlName="estado" />
