@@ -3,30 +3,22 @@
     <h3 class="fw-bolder mb-0  text-center">Consultar Usuarios</h3>
     <p class="fs-6 lead  text-center">En esta sección podrás consultar de los Usuarios</p>
 
-    <form class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
+    <form [formGroup]="fgValidador" (ngSubmit)="buscar()" class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
       <div class="col">
-        <label for="mascota" class="form-label mb-0">Nombre</label>
-        <input type="text" class="form-control" id="mascota" placeholder="Nombre de la Mascota">
+        <label for="usuario" class="form-label mb-0">Usuario</label>
+        <input type="email" class="form-control" id="usuario" formControlName="correo" placeholder="Usuario">
       </div>
 
       <div class="col">
-        <label for="propietario" class="form-label mb-0">Identificacion</label>
-        <input type="text" class="form-control" id="propietario" placeholder="Nombre del propietario">
+        <label for="identificacion" class="form-label mb-0">Identificacion</label>
+        <input type="text" class="form-control" id="identificacion" formControlName="documento" placeholder="Identificacion del usuario">
       </div>
 
-      <div class="col">
-        <label for="veterinario" class="form-label mb-0">Correo</label>
-        <input type="text" class="form-control" id="veterinario" placeholder="Nombre del veterinario">
-      </div>
-      <div class="col">
-        <label for="veterinario" class="form-label mb-0">Rol</label>
-        <input type="text" class="form-control" id="veterinario" placeholder="Nombre del veterinario">
-      </div>
       <div class="col">
         <button class="btn btn-primary py-2" type="submit" data-toggle="tooltip" data-placement="top" title="Consultar">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <button class="btn btn-primary py-2 mx-2" style="float: right;" (click)="onCargar()" data-toggle="tooltip"
+        <button class="btn btn-primary py-2 mx-2" type="button" style="float: right;" (click)="onCargar()" data-toggle="tooltip"
           data-placement="top" title="Nuevo">
           <i class="fa-sharp fa-solid fa-plus"></i>
         </button>

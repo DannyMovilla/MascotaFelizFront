@@ -10,8 +10,25 @@ import { Observable } from 'rxjs';
 export class RolService {
   constructor(private http: HttpClient) {}
 
-  getRols(): Observable<Rol[]> {
-    return this.http.get<Rol[]>(`${environment.urlMascostaFelizApi}rols`);
+  getRols(filtroData?: Rol): Observable<Rol[]> {
+    let where: any = {};
+
+    if (filtroData?.nombre != null && filtroData?.nombre != '') {
+      where['nombre'] = filtroData?.nombre;
+    }
+
+    if (filtroData?.codigo != null && filtroData?.codigo != '') {
+      where['codigo'] = filtroData?.codigo;
+    }
+
+    let data = {
+      where,
+    };
+    let filtro = JSON.stringify(data);
+
+    return this.http.get<Rol[]>(
+      `${environment.urlMascostaFelizApi}rols?filter=${filtro}`
+    );
   }
 
   getRolById(id: string): Observable<Rol> {

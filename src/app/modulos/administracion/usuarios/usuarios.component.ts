@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Rol } from 'src/app/modelos/rol.model';
 import { Usuario } from 'src/app/modelos/usuario.model';
@@ -17,7 +18,13 @@ export class UsuariosComponent implements OnInit {
   modeloRoles: Rol[] = [];
   bsModalRef?: BsModalRef;
 
+  fgValidador: FormGroup = this.fb.group({
+    correo: ['', [Validators.email]],
+    documento: ['']
+  })
+
   constructor(
+    private fb: FormBuilder,
     private usuarioServices: UsuarioService,
     private rolServices: RolService,
     private modalService: BsModalService
@@ -34,7 +41,8 @@ export class UsuariosComponent implements OnInit {
       },
     });
 
-    this.usuarioServices.getUsuarios().subscribe(
+    let filtro = new Usuario(this.fgValidador.value);
+    this.usuarioServices.getUsuarios(filtro).subscribe(
       (resp: Usuario[]) => {
         this.modeloData = resp;
       },

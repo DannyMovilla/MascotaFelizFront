@@ -10,9 +10,24 @@ import { environment } from 'src/environments/environment';
 export class UsuarioService {
   constructor(private http: HttpClient) {}
 
-  getUsuarios(): Observable<Usuario[]> {
+  getUsuarios(filtroData?: Usuario): Observable<Usuario[]> {
+    let where: any = {};
+
+    if (filtroData?.correo != null && filtroData?.correo != '') {
+      where['correo'] = filtroData?.correo;
+    }
+
+    if (filtroData?.documento != null && filtroData?.documento != '') {
+      where['documento'] = filtroData?.documento;
+    }
+
+    let data = {
+      where,
+      include: [{ relation: 'rol' }],
+    };
+    let filtro = JSON.stringify(data);
     return this.http.get<Usuario[]>(
-      `${environment.urlMascostaFelizApi}usuarios?filter={"include":[{"relation": "rol"}]}`
+      `${environment.urlMascostaFelizApi}usuarios?filter=${filtro}`
     );
   }
 

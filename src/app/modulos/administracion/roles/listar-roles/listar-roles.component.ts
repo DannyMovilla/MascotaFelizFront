@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Rol } from 'src/app/modelos/rol.model';
 import { RolService } from 'src/app/services/rol.service';
@@ -13,7 +14,14 @@ import { InfoRolComponent } from '../info-rol/info-rol.component';
 export class ListarRolesComponent implements OnInit {
   modeloData: Rol[] = [];
   bsModalRef?: BsModalRef;
+
+  fgValidador: FormGroup = this.fb.group({
+    nombre: [''],
+    codigo: [''],
+  })
+
   constructor(
+    private fb: FormBuilder,
     private rolServices: RolService,
     private modalService: BsModalService
   ) {}
@@ -23,7 +31,9 @@ export class ListarRolesComponent implements OnInit {
   }
 
   buscar() {
-    this.rolServices.getRols().subscribe({
+    let filtro = new Rol(this.fgValidador.value);
+
+    this.rolServices.getRols(filtro).subscribe({
       next: (data: Rol[]) => {
         this.modeloData = data;
       },

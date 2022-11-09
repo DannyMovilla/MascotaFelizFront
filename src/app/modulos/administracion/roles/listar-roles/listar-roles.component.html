@@ -3,21 +3,21 @@
     <h3 class="fw-bolder mb-0  text-center">Consultar Rol</h3>
     <p class="fs-6 lead  text-center">En esta sección podrás consultar de los roles</p>
 
-    <form class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
+    <form [formGroup]="fgValidador" (ngSubmit)="buscar()" class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
       <div class="col">
         <label for="nombre" class="form-label mb-0">Nombre</label>
-        <input type="text" class="form-control" id="nombre" placeholder="Nombre del rol">
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Nombre del rol">
       </div>
 
       <div class="col">
         <label for="codigo" class="form-label mb-0">Codigo</label>
-        <input type="text" class="form-control" id="codigo" placeholder="Nombre del codigo">
+        <input type="text" class="form-control" id="codigo" formControlName="codigo" placeholder="Nombre del codigo">
       </div>
       <div class="col">
         <button class="btn btn-primary py-2" type="submit" data-toggle="tooltip" data-placement="top" title="Consultar">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <button class="btn btn-primary py-2 mx-2" style="float: right;" (click)="onCargar()" data-toggle="tooltip"
+        <button class="btn btn-primary py-2 mx-2" style="float: right;" type="button" (click)="onCargar()" data-toggle="tooltip"
           data-placement="top" title="Nuevo">
           <i class="fa-sharp fa-solid fa-plus"></i>
         </button>
