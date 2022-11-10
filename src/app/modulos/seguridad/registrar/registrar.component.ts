@@ -72,6 +72,7 @@ export class RegistrarComponent implements OnInit, OnDestroy {
             'success'
           );
           console.log('Almacenado correctamente');
+          this.initForm();
         } else {
           console.log('Error almacenando');
         }
