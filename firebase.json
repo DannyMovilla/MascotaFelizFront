@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/mascota-feliz",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

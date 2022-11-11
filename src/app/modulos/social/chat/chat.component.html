@@ -1,0 +1,54 @@
+<div class="container py-3 mt-3" >
+  <div id="consultar" class="p-3 pb-md-4 mx-auto border-bottom">
+    <h3 class="fw-bolder mb-0  text-center">Comunidad</h3>
+    <p class="fs-6 lead  text-center">En esta sección podrás Con toda la comunidad de Mascota Feliz</p>
+
+  </div>
+  <main>
+
+    <!-- Row start -->
+    <div class="row gutters">
+
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+        <div class="card m-0">
+
+          <!-- Row start -->
+          <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="chat-container">
+                <ul class="chat-box chatContainerScroll" *ngFor="let chat of socialServices.chats">
+                  <!-- <li class="chat-right">
+                                      <div class="chat-hour">08:59 <span class="fa fa-check-circle"></span></div>
+                                      <div class="chat-text">Have you faced any problems at the last phase of the project?</div>
+                                      <div class="chat-avatar">
+                                          <img src="https://www.bootdey.com/img/Content/avatar/avatar4.png" alt="Retail Admin">
+                                          <div class="chat-name">Jin</div>
+                                      </div>
+                                  </li>-->
+                  <li [ngClass]="{ 'chat-right': datosUsuario.datos.id == chat.idUser,
+                  'chat-left': datosUsuario.datos.id != chat.idUser }" class="">
+                    <div class="chat-avatar">
+                      <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
+                      <div class="chat-name">{{chat.nombre}}</div>
+                    </div>
+                    <div class="chat-text">{{chat.mensaje}}</div>
+                    <div class="chat-hour">07:00 <span class="fa fa-check-circle"></span></div>
+                  </li>
+                </ul>
+                <div class="form-group mt-3 mb-0">
+                  <textarea class="form-control" rows="3" placeholder="Ingrese el mensaje..."
+                  [(ngModel)]="mensaje" (keyup.enter)="onEnviarMensaje()"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>

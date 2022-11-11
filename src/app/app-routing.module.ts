@@ -41,11 +41,17 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'social',
+    loadChildren: () =>
+      import('./modulos/social/social.module').then(
+        (m) => m.SocialModule
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/inicio',
   },
-
   {
     path: '**',
     redirectTo: '/inicio',
