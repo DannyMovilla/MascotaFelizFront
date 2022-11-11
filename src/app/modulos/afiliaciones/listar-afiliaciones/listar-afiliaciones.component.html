@@ -3,10 +3,12 @@
     <h3 class="fw-bolder mb-0  text-center">Consultar Afiliaciones</h3>
     <p class="fs-6 lead  text-center">En esta sección podrás consultar de las afiliaciones</p>
 
-    <form data-html2canvas-ignore [formGroup]="fgValidador" (ngSubmit)="buscar()"  class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
+    <form data-html2canvas-ignore [formGroup]="fgValidador" (ngSubmit)="buscar()"
+      class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
       <div class="col">
         <label for="mascota" class="form-label mb-0">Mascota</label>
-        <input type="text" class="form-control" id="mascota" formControlName="nombre" placeholder="Nombre de la Mascota">
+        <input type="text" class="form-control" id="mascota" formControlName="nombre"
+          placeholder="Nombre de la Mascota">
       </div>
       <div class="col">
         <label for="estado" class="form-label mb-0">Estado</label>
@@ -19,12 +21,12 @@
         <button class="btn btn-primary py-2" type="submit" data-toggle="tooltip" data-placement="top" title="Consultar">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-        <button class="btn btn-success py-2 mx-2" type="button" style="float: right;" (click)="downloadPDF()" data-toggle="tooltip"
-          data-placement="top" title="PDF">
+        <button class="btn btn-success py-2 mx-2" type="button" style="float: right;" (click)="downloadPDF()"
+          data-toggle="tooltip" data-placement="top" title="PDF">
           <i class="fa-solid fa-file-pdf"></i>
         </button>
-        <button class="btn btn-primary py-2 mx-2" type="button" style="float: right;" (click)="onCargar()" data-toggle="tooltip"
-          data-placement="top" title="Nuevo">
+        <button *ngIf="dataSesion.rolUsuario.codigo == 'CLIENTE'" class="btn btn-primary py-2 mx-2" type="button"
+          style="float: right;" (click)="onCargar()" data-toggle="tooltip" data-placement="top" title="Nuevo">
           <i class="fa-sharp fa-solid fa-plus"></i>
         </button>
       </div>
@@ -32,9 +34,10 @@
   </div>
   <main>
     <div class="table-responsive mt-3">
-      <table class="table table-striped">
+      <table class="table table-striped" style="vertical-align:middle;">
         <thead>
           <tr>
+            <th scope="col">Foto</th>
             <th scope="col">Mascota</th>
             <th scope="col">Especie</th>
             <th scope="col">Propietario</th>
@@ -45,7 +48,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of modeloData">
-            <td>{{data.nombre}}</td>
+            <td>
+              <ngx-avatars src="{{data.foto}}"></ngx-avatars>
+            </td>
+            <td >{{data.nombre}}</td>
             <td>{{data.especie}}</td>
             <td>{{data.usuario?.nombres}} {{data.usuario?.apellidos}}</td>
             <td>{{data.plan?.nombre}}</td>

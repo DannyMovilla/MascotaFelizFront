@@ -12,6 +12,7 @@ export class Mascota {
   fechaAfiliacion?: string;
   usuarioId?: string;
   planId?: string;
+  foto?: string;
   plan?: Plan;
   usuario?: Usuario;
 

@@ -17,6 +17,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from 'src/environments/environment';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +43,9 @@ import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
     HttpClientModule,
     ModalModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
   ],
   exports: [],
   providers: [

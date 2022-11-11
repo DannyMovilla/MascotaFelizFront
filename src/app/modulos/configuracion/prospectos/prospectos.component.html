@@ -1,11 +1,20 @@
-<div id="consultar" class="container py-3 mt-3">
+<div id="htmlData" class="container py-3 mt-3">
   <div class="p-3 pb-md-4 mx-auto border-bottom">
     <h3 class="fw-bolder mb-0  text-center">Prospectos</h3>
     <p class="fs-6 lead  text-center">En esta sección podrás consultar la información de los prospectos</p>
+
+    <div data-html2canvas-ignore class="row gy-2 gx-3 align-items-end clss-form">
+      <div class="col">
+        <button class="btn btn-success py-2 mx-2" type="button" style="float: right;" (click)="downloadPDF()"
+          data-toggle="tooltip" data-placement="top" title="PDF">
+          <i class="fa-solid fa-file-pdf"></i>
+        </button>
+      </div>
+    </div>
   </div>
   <main>
-    <div class="table-responsive mt-3">
-      <table class="table table-striped">
+    <div class="table-responsive mt-3" >
+      <table class="table table-striped" style="vertical-align:middle;">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -18,6 +27,12 @@
             <td>{{data.nombres}}</td>
             <td>{{data.correo}}</td>
             <td>{{data.mensaje}}</td>
+            <td data-html2canvas-ignore>
+              <a class="btn btn-success mx-2" data-toggle="tooltip" data-placement="top" title="Enviar Correo"
+                (click)="onResponder(data.correo!)">
+                <i class="fa-solid fa-envelope"></i>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Enviar Correo</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<form autocomplete="off" [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" class="clss-form">
+  <div class="modal-body">
+
+    <div class="row g-3 mb-3">
+
+      <div class="col-12 mt-1">
+        <label for="to" class="form-label mb-0">Correo Electronico</label>
+        <input type="email" class="form-control" formControlName="to" id="to"
+          placeholder="Ingresar correo" [class.is-invalid]="toNoValido">
+        <small *ngIf="toNoValido" class="text-danger">
+          Se requiere que ingrese el correo válido.
+        </small>
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="subject" class="form-label mb-0">Asunto</label>
+        <input type="text" class="form-control" formControlName="subject" id="subject"
+          placeholder="Ingresar asunto" [class.is-invalid]="subjectNoValido">
+        <small *ngIf="subjectNoValido" class="text-danger">
+          Se requiere que ingrese un asunto
+        </small>
+      </div>
+
+      <div class="col-12 mt-1">
+        <label for="text" class="form-label mb-0">Mensaje</label>
+        <textarea class="form-control" formControlName="text" id="text" rows="3" [class.is-invalid]="textNoValido"></textarea>
+        <small *ngIf="textNoValido" class="text-danger">
+          Se requiere que ingrese un Mensaje
+        </small>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary btn-lg mb-3" type="submit">Guardar</button>
+    <button class="btn btn-danger btn-lg mb-3 mx-2" type="button" (click)="bsModalRef.hide()">Cancelar</button>
+  </div>
+
+</form>

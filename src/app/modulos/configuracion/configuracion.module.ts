@@ -9,9 +9,10 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListarMenuComponent } from './menu/listar-menu/listar-menu.component';
 import { InfoMenuComponent } from './menu/info-menu/info-menu.component';
+import { MailComponent } from './mail/mail.component';
 
 @NgModule({
-  declarations: [DashboardComponent, ProspectosComponent, PerfilComponent, ListarMenuComponent, InfoMenuComponent],
+  declarations: [DashboardComponent, ProspectosComponent, PerfilComponent, ListarMenuComponent, InfoMenuComponent, MailComponent],
   imports: [CommonModule, ConfiguracionRoutingModule, NgxChartsModule, FormsModule, ReactiveFormsModule],
 })
 export class ConfiguracionModule {}

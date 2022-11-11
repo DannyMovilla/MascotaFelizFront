@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Mascota } from 'src/app/modelos/mascota.model';
 import { Plan } from 'src/app/modelos/plan.model';
+import { ArchivosService } from 'src/app/services/archivos.service';
 import { MascotaService } from 'src/app/services/mascota.service';
 import { PlanService } from 'src/app/services/plan.service';
 import { SeguridadService } from 'src/app/services/seguridad.service';
@@ -22,6 +23,10 @@ export class InfoAfiliacionComponent implements OnInit {
   rolSesion: string = '';
   dataSesion: any;
   modeloMascota: Mascota = new Mascota();
+  urlFotoMascota: string | undefined =
+    'https://source.unsplash.com/random/276x200?sig=2&animal';
+
+  file!: File;
 
   onClose: any;
 
@@ -43,7 +48,8 @@ export class InfoAfiliacionComponent implements OnInit {
     public bsModalRef: BsModalRef,
     private planServices: PlanService,
     private mascotaServices: MascotaService,
-    private authServices: SeguridadService
+    private authServices: SeguridadService,
+    private archivoServices: ArchivosService
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +83,7 @@ export class InfoAfiliacionComponent implements OnInit {
           );
           this.fgValidador.controls['usuarioId'].setValue(dataUsario.usuarioId);
           this.fgValidador.controls['planId'].setValue(dataUsario.planId);
+          this.urlFotoMascota = dataUsario.foto == null ? this.urlFotoMascota : dataUsario.foto;
         },
         error: (err) => {
           console.log('Problemas en la comunicación con el servidor');
@@ -85,60 +92,91 @@ export class InfoAfiliacionComponent implements OnInit {
     }
   }
 
+  onFileSelect(event: any) {
+    if (event.target.files.length > 0) {
+      this.file = event.target.files[0];
+    }
+  }
+
   onRegistrar() {
-    let mascotaData = new Mascota(this.fgValidador.value);
-    delete mascotaData.id;
+    if (typeof this.file != 'undefined') {
+      const { task, ref, path } = this.archivoServices.uploadImageToFirebase(
+        this.file
+      );
 
-    if (this.idMascota == null) {
-      mascotaData.estado = 'PENDIENTE';
+      task.subscribe(
+        snapshot => {
 
-      if (this.rolSesion == 'CLIENTE') {
-        mascotaData.usuarioId = this.dataSesion.datos.id;
-      }
-
-      this.mascotaServices.newMascota(mascotaData).subscribe(
-        (datos: any) => {
-          Swal.fire(
-            'Mascota Feliz!',
-            'La afiliación fue guardada correctamente',
-            'success'
-          );
-
-          this.onClose();
-          this.bsModalRef?.hide();
         },
-        (error: any) => {
-          console.log(error);
+        (error) =>
+          console.log('Some error occured while uploading the picture'),
+        () =>
+          ref.getDownloadURL().subscribe((downloadUrl) => {
+            let mascotaData = new Mascota(this.fgValidador.value);
+            mascotaData.foto = downloadUrl;
+            delete mascotaData.id;
 
-          Swal.fire(
-            'Mascota Feliz!',
-            'Error al guardar la información',
-            'warning'
-          );
-        }
+            if (this.idMascota == null) {
+              mascotaData.estado = 'PENDIENTE';
+
+              if (this.rolSesion == 'CLIENTE') {
+                mascotaData.usuarioId = this.dataSesion.datos.id;
+              }
+
+              this.mascotaServices.newMascota(mascotaData).subscribe(
+                (datos: any) => {
+                  Swal.fire(
+                    'Mascota Feliz!',
+                    'La afiliación fue guardada correctamente',
+                    'success'
+                  );
+
+                  this.onClose();
+                  this.bsModalRef?.hide();
+                },
+                (error: any) => {
+                  console.log(error);
+
+                  Swal.fire(
+                    'Mascota Feliz!',
+                    'Error al guardar la información',
+                    'warning'
+                  );
+                }
+              );
+            } else {
+              mascotaData.estado = this.modeloMascota.estado;
+              this.mascotaServices
+                .updateMascota(this.idMascota, mascotaData)
+                .subscribe(
+                  (datos: any) => {
+                    Swal.fire(
+                      'Mascota Feliz!',
+                      'La afiliación fue actualizada correctamente',
+                      'success'
+                    );
+
+                    this.onClose();
+                    this.bsModalRef?.hide();
+                  },
+                  (error: any) => {
+                    console.log(error);
+
+                    Swal.fire(
+                      'Mascota Feliz!',
+                      'Error al actualizar la información',
+                      'warning'
+                    );
+                  }
+                );
+            }
+          })
       );
     } else {
-      mascotaData.estado = this.modeloMascota.estado;
-      this.mascotaServices.updateMascota(this.idMascota, mascotaData).subscribe(
-        (datos: any) => {
-          Swal.fire(
-            'Mascota Feliz!',
-            'La afiliación fue actualizada correctamente',
-            'success'
-          );
-
-          this.onClose();
-          this.bsModalRef?.hide();
-        },
-        (error: any) => {
-          console.log(error);
-
-          Swal.fire(
-            'Mascota Feliz!',
-            'Error al actualizar la información',
-            'warning'
-          );
-        }
+      Swal.fire(
+        'Mascota Feliz!',
+        'Debe seleccionar una foto de la mascota',
+        'warning'
       );
     }
   }

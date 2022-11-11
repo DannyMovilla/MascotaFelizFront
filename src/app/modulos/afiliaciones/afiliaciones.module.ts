@@ -6,14 +6,20 @@ import { InfoAfiliacionComponent } from './info-afiliacion/info-afiliacion.compo
 import { ListarAfiliacionesComponent } from './listar-afiliaciones/listar-afiliaciones.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EstadoAfiliacionComponent } from './estado-afiliacion/estado-afiliacion.component';
+import { AvatarModule } from 'ngx-avatars';
 
 @NgModule({
-  declarations: [InfoAfiliacionComponent, ListarAfiliacionesComponent, EstadoAfiliacionComponent],
+  declarations: [
+    InfoAfiliacionComponent,
+    ListarAfiliacionesComponent,
+    EstadoAfiliacionComponent,
+  ],
   imports: [
     CommonModule,
     AfiliacionesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    AvatarModule,
   ],
 })
 export class AfiliacionesModule {}

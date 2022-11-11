@@ -9,6 +9,10 @@
 
     <div class="row g-3 mb-3">
 
+      <div class="col-md-12 mt-1 text-center">
+        <ngx-avatars src="{{urlFotoMascota}}"></ngx-avatars>
+      </div>
+
       <div class="col-md-12 mt-1">
         <label for="nombre" class="form-label mb-0">Nombre</label>
         <input type="text" class="form-control" id="nombre" placeholder="Nombre" formControlName="nombre"
@@ -55,12 +59,11 @@
         </small>
       </div>
 
+      <input type="hidden" formControlName="estado"/>
+
       <div class="col-md-12">
-        <input type="hidden" formControlName="estado"/>
-        <label for="estado" class="form-label mb-0">Estado</label>
-        <select formControlName="estado" class="form-select">
-          <option *ngFor="let data of modeloEstado" value="{{data}}">{{data}}</option>
-        </select>
+        <label for="file" class="form-label mb-0">Foto</label>
+        <input class="form-control" type="file" id="file" name="file" (change)="onFileSelect($event)">
         <small *ngIf="estadoNoValido" class="text-danger">
           Seleccione el Estado
         </small>
