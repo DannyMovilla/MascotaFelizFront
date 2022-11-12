@@ -38,6 +38,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {}
 
+  loginGoogle(){
+    this.authService.loginGoogle();
+    this.bsModalRef?.hide();
+  }
+
   onIngresar() {
     let usuario = this.fgValidador.controls['usuario'].value;
     let contrasena = this.fgValidador.controls['contrasena'].value;

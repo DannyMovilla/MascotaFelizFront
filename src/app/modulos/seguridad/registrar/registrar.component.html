@@ -59,7 +59,14 @@
       </div>
       <button class="w-100 btn btn-primary btn-lg mt-4 mb-3" [disabled]="!fgValidador.valid"
         type="submit">Registrar</button>
+
+      <hr class="hr" />
+
+      <button (click)="loginGoogle()" class="w-100 btn btn-primary btn-lg mt-4 mb-3" type="button">
+        Registrate con Google</button>
     </form>
+
+
   </main>
 
 </div>

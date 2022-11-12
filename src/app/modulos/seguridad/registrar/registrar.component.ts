@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Usuario } from 'src/app/modelos/usuario.model';
 import { RolService } from 'src/app/services/rol.service';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -21,12 +22,18 @@ export class RegistrarComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private usuarioServicio: UsuarioService,
     private rolServices: RolService,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private authServices: SeguridadService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
     this.cargarRoles();
+  }
+
+  loginGoogle(){
+    this.authServices.registerGoogle(this.idRolCliente!);
+    this.initForm();
   }
 
   cargarRoles(): void {
