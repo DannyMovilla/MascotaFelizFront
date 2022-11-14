@@ -9,7 +9,7 @@
 
     <div class="row g-3 mb-3">
 
-      <div class="col-md-12 mt-1 text-center">
+      <div class="col-md-12 mt-1 text-center" *ngIf="idMascota !== undefined">
         <ngx-avatars src="{{urlFotoMascota}}"></ngx-avatars>
       </div>
 
@@ -69,7 +69,7 @@
         </small>
       </div>
 
-      <div class="col-12 mt-1" *ngIf="idMascota !== undefined && estadoValido != 'PENDIENTE'">
+      <div class="col-12 mt-1" *ngIf="idMascota !== undefined && estadoValido == 'RECHAZADO'">
         <label for="detalle" class="form-label mb-0">Detalle</label>
         <textarea class="form-control" formControlName="detalle" id="detalle" rows="3"></textarea>
       </div>

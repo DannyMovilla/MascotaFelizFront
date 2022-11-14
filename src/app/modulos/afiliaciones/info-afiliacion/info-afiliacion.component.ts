@@ -83,7 +83,8 @@ export class InfoAfiliacionComponent implements OnInit {
           );
           this.fgValidador.controls['usuarioId'].setValue(dataUsario.usuarioId);
           this.fgValidador.controls['planId'].setValue(dataUsario.planId);
-          this.urlFotoMascota = dataUsario.foto == null ? this.urlFotoMascota : dataUsario.foto;
+          this.urlFotoMascota =
+            dataUsario.foto == null ? this.urlFotoMascota : dataUsario.foto;
         },
         error: (err) => {
           console.log('Problemas en la comunicación con el servidor');
@@ -99,60 +100,34 @@ export class InfoAfiliacionComponent implements OnInit {
   }
 
   onRegistrar() {
-    if (typeof this.file != 'undefined') {
-      const { task, ref, path } = this.archivoServices.uploadImageToFirebase(
-        this.file
-      );
+    if (this.fgValidador.valid) {
+      if (typeof this.file != 'undefined') {
+        const { task, ref, path } = this.archivoServices.uploadImageToFirebase(
+          this.file
+        );
 
-      task.subscribe(
-        snapshot => {
+        task.subscribe(
+          (snapshot) => {},
+          (error) =>
+            console.log('Some error occured while uploading the picture'),
+          () =>
+            ref.getDownloadURL().subscribe((downloadUrl) => {
+              let mascotaData = new Mascota(this.fgValidador.value);
+              mascotaData.foto = downloadUrl;
+              delete mascotaData.id;
 
-        },
-        (error) =>
-          console.log('Some error occured while uploading the picture'),
-        () =>
-          ref.getDownloadURL().subscribe((downloadUrl) => {
-            let mascotaData = new Mascota(this.fgValidador.value);
-            mascotaData.foto = downloadUrl;
-            delete mascotaData.id;
+              if (this.idMascota == null) {
+                mascotaData.estado = 'PENDIENTE';
 
-            if (this.idMascota == null) {
-              mascotaData.estado = 'PENDIENTE';
-
-              if (this.rolSesion == 'CLIENTE') {
-                mascotaData.usuarioId = this.dataSesion.datos.id;
-              }
-
-              this.mascotaServices.newMascota(mascotaData).subscribe(
-                (datos: any) => {
-                  Swal.fire(
-                    'Mascota Feliz!',
-                    'La afiliación fue guardada correctamente',
-                    'success'
-                  );
-
-                  this.onClose();
-                  this.bsModalRef?.hide();
-                },
-                (error: any) => {
-                  console.log(error);
-
-                  Swal.fire(
-                    'Mascota Feliz!',
-                    'Error al guardar la información',
-                    'warning'
-                  );
+                if (this.rolSesion == 'CLIENTE') {
+                  mascotaData.usuarioId = this.dataSesion.datos.id;
                 }
-              );
-            } else {
-              mascotaData.estado = this.modeloMascota.estado;
-              this.mascotaServices
-                .updateMascota(this.idMascota, mascotaData)
-                .subscribe(
+
+                this.mascotaServices.newMascota(mascotaData).subscribe(
                   (datos: any) => {
                     Swal.fire(
                       'Mascota Feliz!',
-                      'La afiliación fue actualizada correctamente',
+                      'La afiliación fue guardada correctamente',
                       'success'
                     );
 
@@ -164,20 +139,48 @@ export class InfoAfiliacionComponent implements OnInit {
 
                     Swal.fire(
                       'Mascota Feliz!',
-                      'Error al actualizar la información',
+                      'Error al guardar la información',
                       'warning'
                     );
                   }
                 );
-            }
-          })
-      );
+              } else {
+                mascotaData.estado = this.modeloMascota.estado;
+                this.mascotaServices
+                  .updateMascota(this.idMascota, mascotaData)
+                  .subscribe(
+                    (datos: any) => {
+                      Swal.fire(
+                        'Mascota Feliz!',
+                        'La afiliación fue actualizada correctamente',
+                        'success'
+                      );
+
+                      this.onClose();
+                      this.bsModalRef?.hide();
+                    },
+                    (error: any) => {
+                      console.log(error);
+
+                      Swal.fire(
+                        'Mascota Feliz!',
+                        'Error al actualizar la información',
+                        'warning'
+                      );
+                    }
+                  );
+              }
+            })
+        );
+      } else {
+        Swal.fire(
+          'Mascota Feliz!',
+          'Debe seleccionar una foto de la mascota',
+          'warning'
+        );
+      }
     } else {
-      Swal.fire(
-        'Mascota Feliz!',
-        'Debe seleccionar una foto de la mascota',
-        'warning'
-      );
+      Swal.fire('Mascota Feliz!', 'Debe diligenciar los campos', 'warning');
     }
   }
 

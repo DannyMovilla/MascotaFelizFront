@@ -21,15 +21,22 @@
                     routerLinkActive="active">{{data.nombre}}</a>
                 </li>
                 <li class="nav-item" *ngIf="islast">
+                  <a class="btn btn-outline-light" routerLink="/social/chats" routerLinkActive="active">Social</a>
+                </li>
+                <li class="nav-item" *ngIf="islast">
                   <div class="btn-group" dropdown>
                     <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-light dropdown-toggle"
-                            aria-controls="dropdown-basic">
+                      aria-controls="dropdown-basic">
                       Opciones <span class="caret"></span>
                     </button>
-                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-                        role="menu" aria-labelledby="button-basic">
+                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                      aria-labelledby="button-basic">
                       <li role="menuitem">
                         <a class="dropdown-item" routerLink="/configuracion/perfil" routerLinkActive="active">Perfil</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" *ngIf="rolUsuario == 'ADMIN'" routerLink="/administracion/roles"
+                          routerLinkActive="active">Roles</a>
                       </li>
                       <li role="menuitem">
                         <a class="dropdown-item" (click)="cerrarSession()">Salir</a>

@@ -79,10 +79,10 @@ export class EstadoAfiliacionComponent implements OnInit {
         'success'
       );
     } else {
-      if(mascotaData.estado == 'ACEPTADA'){
+      if(mascotaData.estado == 'ACEPTADO'){
         let pipe = new DatePipe('en-US');
         mascotaData.fechaAfiliacion = pipe.transform(Date.now(), 'dd/MM/yyyy')!;
-        console.log(mascotaData.fechaAfiliacion)
+        mascotaData.detalle = "";
       }
 
       this.mascotaServices.updateEstadoMascota(this.idMascota, mascotaData).subscribe(

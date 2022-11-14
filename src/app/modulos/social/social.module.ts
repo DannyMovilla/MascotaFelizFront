@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SocialRoutingModule } from './social-routing.module';
 import { ChatComponent } from './chat/chat.component';
 import { FormsModule } from '@angular/forms';
+import { AvatarModule } from 'ngx-avatars';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     SocialRoutingModule,
-    FormsModule
+    FormsModule,
+    AvatarModule,
   ]
 })
 export class SocialModule { }

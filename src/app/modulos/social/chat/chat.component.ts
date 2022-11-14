@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ChatData } from 'src/app/modelos/chat-data.model';
 import { SeguridadService } from 'src/app/services/seguridad.service';
 import { SocialService } from 'src/app/services/social.service';
+import { UsuarioFirebaseService } from 'src/app/services/usuario-firebase.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,9 +17,11 @@ export class ChatComponent implements OnInit {
 
   constructor(
     public socialServices: SocialService,
-    private authServices: SeguridadService
+    private authServices: SeguridadService,
+    public usuarioSocial: UsuarioFirebaseService
   ) {
     this.socialServices.getChats().subscribe();
+    this.usuarioSocial.getUsuarios().subscribe();
     this.datosUsuario = this.authServices.obtenerSession();
   }
 

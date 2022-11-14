@@ -12,7 +12,7 @@ import { DatosLogin } from '../modelos/datos-login';
 export class UsuarioFirebaseService {
   private itemsCollection!: AngularFirestoreCollection<DatosLogin>;
 
-  public chats: DatosLogin[] = [];
+  public usuarios: DatosLogin[] = [];
 
   constructor(private firestore: AngularFirestore) {}
 
@@ -23,13 +23,13 @@ export class UsuarioFirebaseService {
       map((mensajes: DatosLogin[]) => {
         console.log(mensajes);
 
-        this.chats = [];
+        this.usuarios = [];
 
         for (let mensaje of mensajes) {
-          this.chats.unshift(mensaje);
+          this.usuarios.unshift(mensaje);
         }
 
-        return this.chats;
+        return this.usuarios;
       })
     );
   }
