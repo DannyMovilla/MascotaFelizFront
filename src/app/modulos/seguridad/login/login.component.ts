@@ -6,6 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as CryptoJS from 'crypto-js';
 import Swal from 'sweetalert2';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
+import { UsuarioFirebaseService } from 'src/app/services/usuario-firebase.service';
 
 @Component({
   selector: 'mascota-feliz-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private authService: SeguridadService,
+    private usuarioFirebase: UsuarioFirebaseService,
     public bsModalRef: BsModalRef,
     private modalService: BsModalService
   ) {}
@@ -58,6 +60,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         );
 
         this.authService.almacenarSession(datos);
+
+        this.usuarioFirebase.loguearUsuario(datos.datos);
 
         if (datos.rolUsuario.codigo != 'CLIENTE') {
           this.router.navigateByUrl('/configuracion/dashboard');

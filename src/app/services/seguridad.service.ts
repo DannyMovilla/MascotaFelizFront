@@ -9,6 +9,7 @@ import { UsuarioService } from './usuario.service';
 import { Usuario } from '../modelos/usuario.model';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { UsuarioFirebaseService } from './usuario-firebase.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,7 @@ export class SeguridadService {
     private http: HttpClient,
     public auth: AngularFireAuth,
     private usuarioServicio: UsuarioService,
+    private usuarioFirebase: UsuarioFirebaseService,
     private router: Router,
   ) {
     this.verificarSessionActual();
@@ -68,6 +70,8 @@ export class SeguridadService {
             );
 
             this.almacenarSession(datos);
+
+            this.usuarioFirebase.loguearUsuario(datos.datos);
 
             if (datos.rolUsuario.codigo != 'CLIENTE') {
               this.router.navigateByUrl('/configuracion/dashboard');
@@ -125,6 +129,7 @@ export class SeguridadService {
   eliminarSession() {
     localStorage.removeItem('datosSesion');
     this.logout();
+    this.usuarioFirebase.deleteUser();
     this.refrescarDataSesion(new ModeloIdentificar());
   }
 

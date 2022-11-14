@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  //urlMascostaFelizApi: 'https://mascotafelizba-prod-mascotafeliz-hcadhp.mo5.mogenius.io/',
+  urlMascostaFelizApi: 'https://mascotafelizba-prod-mascotafeliz-hcadhp.mo5.mogenius.io/',
   urlMailApi: 'https://vp147852266-ms-prod-dannymovi-4j2fnd.mo4.mogenius.io/',
-  urlMascostaFelizApi: 'http://localhost:3000/',
+  //urlMascostaFelizApi: 'http://localhost:3000/',
   firebaseConfig: {
     apiKey: 'AIzaSyDISEbgMB4hLu4sgw9JyjYyz2uvcMYxS9g',
     authDomain: 'storagemascotafeliz.firebaseapp.com',
