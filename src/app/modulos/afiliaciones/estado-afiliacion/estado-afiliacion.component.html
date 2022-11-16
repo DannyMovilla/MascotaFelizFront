@@ -48,9 +48,12 @@
         </small>
       </div>
 
-      <div class="col-12 mt-1" *ngIf="estadoValido == 'RECHAZADO'">
+      <div class="col-12 mt-1" *ngIf="estadoValido != 'PENDIENTE'">
         <label for="detalle" class="form-label mb-0">Detalle</label>
-        <textarea class="form-control" formControlName="detalle" id="detalle" rows="3"></textarea>
+        <textarea class="form-control" formControlName="detalle" id="detalle" rows="3" [class.is-invalid]="detalleNoValido"></textarea>
+        <small *ngIf="detalleNoValido" class="text-danger">
+          Ingrese un detalle
+        </small>
       </div>
 
     </div>
