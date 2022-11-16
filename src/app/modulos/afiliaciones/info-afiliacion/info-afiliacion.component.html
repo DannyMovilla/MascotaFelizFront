@@ -9,8 +9,8 @@
 
     <div class="row g-3 mb-3">
 
-      <div class="col-md-12 mt-1 text-center" *ngIf="idMascota !== undefined">
-        <ngx-avatars src="{{urlFotoMascota}}"></ngx-avatars>
+      <div class="col-md-12 mt-1 text-center" *ngIf="idMascota !== undefined" style="display: flex; justify-content: center;">
+        <ngx-avatars src="{{urlFotoMascota}}" size="70"></ngx-avatars>
       </div>
 
       <div class="col-md-12 mt-1">
@@ -71,7 +71,7 @@
 
       <div class="col-12 mt-1" *ngIf="idMascota !== undefined && estadoValido == 'RECHAZADO'">
         <label for="detalle" class="form-label mb-0">Detalle</label>
-        <textarea class="form-control" formControlName="detalle" id="detalle" rows="3"></textarea>
+        <textarea class="form-control" formControlName="detalle" id="detalle" rows="2"></textarea>
       </div>
 
     </div>

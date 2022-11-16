@@ -18,7 +18,7 @@ export class InfoMenuComponent implements OnInit {
   onClose: any;
 
   fgValidador: FormGroup = this.fb.group({
-    id: ['', [Validators.required]],
+    id: [''],
     nombre: ['', [Validators.required]],
     url: ['', [Validators.required]],
     rol: ['', [Validators.required]],

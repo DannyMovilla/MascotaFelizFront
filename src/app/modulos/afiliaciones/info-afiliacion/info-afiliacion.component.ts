@@ -31,7 +31,7 @@ export class InfoAfiliacionComponent implements OnInit {
   onClose: any;
 
   fgValidador: FormGroup = this.fb.group({
-    id: ['', [Validators.required]],
+    id: [''],
     nombre: ['', [Validators.required]],
     color: ['', [Validators.required]],
     raza: ['', [Validators.required]],

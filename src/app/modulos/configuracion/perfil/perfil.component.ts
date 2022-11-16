@@ -16,7 +16,7 @@ export class PerfilComponent implements OnInit {
   modeloRoles: Rol[] = [];
 
   fgValidador: FormGroup = this.fb.group({
-    id: ['', [Validators.required]],
+    id: [''],
     nombres: ['', [Validators.required]],
     apellidos: ['', [Validators.required]],
     correo: ['', [Validators.required]],

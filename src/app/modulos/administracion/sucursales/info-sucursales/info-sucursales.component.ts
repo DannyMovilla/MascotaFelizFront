@@ -15,7 +15,7 @@ export class InfoSucursalesComponent implements OnInit {
   onClose: any;
 
   fgValidador: FormGroup = this.fb.group({
-    id: ['', [Validators.required]],
+    id: [''],
     departamento: ['', [Validators.required]],
     ciudad: ['', [Validators.required]],
     direccion: ['', [Validators.required]],

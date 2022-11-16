@@ -15,7 +15,7 @@ export class InfoRolComponent implements OnInit {
   onClose: any;
 
   fgValidador: FormGroup = this.fb.group({
-    id: ['', [Validators.required]],
+    id: [''],
     nombre: ['', [Validators.required]],
     codigo: ['', [Validators.required]],
   });

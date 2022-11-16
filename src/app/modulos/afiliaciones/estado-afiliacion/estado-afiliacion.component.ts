@@ -25,7 +25,7 @@ export class EstadoAfiliacionComponent implements OnInit {
   onClose: any;
 
   fgValidador: FormGroup = this.fb.group({
-    id: ['', [Validators.required]],
+    id: [''],
     estado: ['PENDIENTE', [Validators.required]],
     detalle: ['', [Validators.required]],
     fechaAfiliacion: ['', [Validators.required]],

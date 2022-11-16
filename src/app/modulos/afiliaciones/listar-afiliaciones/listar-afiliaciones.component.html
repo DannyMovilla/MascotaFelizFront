@@ -48,8 +48,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of modeloData">
-            <td>
-              <ngx-avatars src="{{data.foto}}"></ngx-avatars>
+            <td data-html2canvas-ignore>
+              <ngx-avatars src="{{data.foto}}" *ngIf="data.foto != null"></ngx-avatars>
+              <ngx-avatars name="{{data.nombre}}" *ngIf="data.foto == null"></ngx-avatars>
             </td>
             <td >{{data.nombre}}</td>
             <td>{{data.especie}}</td>

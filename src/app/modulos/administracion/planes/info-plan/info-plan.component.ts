@@ -15,7 +15,7 @@ export class InfoPlanComponent implements OnInit {
   onClose: any;
 
   fgValidador: FormGroup = this.fb.group({
-    id: ['', [Validators.required]],
+    id: [''],
     nombre: ['', [Validators.required]],
     descripcion: ['', [Validators.required]],
     precio: ['', [Validators.required]],
