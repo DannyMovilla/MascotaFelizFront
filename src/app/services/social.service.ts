@@ -26,14 +26,10 @@ export class SocialService {
 
     return this.itemsCollection.valueChanges().pipe(
       map((mensajes: ChatData[]) => {
-        console.log(mensajes);
-
         this.chats = [];
-
         for (let mensaje of mensajes) {
           this.chats.unshift(mensaje);
         }
-
         return this.chats;
       })
     );

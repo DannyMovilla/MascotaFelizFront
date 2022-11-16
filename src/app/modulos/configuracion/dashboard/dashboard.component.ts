@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
+import { AsesorMascotas } from 'src/app/modelos/asesor-mascotas.model';
 import { Plan } from 'src/app/modelos/plan.model';
+import { AsesorMascotasService } from 'src/app/services/asesor-mascotas.service';
 import { MascotaService } from 'src/app/services/mascota.service';
 import { PlanService } from 'src/app/services/plan.service';
 import { ProspectosService } from 'src/app/services/prospectos.service';
@@ -41,7 +43,8 @@ export class DashboardComponent implements OnInit {
     private usuarioServices: UsuarioService,
     private surcursalServices: SucursalService,
     private planServices: PlanService,
-    private authServices: SeguridadService
+    private authServices: SeguridadService,
+    private asesorMtasService: AsesorMascotasService
   ) {
     this.view = [innerWidth / 2, 250];
   }
@@ -54,7 +57,13 @@ export class DashboardComponent implements OnInit {
   grafiContar() {
     const observables = [];
     observables.push(this.prospectoServices.getProspectosCount());
-    observables.push(this.mascotasServices.getMascotaCount());
+
+    if(this.authServices.obtenerRolSesion() == 'ASESOR'){
+      observables.push(this.asesorMtasService.getAsesorById(this.authServices.obtenerSession().datos.id));
+    }else{
+      observables.push(this.mascotasServices.getMascotaCount());
+    }
+
     observables.push(this.usuarioServices.getUsuarioCount());
     observables.push(this.surcursalServices.getSucursalCount());
 
@@ -67,7 +76,7 @@ export class DashboardComponent implements OnInit {
           },
           {
             name: 'Afiliaciones',
-            value: mascota['count'],
+            value: this.authServices.obtenerRolSesion() == 'ASESOR' ? mascota.length : mascota['count'],
           },
           {
             name: 'Usuario',

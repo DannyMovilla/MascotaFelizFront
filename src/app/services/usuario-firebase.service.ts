@@ -21,14 +21,10 @@ export class UsuarioFirebaseService {
 
     return this.itemsCollection.valueChanges().pipe(
       map((mensajes: DatosLogin[]) => {
-        console.log(mensajes);
-
         this.usuarios = [];
-
         for (let mensaje of mensajes) {
           this.usuarios.unshift(mensaje);
         }
-
         return this.usuarios;
       })
     );
@@ -36,6 +32,22 @@ export class UsuarioFirebaseService {
 
   loguearUsuario(dataLogin: DatosLogin) {
     this.itemsCollection = this.firestore.collection<DatosLogin>('usuarios');
+
+    let usuariosChat: DatosLogin[] = [];
+
+    this.itemsCollection.valueChanges().pipe(
+      map((mensajes: DatosLogin[]) => {
+        usuariosChat = [];
+        for (let mensaje of mensajes) {
+          usuariosChat.unshift(mensaje);
+        }
+      })
+    );
+
+    for (let index = 0; index < usuariosChat.length; index++) {
+      const element = usuariosChat[index];
+      console.log(element)
+    }
 
     const id = this.firestore.createId();
     localStorage.setItem('userId', id);
