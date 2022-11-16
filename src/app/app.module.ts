@@ -19,6 +19,7 @@ import { AuthInterceptorService } from './seguridad/auth-interceptor.service';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
@@ -48,6 +49,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFirestoreModule,
+    AngularFireMessagingModule,
     provideFirestore(() => getFirestore()),
   ],
   exports: [],
