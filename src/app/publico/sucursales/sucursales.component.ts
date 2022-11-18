@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Sucursal } from 'src/app/modelos/sucursal.model';
 import { SucursalService } from 'src/app/services/sucursal.service';
+import AOS from "aos";
 
 @Component({
   selector: 'mascota-feliz-sucursales',
@@ -26,5 +27,6 @@ export class SucursalesComponent implements OnInit {
         console.log('Problemas en la comunicación con el servidor');
       },
     });
+    AOS.init();
   }
 }

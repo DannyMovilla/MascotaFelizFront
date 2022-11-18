@@ -1,4 +1,4 @@
-<div class="container py-3  animate__animated animate__fadeInRight" *ngIf="modeloData.length > 0">
+<div class="container py-3" data-aos="fade-right" *ngIf="modeloData.length > 0">
   <div class="p-3 pb-md-4 mx-auto border-bottom">
 
     <h2 class="fw-bolder mb-0  text-center text-uppercase">
@@ -7,10 +7,10 @@
     <br>
 
     <main>
-      <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+      <div class="row row-cols-1 row-cols-md-4 mb-3 text-center">
         <ng-container *ngFor="let data of modeloData;let i=index">
           <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card mb-4 rounded-3 shadow-sm"  data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
               <div class="card-header py-3">
                 <h4 class="my-0 fw-normal">{{data.nombre}}</h4>
               </div>

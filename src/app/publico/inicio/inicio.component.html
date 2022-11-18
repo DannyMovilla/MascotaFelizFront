@@ -48,7 +48,7 @@
   </div>
 </header>
 
-<div class="container py-3 mt-3 animate__animated animate__fadeInDown">
+<div class="container py-3 mt-3" data-aos="fade-down">
   <div class="p-3 pb-md-4 mx-auto border-bottom">
     <h2 class="fw-bolder mb-0  text-center text-uppercase">
       <strong>Bienvenidos a nuestra familia</strong>
@@ -73,4 +73,50 @@
 
 <mascota-feliz-planes></mascota-feliz-planes>
 
+<div class="container py-3 mt-3" data-aos="fade-down">
+  <div class="p-3 pb-md-4 mx-auto border-bottom">
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading fw-normal lh-1">
+          Primera Red
+          <br>
+          <span class="text-muted"> De Atención Veterinaria del país</span>
+        </h2>
+        <p class="fs-6 lead text-justify">Con mayor variedad de productos y servicios a domicilio en Colombia, contamos
+          con más
+          de 4.000 productos (alimentos, dietas naturales, snacks, medicinas, higiene y accesorios) y más de 17
+          servicios como (medicina veterinaria prepagada, veterinario a domicilio, vacunación, baños, funeraria,
+          entrenador, gaticuidadores, información de colegios, fundaciones, entre otros.</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <video class="w-100" autoplay loop muted>
+          <source src="https://video.wixstatic.com/video/d6133a_a9ab2414dedb47489e42cc5f7e7ac3e6/1080p/mp4/file.mp4"
+            type="video/mp4" />
+        </video>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <mascota-feliz-sucursales></mascota-feliz-sucursales>
+
+<footer id="final">
+  <div class="container py-3">
+    <div class="d-flex flex-column flex-md-row align-items-center ">
+      <p class="text-center text-muted" style=" color: #ffffff !important;">&copy; 2022 Company, Inc</p>
+
+      <a href="/"
+        class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+        <img src="assets/img/logo.png">
+      </a>
+
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto pb-3 mb-3">
+        <a class="btn btn-outline-light" routerLink="/inicio" routerLinkActive="active">Inicio</a>
+        <a class="btn btn-outline-light" routerLink="/empresa" routerLinkActive="active">Empresa</a>
+        <a class="btn btn-outline-light" (click)="onCargarRegistrar()">Registrate</a>
+        <a class="btn btn-outline-light" (click)="onCargarLogin()">Login</a>
+      </nav>
+    </div>
+  </div>
+</footer>

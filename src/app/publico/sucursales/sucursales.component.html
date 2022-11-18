@@ -1,5 +1,5 @@
-<div class="container py-3  animate__animated animate__fadeIn" *ngIf="modeloData.length > 0">
-  <div class="p-3 pb-md-4 mx-auto border-bottom">
+<div class="container py-3" *ngIf="modeloData.length > 0" data-aos="fade-left">
+  <div class="p-3 pb-md-4 mx-auto ">
 
     <h2 class="fw-bolder mb-0  text-center text-uppercase">
       Sucursales
@@ -9,7 +9,7 @@
     <div class="container py-4">
       <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3  text-center">
         <ng-container *ngFor="let data of modeloData;let i=index">
-          <div class="col">
+          <div class="col" data-aos="flip-right" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
             <div class="card" style="border: none;">
               <div class="ratio ratio-1x1 rounded-circle overflow-hidden">
                 <img src="https://source.unsplash.com/random/276x200?sig={{i}}&ciudad" class="card-img-top img-cover"

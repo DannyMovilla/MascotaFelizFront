@@ -31,6 +31,11 @@ header {
   background: url("/assets//img/bg.png");
   background-size: cover;
 }
+
+footer {
+  background: url("/assets//img/bg.png");
+  background-size: cover;
+}
 nav a.btn.btn-outline-light {
   font-family: "Poppins";
   margin-left: 4px;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import AOS from "aos";
 
 @Component({
   selector: 'mascota-feliz-testimonios',
@@ -8,5 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class TestimoniosComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    AOS.init();
+  }
 }

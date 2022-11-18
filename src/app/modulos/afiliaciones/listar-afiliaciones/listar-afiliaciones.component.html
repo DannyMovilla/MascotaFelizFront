@@ -52,11 +52,14 @@
               <ngx-avatars src="{{data.foto}}" *ngIf="data.foto != null"></ngx-avatars>
               <ngx-avatars name="{{data.nombre}}" *ngIf="data.foto == null"></ngx-avatars>
             </td>
-            <td >{{data.nombre}}</td>
+            <td>{{data.nombre}}</td>
             <td>{{data.especie}}</td>
             <td>{{data.usuario?.nombres}} {{data.usuario?.apellidos}}</td>
             <td>{{data.plan?.nombre}}</td>
-            <td>{{data.estado}}</td>
+            <td>
+              <p [ngClass]="{'text-warning': data.estado=='PENDIENTE', 'text-success':data.estado=='ACEPTADO', 'text-danger':data.estado=='RECHAZADO' }"
+                class="">{{data.estado}}</p>
+            </td>
             <td data-html2canvas-ignore>
               <a class="btn btn-primary mr-2" data-toggle="tooltip" data-placement="top" title="Editar"
                 (click)="onGestionar(data.id)">

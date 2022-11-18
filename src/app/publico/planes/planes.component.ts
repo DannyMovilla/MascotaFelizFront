@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Plan } from 'src/app/modelos/plan.model';
 import { RegistrarComponent } from 'src/app/modulos/seguridad/registrar/registrar.component';
 import { PlanService } from 'src/app/services/plan.service';
+import AOS from "aos";
 
 @Component({
   selector: 'mascota-feliz-planes',
@@ -27,6 +28,9 @@ export class PlanesComponent implements OnInit {
         console.log('Problemas en la comunicación con el servidor');
       },
     });
+
+    AOS.init();
+
   }
 
   onCargarRegistrar() {
