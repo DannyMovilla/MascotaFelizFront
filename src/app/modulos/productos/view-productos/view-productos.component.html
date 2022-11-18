@@ -1,0 +1,66 @@
+<div class="container py-3">
+  <div class="p-3 pb-md-4 mx-auto border-bottom">
+
+    <h2 class="fw-bolder mb-0  text-center text-uppercase">
+      Planes
+    </h2>
+    <p class="fs-6 lead  text-center">En esta sección podrás visualizar todos nuestos productos</p>
+    <br>
+
+    <main>
+      <div class="row row-cols-1 row-cols-md-4 mb-3">
+        <ng-container *ngFor="let data of modeloData;let i=index">
+
+          <div class="col-xs-12 col-md-4 bootstrap snippets bootdeys">
+            <!-- product -->
+            <div class="product-content product-wrap clearfix">
+              <div class="row">
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                  <div class="product-image">
+                    <img src="{{data.foto}}" alt="{{data.nombre}}" height="230" width="194" class="img-responsive">
+                    <span class="tag2 hot">
+                      HOT
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                  <div class="product-deatil">
+                    <h5 class="name">
+                      <a >
+                        {{data.nombre}} <span>{{data.tipo}}</span>
+                      </a>
+                    </h5>
+                    <p class="price-container">
+                      <span>${{data.precio}}</span>
+                    </p>
+                    <span class="tag1"></span>
+                  </div>
+                  <div class="description">
+                    <p>{{data.descripcion}}</p>
+                  </div>
+                  <div class="product-info smart-form">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="rating">
+                          <label for="stars-rating-5"><i class="fa fa-star text-primary"></i></label>
+                          <label for="stars-rating-4"><i class="fa fa-star text-primary"></i></label>
+                          <label for="stars-rating-3"><i class="fa fa-star text-primary"></i></label>
+                          <label for="stars-rating-2"><i class="fa fa-star text-primary"></i></label>
+                          <label for="stars-rating-1"><i class="fa fa-star text-primary"></i></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end product -->
+          </div>
+        </ng-container>
+
+      </div>
+    </main>
+
+  </div>
+</div>
+

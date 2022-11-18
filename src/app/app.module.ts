@@ -24,6 +24,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { FooterComponent } from './publico/navegacion/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     MenuDasboardComponent,
     SucursalesComponent,
     TestimoniosComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

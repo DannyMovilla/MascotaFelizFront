@@ -9,9 +9,14 @@
   <mascota-feliz-menu-dasboard></mascota-feliz-menu-dasboard>
 </ng-template>
 
-
-
 <router-outlet></router-outlet>
+
+<ng-container *ngIf="!seInicionSesion; then notauthenticatedFooter">
+</ng-container>
+
+<ng-template #notauthenticatedFooter>
+  <mascota-feliz-footer></mascota-feliz-footer>
+</ng-template>
 
 <ng-http-loader [backgroundColor]="'#8945f0'" [backdropBackgroundColor]="'#cfcccc'" spinner="sk-wandering-cubes">
 </ng-http-loader>

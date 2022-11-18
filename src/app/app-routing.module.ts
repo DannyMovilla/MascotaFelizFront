@@ -43,8 +43,13 @@ const routes: Routes = [
   {
     path: 'social',
     loadChildren: () =>
-      import('./modulos/social/social.module').then(
-        (m) => m.SocialModule
+      import('./modulos/social/social.module').then((m) => m.SocialModule),
+  },
+  {
+    path: 'productos',
+    loadChildren: () =>
+      import('./modulos/productos/productos.module').then(
+        (m) => m.ProductosModule
       ),
   },
   {

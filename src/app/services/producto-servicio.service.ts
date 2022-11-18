@@ -10,9 +10,26 @@ import { ProductoServicio } from '../modelos/producto-servicio.model';
 export class ProductoServicioService {
   constructor(private http: HttpClient) {}
 
-  getProductoServicio(): Observable<ProductoServicio[]> {
+  getProductoServicio(
+    filtroMascota?: ProductoServicio
+  ): Observable<ProductoServicio[]> {
+    let where: any = {};
+
+    if (filtroMascota?.nombre != null && filtroMascota?.nombre != '') {
+      where['nombre'] = filtroMascota?.nombre;
+    }
+
+    if (filtroMascota?.tipo != null && filtroMascota?.tipo != '') {
+      where['tipo'] = filtroMascota?.tipo;
+    }
+
+    let data = {
+      where,
+    };
+    let filtro = JSON.stringify(data);
+
     return this.http.get<ProductoServicio[]>(
-      `${environment.urlMascostaFelizApi}producto-servicios`
+      `${environment.urlMascostaFelizApi}producto-servicios?filter=${filtro}`
     );
   }
 

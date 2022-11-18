@@ -1,0 +1,73 @@
+<div class="container py-3 mt-3" id="htmlData">
+  <div id="consultar" class="p-3 pb-md-4 mx-auto border-bottom">
+    <h3 class="fw-bolder mb-0  text-center">Consultar Productos</h3>
+    <p class="fs-6 lead  text-center">En esta sección podrás consultar de las afiliaciones</p>
+
+    <form data-html2canvas-ignore [formGroup]="fgValidador" (ngSubmit)="buscar()"
+      class="row gy-2 gx-3 align-items-end clss-form" autocomplete="off">
+      <div class="col">
+        <label for="nombre" class="form-label mb-0">Producto</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Nombre del producto">
+      </div>
+      <div class="col">
+        <label for="tipo" class="form-label mb-0">Tipo</label>
+        <select formControlName="tipo" class="form-select">
+          <option value="">Seleccione</option>
+          <option *ngFor="let data of modeloCategoria" value="{{data}}">{{data}}</option>
+        </select>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary py-2" type="submit" data-toggle="tooltip" data-placement="top" title="Consultar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="btn btn-success py-2 mx-2" type="button" style="float: right;" (click)="downloadPDF()"
+          data-toggle="tooltip" data-placement="top" title="PDF">
+          <i class="fa-solid fa-file-pdf"></i>
+        </button>
+        <button class="btn btn-primary py-2 mx-2" type="button" style="float: right;" data-toggle="tooltip"
+          (click)="onCargar()" data-placement="top" title="Nuevo">
+          <i class="fa-sharp fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+  <main>
+    <div class="table-responsive mt-3">
+      <table class="table table-striped" style="vertical-align:middle;">
+        <thead>
+          <tr>
+            <th scope="col">Foto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Precio</th>
+            <th scope="col" data-html2canvas-ignore>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of modeloData">
+            <td data-html2canvas-ignore>
+              <ngx-avatars src="{{data.foto}}" *ngIf="data.foto != null"></ngx-avatars>
+              <ngx-avatars name="{{data.nombre}}" *ngIf="data.foto == null"></ngx-avatars>
+            </td>
+            <td>{{data.nombre}}</td>
+            <td>{{data.descripcion}}</td>
+            <td>{{data.tipo}}</td>
+            <td>${{data.precio}}</td>
+            <td data-html2canvas-ignore>
+              <a class="btn btn-primary mr-2" data-toggle="tooltip" data-placement="top" title="Editar"
+                (click)="onGestionar(data.id)">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </a>
+              <a class="btn btn-danger mx-2" data-toggle="tooltip" data-placement="top" title="Eliminar"
+                (click)="onEliminar(data.id!)">
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+</div>

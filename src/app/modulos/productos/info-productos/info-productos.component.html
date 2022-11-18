@@ -1,0 +1,68 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Afiliación</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<form autocomplete="off" [formGroup]="fgValidador" (ngSubmit)="onRegistrar()" class="clss-form">
+  <div class="modal-body">
+
+    <div class="row g-3 mb-3">
+
+      <div class="col-md-12 mt-1 text-center" *ngIf="idProducto !== undefined"
+        style="display: flex; justify-content: center;">
+        <ngx-avatars src="{{urlFotoProducto}}" size="70"></ngx-avatars>
+      </div>
+
+      <div class="col-md-12 mt-1">
+        <label for="nombre" class="form-label mb-0">Nombre</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre" formControlName="nombre"
+          [class.is-invalid]="nombreNoValido">
+        <small *ngIf="nombreNoValido" class="text-danger">
+          Ingrese el nombre
+        </small>
+      </div>
+
+      <div class="col-md-12">
+        <label for="descripcion" class="form-label mb-0">Descripcion</label>
+        <textarea class="form-control" formControlName="descripcion" id="descripcion" rows="2"
+          [class.is-invalid]="descripcionNoValido"></textarea>
+        <small *ngIf="descripcionNoValido" class="text-danger">
+          Ingrese las descripcion
+        </small>
+      </div>
+
+      <div class="col-md-12">
+        <label for="precio" class="form-label mb-0">Precio</label>
+        <input type="number" class="form-control" id="precio" placeholder="Precio" formControlName="precio"
+          [class.is-invalid]="precioNoValido">
+        <small *ngIf="precioNoValido" class="text-danger">
+          Ingrese el Precio
+        </small>
+      </div>
+
+      <div class="col-md-12">
+        <label for="tipo" class="form-label mb-0">Tipo</label>
+        <select formControlName="tipo" class="form-select">
+          <option *ngFor="let data of modeloCategoria" value="{{data}}" [class.is-invalid]="tipoNoValido">{{data}}
+          </option>
+        </select>
+        <small *ngIf="tipoNoValido" class="text-danger">
+          Seleccione el Tipo
+        </small>
+      </div>
+
+      <div class="col-md-12">
+        <label for="file" class="form-label mb-0">Foto</label>
+        <input class="form-control" type="file" id="file" name="file" (change)="onFileSelect($event)">
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary btn-lg mb-3" type="submit">Guardar</button>
+    <button class="btn btn-danger btn-lg mb-3 mx-2" type="button" (click)="bsModalRef.hide()">Cancelar</button>
+  </div>
+
+</form>

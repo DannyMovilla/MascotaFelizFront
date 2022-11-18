@@ -23,6 +23,10 @@
                 <li class="nav-item" *ngIf="islast">
                   <a class="btn btn-outline-light" routerLink="/social/chats" routerLinkActive="active">Social</a>
                 </li>
+                <li class="nav-item" *ngIf="islast && rolUsuario != 'CLIENTE'">
+                  <a class="btn btn-outline-light" routerLink="/productos/listarProductos"
+                    routerLinkActive="active">Productos</a>
+                </li>
                 <li class="nav-item" *ngIf="islast">
                   <div class="btn-group" dropdown>
                     <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-light dropdown-toggle"
