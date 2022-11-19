@@ -25,6 +25,10 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FooterComponent } from './publico/navegacion/footer/footer.component';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { esLocale } from 'ngx-bootstrap/locale';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+defineLocale('es', esLocale);
 
 @NgModule({
   declarations: [
@@ -64,4 +68,8 @@ import { FooterComponent } from './publico/navegacion/footer/footer.component';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private bsLocaleService: BsLocaleService) {
+    this.bsLocaleService.use('es');
+  }
+}

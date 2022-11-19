@@ -67,6 +67,15 @@
           </tr>
         </tbody>
       </table>
+      <pagination [totalItems]="modeloDataAux.length" (pageChanged)="pageChanged($event)"
+        [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate"></pagination>
+      <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+        Próximo
+      </ng-template>
+
+      <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+        Anterior
+      </ng-template>
     </div>
   </main>
 

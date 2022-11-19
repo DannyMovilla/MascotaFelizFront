@@ -11,14 +11,25 @@ import { ListarPlanesComponent } from './planes/listar-planes/listar-planes.comp
 import { InfoPlanComponent } from './planes/info-plan/info-plan.component';
 import { ListarSucursalesComponent } from './sucursales/listar-sucursales/listar-sucursales.component';
 import { InfoSucursalesComponent } from './sucursales/info-sucursales/info-sucursales.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
-  declarations: [UsuariosComponent, InfoUsuarioComponent, ListarRolesComponent, InfoRolComponent, ListarPlanesComponent, InfoPlanComponent, ListarSucursalesComponent, InfoSucursalesComponent],
+  declarations: [
+    UsuariosComponent,
+    InfoUsuarioComponent,
+    ListarRolesComponent,
+    InfoRolComponent,
+    ListarPlanesComponent,
+    InfoPlanComponent,
+    ListarSucursalesComponent,
+    InfoSucursalesComponent,
+  ],
   imports: [
     CommonModule,
     AdministracionRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    PaginationModule.forRoot(),
   ],
 })
 export class AdministracionModule {}

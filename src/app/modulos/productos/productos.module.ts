@@ -7,6 +7,7 @@ import { AvatarModule } from 'ngx-avatars';
 import { ListarProductosComponent } from './listar-productos/listar-productos.component';
 import { InfoProductosComponent } from './info-productos/info-productos.component';
 import { ViewProductosComponent } from './view-productos/view-productos.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ViewProductosComponent } from './view-productos/view-productos.componen
     FormsModule,
     ReactiveFormsModule,
     AvatarModule,
+    PaginationModule.forRoot(),
   ]
 })
 export class ProductosModule { }

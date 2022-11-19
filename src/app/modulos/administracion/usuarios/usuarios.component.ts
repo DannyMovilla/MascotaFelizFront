@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { Rol } from 'src/app/modelos/rol.model';
 import { Usuario } from 'src/app/modelos/usuario.model';
 import { RolService } from 'src/app/services/rol.service';
@@ -15,6 +16,7 @@ import { InfoUsuarioComponent } from './info-usuario/info-usuario.component';
 })
 export class UsuariosComponent implements OnInit {
   modeloData: Usuario[] = [];
+  modeloDataAux: Usuario[] = [];
   modeloRoles: Rol[] = [];
   bsModalRef?: BsModalRef;
 
@@ -45,9 +47,17 @@ export class UsuariosComponent implements OnInit {
     this.usuarioServices.getUsuarios(filtro).subscribe(
       (resp: Usuario[]) => {
         this.modeloData = resp;
+        this.modeloDataAux = resp;
       },
       (errorServicio) => {}
     );
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.modeloData = this.modeloDataAux.slice(startItem, endItem);
+    window.scrollTo(0, 0);
   }
 
   onGestionar(idUsuario: any) {

@@ -4,6 +4,8 @@ import { ModeloIdentificar } from './modelos/modelo-identificar';
 import { PushNotificationService } from './services/push-notification.service';
 import { SeguridadService } from './services/seguridad.service';
 
+declare var $: any;
+
 @Component({
   selector: 'mascota-feliz-root',
   templateUrl: './app.component.html',
@@ -31,6 +33,10 @@ export class AppComponent {
         this.seInicionSesion = datos.estaIdentificado;
       });
 
-      this.pushServices.listen();
+    this.pushServices.listen();
+
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
   }
 }

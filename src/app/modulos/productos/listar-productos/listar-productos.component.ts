@@ -10,6 +10,7 @@ import { ProductoServicioService } from 'src/app/services/producto-servicio.serv
 import { SeguridadService } from 'src/app/services/seguridad.service';
 import Swal from 'sweetalert2';
 import { InfoProductosComponent } from '../info-productos/info-productos.component';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'mascota-feliz-listar-productos',
@@ -18,6 +19,7 @@ import { InfoProductosComponent } from '../info-productos/info-productos.compone
 })
 export class ListarProductosComponent implements OnInit {
   modeloData: ProductoServicio[] = [];
+  modeloDataAux: ProductoServicio[] = [];
   modeloCategoria: string[] = ['PRODUCTO', 'SERVICIO'];
 
   bsModalRef?: BsModalRef;
@@ -46,8 +48,16 @@ export class ListarProductosComponent implements OnInit {
     this.productoServices.getProductoServicio(filtro).subscribe({
       next: (data: ProductoServicio[]) => {
         this.modeloData = data;
+        this.modeloDataAux = data;
       },
     });
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.modeloData = this.modeloDataAux.slice(startItem, endItem);
+    window.scrollTo(0, 0);
   }
 
   onGestionar(idProducto: any) {
